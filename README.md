@@ -20,4 +20,11 @@ Hemos seleccionado **InvenTree** como nuestra base principal para el desarrollo 
 * **Sprint 4 (Hito 3):** 28 de Junio - 12 de Julio (Entrega Final e IEEE).
 
 ## 3. Segunda Opción de Proyecto
-*(Aquí deben agregar el nombre y link del segundo repositorio que encuentren hoy)*.
+
+Hemos seleccionado **Krayin CRM** como segunda opción para el desarrollo del curso. Cumple con todos los criterios exigidos:
+
+- **Dominio:** CRM Empresarial para PYMES y Empresas.
+- **Licencia:** MIT (Verificada).
+- **Complejidad:** >10,000 líneas de código, arquitectura modular.
+- **Stack:** Laravel (PHP 8.3) + Vue.js + MySQL, Docker Compose oficial disponible.
+- **Repositorio fork:** https://github.com/Unsa-ips-grupo/laravel-crm

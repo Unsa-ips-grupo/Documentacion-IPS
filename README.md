@@ -2,6 +2,8 @@
 **Curso:** Ingeniería y Procesos de Software  
 **Equipo:** 5 Estudiantes (Grupo A1 )  
 **Líder Sprint 0:** Johan Vilca Flores  
+                    Yunque Quispe Gustavo Alonso
+                    Navarro Quispe Henry Alex
 
 ## 1. Producto de Software Seleccionado: InvenTree
 Hemos seleccionado **InvenTree** como nuestra base principal para el desarrollo del curso.Cumple con todos los criterios exigidos

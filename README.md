@@ -4,6 +4,7 @@
 **Líder Sprint 0:** Johan Vilca Flores  
                     Yunque Quispe Gustavo Alonso
                     Navarro Quispe Henry Alex
+                    Cahua Soto Franco Jesus
 
 ## 1. Producto de Software Seleccionado: InvenTree
 Hemos seleccionado **InvenTree** como nuestra base principal para el desarrollo del curso.Cumple con todos los criterios exigidos

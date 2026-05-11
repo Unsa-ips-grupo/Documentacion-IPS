@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sprint 0 – IPS UNSA 2026-A</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0f1a;
+    --surface: #111827;
+    --border: #1e2d40;
+    --accent: #3b82f6;
+    --accent2: #06b6d4;
+    --green: #10b981;
+    --orange: #f59e0b;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --card: #131c2e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* GRID NOISE BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  header {
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: .72rem;
+    color: var(--accent2);
+    background: rgba(6,182,212,0.08);
+    border: 1px solid rgba(6,182,212,0.2);
+    padding: .3rem .8rem;
+    border-radius: 2px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .badge::before { content: '●'; font-size: .5rem; animation: blink 1.4s infinite; }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    max-width: 820px;
+    margin-bottom: 1.2rem;
+    background: linear-gradient(135deg, #e2e8f0 30%, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: .15rem;
+  }
+
+  .meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: .65rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+  }
+
+  .meta-value {
+    font-size: .9rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 3.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-number {
+    font-family: 'DM Mono', monospace;
+    font-size: .7rem;
+    color: var(--accent);
+    background: rgba(59,130,246,0.1);
+    border: 1px solid rgba(59,130,246,0.2);
+    padding: .2rem .55rem;
+    border-radius: 2px;
+    letter-spacing: .05em;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+  }
+
+  /* CARDS */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.8rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .2s, transform .2s;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity .2s;
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: .65rem;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin-bottom: .7rem;
+  }
+
+  .card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: .3rem;
+  }
+
+  .card .repo-link {
+    font-family: 'DM Mono', monospace;
+    font-size: .72rem;
+    color: var(--accent);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 1.2rem;
+    opacity: .8;
+  }
+
+  .card .repo-link:hover { opacity: 1; text-decoration: underline; }
+
+  .spec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .6rem;
+    margin-top: .8rem;
+  }
+
+  .spec-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: .5rem .7rem;
+  }
+
+  .spec-key {
+    font-family: 'DM Mono', monospace;
+    font-size: .6rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: .15rem;
+  }
+
+  .spec-val {
+    font-size: .82rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .chip {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: .65rem;
+    padding: .2rem .5rem;
+    border-radius: 3px;
+    margin: .15rem .1rem;
+    font-weight: 500;
+  }
+
+  .chip-blue { background: rgba(59,130,246,.12); color: #93c5fd; border: 1px solid rgba(59,130,246,.2); }
+  .chip-green { background: rgba(16,185,129,.12); color: #6ee7b7; border: 1px solid rgba(16,185,129,.2); }
+  .chip-orange { background: rgba(245,158,11,.12); color: #fcd34d; border: 1px solid rgba(245,158,11,.2); }
+
+  /* CRONOGRAMA */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 8px; bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+  }
+
+  .tl-item {
+    position: relative;
+    padding: 0 0 2rem 1.5rem;
+  }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -1.75rem;
+    top: 7px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+  }
+
+  .tl-item.hito::before {
+    width: 14px; height: 14px;
+    left: calc(-1.75rem - 2px);
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(59,130,246,.5);
+  }
+
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: .68rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: .2rem;
+  }
+
+  .tl-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: .3rem;
+  }
+
+  .tl-desc {
+    font-size: .85rem;
+    color: var(--muted);
+    max-width: 600px;
+  }
+
+  .hito-badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: .62rem;
+    background: rgba(59,130,246,.15);
+    color: var(--accent);
+    border: 1px solid rgba(59,130,246,.3);
+    padding: .15rem .5rem;
+    border-radius: 3px;
+    margin-left: .6rem;
+    vertical-align: middle;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+
+  .hito-badge.h2 { background: rgba(6,182,212,.12); color: var(--accent2); border-color: rgba(6,182,212,.3); }
+  .hito-badge.h3 { background: rgba(16,185,129,.12); color: var(--green); border-color: rgba(16,185,129,.3); }
+
+  /* TEAM */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+
+  .member-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.2rem 1rem;
+    text-align: center;
+  }
+
+  .member-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: .9rem;
+    font-weight: 800;
+    color: white;
+    margin: 0 auto .8rem;
+  }
+
+  .member-name {
+    font-size: .83rem;
+    font-weight: 500;
+    margin-bottom: .2rem;
+  }
+
+  .member-role {
+    font-family: 'DM Mono', monospace;
+    font-size: .62rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+
+  /* TOOLS */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .tool-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.2rem;
+    display: flex;
+    gap: .9rem;
+    align-items: flex-start;
+  }
+
+  .tool-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    margin-top: .1rem;
+  }
+
+  .tool-name {
+    font-family: 'DM Mono', monospace;
+    font-size: .75rem;
+    font-weight: 500;
+    color: var(--accent2);
+    margin-bottom: .25rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+
+  .tool-desc {
+    font-size: .8rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2.5rem 0;
+    text-align: center;
+  }
+
+  .footer-text {
+    font-family: 'DM Mono', monospace;
+    font-size: .7rem;
+    color: var(--muted);
+    letter-spacing: .05em;
+  }
+
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fadeIn .6s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in:nth-child(1) { animation-delay: .05s; }
+  .fade-in:nth-child(2) { animation-delay: .15s; }
+  .fade-in:nth-child(3) { animation-delay: .25s; }
+  .fade-in:nth-child(4) { animation-delay: .35s; }
+  .fade-in:nth-child(5) { animation-delay: .45s; }
+
+  @media (max-width: 640px) {
+    .spec-grid { grid-template-columns: 1fr; }
+    .meta-row { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="badge">EPIS · UNSA · 2026-A</div>
+    <h1>Scrum & DevOps aplicado a productos de software Open Source</h1>
+    <div class="meta-row">
+      <div class="meta-item">
+        <span class="meta-label">Curso</span>
+        <span class="meta-value">Ingeniería y Procesos de Software</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Docente</span>
+        <span class="meta-value">Prof. Robert Arisaca</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Hito actual</span>
+        <span class="meta-value">Sprint 0 — 13 Mayo 2026</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Organización</span>
+        <a href="https://github.com/Unsa-ips-grupo" style="color:#3b82f6;font-size:.9rem;font-weight:500;text-decoration:none;" target="_blank">Unsa-ips-grupo</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- PROYECTOS -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2>Productos de Software Seleccionados</h2>
+      </div>
+      <div class="cards">
+
+        <!-- InvenTree -->
+        <div class="card fade-in">
+          <div class="card-tag">Proyecto 01 · SCM / Inventario</div>
+          <h3>InvenTree</h3>
+          <a class="repo-link" href="https://github.com/Unsa-ips-grupo/InvenTree" target="_blank">github.com/Unsa-ips-grupo/InvenTree</a>
+          <p style="font-size:.85rem;color:var(--muted);margin-bottom:1rem;">Sistema de gestión de inventario y cadena de suministro de código abierto, diseñado para pequeñas y medianas empresas con múltiples módulos integrados.</p>
+          <div style="margin-bottom:.8rem;">
+            <span class="chip chip-green">MIT License ✓</span>
+            <span class="chip chip-blue">Python</span>
+            <span class="chip chip-blue">Django</span>
+            <span class="chip chip-orange">Docker Compose</span>
+          </div>
+          <div class="spec-grid">
+            <div class="spec-item">
+              <div class="spec-key">Dominio</div>
+              <div class="spec-val">SCM / Inventario</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-key">Complejidad</div>
+              <div class="spec-val">&gt; 10 KLOC</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-key">Módulos</div>
+              <div class="spec-val">5+ funcionales</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-key">Estado</div>
+              <div class="spec-val">Activo · Fork listo</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Krayin -->
+        <div class="card fade-in">
+          <div class="card-tag">Proyecto 02 · CRM</div>
+          <h3>Krayin CRM</h3>
+          <a class="repo-link" href="https://github.com/Unsa-ips-grupo/laravel-crm" target="_blank">github.com/Unsa-ips-grupo/laravel-crm</a>
+          <p style="font-size:.85rem;color:var(--muted);margin-bottom:1rem;">Sistema CRM empresarial de ciclo completo orientado a PYMES, con enfoque modular sobre el stack Laravel + Vue.js. Infraestructura Docker oficial disponible.</p>
+          <div style="margin-bottom:.8rem;">
+            <span class="chip chip-green">MIT License ✓</span>
+            <span class="chip chip-blue">Laravel</span>
+            <span class="chip chip-blue">Vue.js</span>
+            <span class="chip chip-orange">Docker Compose</span>
+          </div>
+          <div class="spec-grid">
+            <div class="spec-item">
+              <div class="spec-key">Dominio</div>
+              <div class="spec-val">CRM Empresarial</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-key">Complejidad</div>
+              <div class="spec-val">&gt; 10 KLOC</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-key">Módulos</div>
+              <div class="spec-val">Contactos, Leads, Email, Workflows, Cotizaciones</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-key">Stars</div>
+              <div class="spec-val">22,000+ ⭐</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CRONOGRAMA -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2>Cronograma General del Proyecto</h2>
+      </div>
+      <div class="timeline">
+
+        <div class="tl-item hito fade-in">
+          <div class="tl-date">13 Mayo 2026</div>
+          <div class="tl-title">Sprint 0 — Plan y Selección <span class="hito-badge">Hito 1 · 15%</span></div>
+          <div class="tl-desc">Plan de proyecto, cronograma, presentación de los dos productos de software seleccionados. GitHub Projects configurado y GitHub Pages publicado.</div>
+        </div>
+
+        <div class="tl-item fade-in">
+          <div class="tl-date">14 Mayo – 28 Mayo 2026</div>
+          <div class="tl-title">Sprint 1 — Análisis e inicio CI/CD</div>
+          <div class="tl-desc">Análisis de arquitectura del producto seleccionado, definición del Product Backlog, primeras historias de usuario, configuración inicial de GitHub Actions.</div>
+        </div>
+
+        <div class="tl-item hito fade-in">
+          <div class="tl-date">29 Mayo – 12 Junio 2026</div>
+          <div class="tl-title">Sprint 2 — Integración CI/CD funcionando <span class="hito-badge h2">Hito 2 · 60%</span></div>
+          <div class="tl-desc">Producto de software funcionando con pipeline CI/CD operativo en GitHub Actions. Implementación completa del marco Scrum con GitHub Issues y Projects.</div>
+        </div>
+
+        <div class="tl-item fade-in">
+          <div class="tl-date">13 Junio – 27 Junio 2026</div>
+          <div class="tl-title">Sprint 3 — Mejoras y refactorización</div>
+          <div class="tl-desc">Implementación de mejoras al producto base, despliegue automatizado en staging mediante GitHub Pages, documentación técnica incremental.</div>
+        </div>
+
+        <div class="tl-item hito fade-in">
+          <div class="tl-date">28 Junio – 12 Julio 2026</div>
+          <div class="tl-title">Sprint 4 — Entrega final <span class="hito-badge h3">Hito 3 · 100%</span></div>
+          <div class="tl-desc">Despliegue CI/CD completo y automatizado, documentación técnica del proceso Scrum + DevOps, artículo formato IEEE con resultados y conclusiones.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPO -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2>Equipo de Trabajo</h2>
+      </div>
+      <div class="team-grid">
+        <div class="member-card fade-in">
+          <div class="member-avatar">JV</div>
+          <div class="member-name">Johan Vilca Flores</div>
+          <div class="member-role">Líder · Sprint 0</div>
+        </div>
+        <div class="member-card fade-in">
+          <div class="member-avatar">GY</div>
+          <div class="member-name">Gustavo Yunque</div>
+          <div class="member-role">Líder · Sprint 1</div>
+        </div>
+        <div class="member-card fade-in">
+          <div class="member-avatar">M3</div>
+          <div class="member-name">Miembro 3</div>
+          <div class="member-role">Desarrollador</div>
+        </div>
+        <div class="member-card fade-in">
+          <div class="member-avatar">M4</div>
+          <div class="member-name">Miembro 4</div>
+          <div class="member-role">Desarrollador</div>
+        </div>
+        <div class="member-card fade-in">
+          <div class="member-avatar">M5</div>
+          <div class="member-name">Miembro 5</div>
+          <div class="member-role">Desarrollador</div>
+        </div>
+      </div>
+      <p style="font-size:.8rem;color:var(--muted);margin-top:1rem;">* El rol de líder de equipo es rotativo por Sprint, conforme a la metodología del curso.</p>
+    </div>
+  </section>
+
+  <!-- HERRAMIENTAS -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">04</span>
+        <h2>Herramientas Scrum + DevOps</h2>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-card fade-in">
+          <div class="tool-icon">📋</div>
+          <div>
+            <div class="tool-name">GitHub Projects</div>
+            <div class="tool-desc">Gestión del Product Backlog, Sprints y asignación de historias de usuario en tablero Kanban.</div>
+          </div>
+        </div>
+        <div class="tool-card fade-in">
+          <div class="tool-icon">⚙️</div>
+          <div>
+            <div class="tool-name">GitHub Actions</div>
+            <div class="tool-desc">Pipeline CI/CD automatizado: compilación, pruebas, detección de errores y despliegue a staging.</div>
+          </div>
+        </div>
+        <div class="tool-card fade-in">
+          <div class="tool-icon">🌐</div>
+          <div>
+            <div class="tool-name">GitHub Pages</div>
+            <div class="tool-desc">Publicación del entorno de staging, documentación técnica y burndown chart del proyecto.</div>
+          </div>
+        </div>
+        <div class="tool-card fade-in">
+          <div class="tool-icon">🎫</div>
+          <div>
+            <div class="tool-name">GitHub Issues</div>
+            <div class="tool-desc">Registro de historias de usuario, reporte de bugs y documentación de decisiones técnicas.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <p class="footer-text">EPIS · UNSA · Ingeniería y Procesos de Software · 2026-A &nbsp;—&nbsp; Prof. Robert Arisaca</p>
+  </div>
+</footer>
+
+</body>
+</html>

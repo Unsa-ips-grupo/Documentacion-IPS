@@ -9,3 +9,5 @@
 4.Elaborar Cronograma (Sprints de 15 días calendario).
 
 5.Configurar GitHub Pages y publicar el entregable del Hito 1.
+
+Se supone que esta es GITHUB PAGES XD

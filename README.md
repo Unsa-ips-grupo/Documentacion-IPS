@@ -18,7 +18,7 @@ Hemos seleccionado **Krayin CRM** como segunda opción para el desarrollo del cu
 
 ##2. Cronograma General (Sprints de 15 días)
 * **Sprint 0 (Hito 1):** Cierre 13 de Mayo (Plan y Selección).
-* **Sprint 1:** 14 de Mayo - 28 de Mayo.
-* **Sprint 2 (Hito 2):** 29 de Mayo - 12 de Junio (CI/CD funcionando).
-* **Sprint 3:** 13 de Junio - 27 de Junio.
-* **Sprint 4 (Hito 3):** 28 de Junio - 12 de Julio (Entrega Final e IEEE).
+* **Sprint 1:** 14 de Mayo - 27 de Mayo.
+* **Sprint 2 (Hito 2):** 28 de Mayo - 10 de Junio (CI/CD funcionando).
+* **Sprint 3:** 11 de Junio - 24 de Junio.
+* **Sprint 4 (Hito 3):** 25 de Junio - 13 de Julio (Entrega Final e IEEE).

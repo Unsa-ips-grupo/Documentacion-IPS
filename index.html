@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sprint 0 – IPS UNSA 2026-A</title>
+<title>Guía Integral Krayin CRM – IPS UNSA 2026-A</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -207,6 +207,12 @@
     font-size: 1.1rem;
     font-weight: 700;
     margin-bottom: .3rem;
+  }
+
+  .card p {
+    font-size: .85rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
   }
 
   .card .repo-link {
@@ -424,6 +430,46 @@
     line-height: 1.5;
   }
 
+  /* TABLES */
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 1rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  th {
+    background: rgba(255,255,255,0.02);
+    font-family: 'DM Mono', monospace;
+    font-size: .75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+
+  td {
+    font-size: .85rem;
+    color: var(--text);
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
   /* FOOTER */
   footer {
     padding: 2.5rem 0;
@@ -464,24 +510,24 @@
 
 <header>
   <div class="container">
-    <div class="badge">EPIS · UNSA · 2026-A</div>
-    <h1>Scrum & DevOps aplicado a productos de software Open Source</h1>
+    <div class="badge">EPIS · UNSA · 2026-A [cite: 6]</div>
+    <h1>Guía Integral del Proyecto Krayin CRM [cite: 2]</h1>
     <div class="meta-row">
       <div class="meta-item">
         <span class="meta-label">Curso</span>
-        <span class="meta-value">Ingeniería y Procesos de Software</span>
+        <span class="meta-value">Ingeniería y Procesos de Software [cite: 4]</span>
       </div>
       <div class="meta-item">
         <span class="meta-label">Docente</span>
-        <span class="meta-value">Prof. Robert Arisaca</span>
+        <span class="meta-value">Prof. Robert Arisaca [cite: 5]</span>
       </div>
       <div class="meta-item">
-        <span class="meta-label">Hito actual</span>
-        <span class="meta-value">Sprint 0 — 13 Mayo 2026</span>
+        <span class="meta-label">Fecha Base</span>
+        <span class="meta-value">13 de mayo de 2026 [cite: 7]</span>
       </div>
       <div class="meta-item">
         <span class="meta-label">Organización</span>
-        <a href="https://github.com/Unsa-ips-grupo" style="color:#3b82f6;font-size:.9rem;font-weight:500;text-decoration:none;" target="_blank">Unsa-ips-grupo</a>
+        <a href="https://github.com/Unsa-ips-grupo" style="color:#3b82f6;font-size:.9rem;font-weight:500;text-decoration:none;" target="_blank">Unsa-ips-grupo [cite: 6]</a>
       </div>
     </div>
   </div>
@@ -489,75 +535,41 @@
 
 <main>
 
-  <!-- PROYECTOS -->
   <section>
     <div class="container">
       <div class="section-header">
         <span class="section-number">01</span>
-        <h2>Productos de Software Seleccionados</h2>
+        <h2>Software Base Seleccionado</h2>
       </div>
       <div class="cards">
 
-        <!-- InvenTree -->
         <div class="card fade-in">
-          <div class="card-tag">Proyecto 01 · SCM / Inventario</div>
-          <h3>InvenTree</h3>
-          <a class="repo-link" href="https://github.com/Unsa-ips-grupo/InvenTree" target="_blank">github.com/Unsa-ips-grupo/InvenTree</a>
-          <p style="font-size:.85rem;color:var(--muted);margin-bottom:1rem;">Sistema de gestión de inventario y cadena de suministro de código abierto, diseñado para pequeñas y medianas empresas con múltiples módulos integrados.</p>
+          <div class="card-tag">Proyecto Principal · CRM</div>
+          <h3>Krayin CRM [cite: 27]</h3>
+          <a class="repo-link" href="https://github.com/Unsa-ips-grupo/laravel-crm" target="_blank">github.com/Unsa-ips-grupo/laravel-crm [cite: 241]</a>
+          <p>Sistema de gestión de relaciones con clientes (CRM) de código abierto. Desarrollado por Webkul Software Pvt. Ltd., diseñado para centralizar contactos, leads y oportunidades empresariales[cite: 16, 28].</p>
           <div style="margin-bottom:.8rem;">
-            <span class="chip chip-green">MIT License ✓</span>
-            <span class="chip chip-blue">Python</span>
-            <span class="chip chip-blue">Django</span>
-            <span class="chip chip-orange">Docker Compose</span>
+            <span class="chip chip-green">MIT License ✓ [cite: 28]</span>
+            <span class="chip chip-blue">Laravel [cite: 29]</span>
+            <span class="chip chip-blue">Vue.js [cite: 29]</span>
+            <span class="chip chip-orange">Docker Compose [cite: 106]</span>
           </div>
           <div class="spec-grid">
             <div class="spec-item">
               <div class="spec-key">Dominio</div>
-              <div class="spec-val">SCM / Inventario</div>
+              <div class="spec-val">CRM Empresarial [cite: 248]</div>
             </div>
             <div class="spec-item">
-              <div class="spec-key">Complejidad</div>
-              <div class="spec-val">&gt; 10 KLOC</div>
+              <div class="spec-key">Docker Oficial</div>
+              <div class="spec-val">webkul/krayin (>50k pulls) [cite: 64]</div>
             </div>
             <div class="spec-item">
-              <div class="spec-key">Módulos</div>
-              <div class="spec-val">5+ funcionales</div>
+              <div class="spec-key">Módulos [cite: 123]</div>
+              <div class="spec-val">Leads, Contactos, Cotizaciones, Workflows [cite: 124, 125, 127, 130]</div>
             </div>
             <div class="spec-item">
-              <div class="spec-key">Estado</div>
-              <div class="spec-val">Activo · Fork listo</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Krayin -->
-        <div class="card fade-in">
-          <div class="card-tag">Proyecto 02 · CRM</div>
-          <h3>Krayin CRM</h3>
-          <a class="repo-link" href="https://github.com/Unsa-ips-grupo/laravel-crm" target="_blank">github.com/Unsa-ips-grupo/laravel-crm</a>
-          <p style="font-size:.85rem;color:var(--muted);margin-bottom:1rem;">Sistema CRM empresarial de ciclo completo orientado a PYMES, con enfoque modular sobre el stack Laravel + Vue.js. Infraestructura Docker oficial disponible.</p>
-          <div style="margin-bottom:.8rem;">
-            <span class="chip chip-green">MIT License ✓</span>
-            <span class="chip chip-blue">Laravel</span>
-            <span class="chip chip-blue">Vue.js</span>
-            <span class="chip chip-orange">Docker Compose</span>
-          </div>
-          <div class="spec-grid">
-            <div class="spec-item">
-              <div class="spec-key">Dominio</div>
-              <div class="spec-val">CRM Empresarial</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-key">Complejidad</div>
-              <div class="spec-val">&gt; 10 KLOC</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-key">Módulos</div>
-              <div class="spec-val">Contactos, Leads, Email, Workflows, Cotizaciones</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-key">Stars</div>
-              <div class="spec-val">22,000+ ⭐</div>
+              <div class="spec-key">Licencia</div>
+              <div class="spec-val">MIT Pura (Req. del curso) [cite: 137]</div>
             </div>
           </div>
         </div>
@@ -566,61 +578,169 @@
     </div>
   </section>
 
-  <!-- CRONOGRAMA -->
   <section>
     <div class="container">
       <div class="section-header">
         <span class="section-number">02</span>
-        <h2>Cronograma General del Proyecto</h2>
+        <h2>Stack Tecnológico y Arquitectura [cite: 65]</h2>
       </div>
+      <p style="margin-bottom: 1.5rem; color: var(--muted);">El proyecto Krayin se fundamenta en tecnologías robustas que serán el entorno de trabajo para el despliegue de las prácticas DevOps[cite: 66, 164].</p>
+      
+      <div class="table-container fade-in">
+        <table>
+          <thead>
+            <tr>
+              <th>Componente [cite: 108]</th>
+              <th>Función dentro de Krayin [cite: 108]</th>
+              <th>Versión [cite: 108]</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>PHP</strong></td>
+              <td>Lenguaje base del backend[cite: 70]. Procesa peticiones y lógica.</td>
+              <td>8.2+ [cite: 108]</td>
+            </tr>
+            <tr>
+              <td><strong>Laravel</strong></td>
+              <td>Framework MVC principal[cite: 73]. Implementa Eloquent ORM.</td>
+              <td>11.x [cite: 108]</td>
+            </tr>
+            <tr>
+              <td><strong>Blade</strong></td>
+              <td>Motor de plantillas para vistas renderizadas en servidor[cite: 76].</td>
+              <td>Integrado [cite: 108]</td>
+            </tr>
+            <tr>
+              <td><strong>Vue.js</strong></td>
+              <td>Interactividad reactiva del frontend (Kanban, modales)[cite: 83].</td>
+              <td>3.x [cite: 108]</td>
+            </tr>
+            <tr>
+              <td><strong>MySQL</strong></td>
+              <td>Base de datos relacional para persistencia[cite: 86].</td>
+              <td>8.0.32+ [cite: 108]</td>
+            </tr>
+            <tr>
+              <td><strong>Docker</strong></td>
+              <td>Contenedorización oficial para aislar dependencias[cite: 104].</td>
+              <td>Imagen 2.2.0 [cite: 108]</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2>El Producto Final y los 6 Entregables [cite: 203]</h2>
+      </div>
+      <p style="margin-bottom: 2rem; color: var(--muted);">El producto evaluable no es el CRM per se, sino <strong>la aplicación rigurosa de un proceso de Ingeniería de Software (Scrum + DevOps) sobre Krayin CRM</strong>[cite: 199].</p>
+      
+      <div class="tools-grid">
+        <div class="tool-card fade-in">
+          <div class="tool-icon">01</div>
+          <div>
+            <div class="tool-name">Fork con Mejoras [cite: 204]</div>
+            <div class="tool-desc">Modificación sobre el fork en Unsa-ips-grupo integrando funcionalidades nuevas (ej. mejora al pipeline Kanban)[cite: 206, 207].</div>
+          </div>
+        </div>
+        <div class="tool-card fade-in">
+          <div class="tool-icon">02</div>
+          <div>
+            <div class="tool-name">Pipeline CI/CD Funcional [cite: 208]</div>
+            <div class="tool-desc">Automatización de pruebas (PHPUnit/Pest) y validaciones en GitHub Actions[cite: 210]. Entregable clave del Hito 2[cite: 209].</div>
+          </div>
+        </div>
+        <div class="tool-card fade-in">
+          <div class="tool-icon">03</div>
+          <div>
+            <div class="tool-name">Despliegue a Staging [cite: 211]</div>
+            <div class="tool-desc">Entorno de Krayin desplegado en la nube (ej. Render, Railway) actualizado automáticamente tras merge a main[cite: 212, 213].</div>
+          </div>
+        </div>
+        <div class="tool-card fade-in">
+          <div class="tool-icon">04</div>
+          <div>
+            <div class="tool-name">Documentación Scrum + DevOps [cite: 215]</div>
+            <div class="tool-desc">Trazabilidad en repositorio público evidenciando Sprints, Backlogs y Retrospectivas reales[cite: 216, 217].</div>
+          </div>
+        </div>
+        <div class="tool-card fade-in">
+          <div class="tool-icon">05</div>
+          <div>
+            <div class="tool-name">Artículo IEEE [cite: 219]</div>
+            <div class="tool-desc">Documento académico documentando contexto, metodología Scrum/DevOps, decisiones y resultados[cite: 220]. Clave del Hito 3[cite: 220].</div>
+          </div>
+        </div>
+        <div class="tool-card fade-in">
+          <div class="tool-icon">06</div>
+          <div>
+            <div class="tool-name">Demo Final en Vivo [cite: 222]</div>
+            <div class="tool-desc">Presentación técnica demostrando código funcionando, pipeline CI/CD en vivo y despliegue exitoso[cite: 223].</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">04</span>
+        <h2>Cronograma Maestro de Sprints [cite: 180]</h2>
+      </div>
+      <p style="margin-bottom: 2rem; color: var(--muted);">Cada iteración tiene una duración estricta de 15 días calendario[cite: 160].</p>
       <div class="timeline">
 
         <div class="tl-item hito fade-in">
-          <div class="tl-date">13 Mayo 2026</div>
-          <div class="tl-title">Sprint 0 — Plan y Selección <span class="hito-badge">Hito 1 · 15%</span></div>
-          <div class="tl-desc">Plan de proyecto, cronograma, presentación de los dos productos de software seleccionados. GitHub Projects configurado y GitHub Pages publicado.</div>
+          <div class="tl-date">22 Abr – 13 May [cite: 181]</div>
+          <div class="tl-title">Sprint 0 — Planificación y Selección <span class="hito-badge">Hito 1 · 15% [cite: 181, 228]</span></div>
+          <div class="tl-desc">Planificación, selección de proyecto, configuración de GitHub Pages[cite: 181].</div>
         </div>
 
         <div class="tl-item fade-in">
-          <div class="tl-date">14 Mayo – 28 Mayo 2026</div>
-          <div class="tl-title">Sprint 1 — Análisis e inicio CI/CD</div>
-          <div class="tl-desc">Análisis de arquitectura del producto seleccionado, definición del Product Backlog, primeras historias de usuario, configuración inicial de GitHub Actions.</div>
+          <div class="tl-date">14 May – 27 May [cite: 181]</div>
+          <div class="tl-title">Sprint 1 — Setup Técnico [cite: 182]</div>
+          <div class="tl-desc">Krayin corriendo en local mediante Docker Compose, análisis de arquitectura y consolidación del Product Backlog[cite: 183, 184].</div>
         </div>
 
         <div class="tl-item hito fade-in">
-          <div class="tl-date">29 Mayo – 12 Junio 2026</div>
-          <div class="tl-title">Sprint 2 — Integración CI/CD funcionando <span class="hito-badge h2">Hito 2 · 60%</span></div>
-          <div class="tl-desc">Producto de software funcionando con pipeline CI/CD operativo en GitHub Actions. Implementación completa del marco Scrum con GitHub Issues y Projects.</div>
+          <div class="tl-date">28 May – 10 Jun [cite: 181]</div>
+          <div class="tl-title">Sprint 2 — CI/CD Básico <span class="hito-badge h2">Hito 2 · 60% [cite: 181, 229]</span></div>
+          <div class="tl-desc">Configuración de workflows de GitHub Actions para ejecutar pruebas y validar estilos ante cada pull request[cite: 186].</div>
         </div>
 
         <div class="tl-item fade-in">
-          <div class="tl-date">13 Junio – 27 Junio 2026</div>
-          <div class="tl-title">Sprint 3 — Mejoras y refactorización</div>
-          <div class="tl-desc">Implementación de mejoras al producto base, despliegue automatizado en staging mediante GitHub Pages, documentación técnica incremental.</div>
+          <div class="tl-date">11 Jun – 24 Jun [cite: 181]</div>
+          <div class="tl-title">Sprint 3 — Mejora funcional y despliegue [cite: 188]</div>
+          <div class="tl-desc">Implementación de nueva funcionalidad y automatización de despliegue a entorno de staging[cite: 189].</div>
         </div>
 
         <div class="tl-item hito fade-in">
-          <div class="tl-date">28 Junio – 12 Julio 2026</div>
-          <div class="tl-title">Sprint 4 — Entrega final <span class="hito-badge h3">Hito 3 · 100%</span></div>
-          <div class="tl-desc">Despliegue CI/CD completo y automatizado, documentación técnica del proceso Scrum + DevOps, artículo formato IEEE con resultados y conclusiones.</div>
+          <div class="tl-date">25 Jun – 8 Jul [cite: 181]</div>
+          <div class="tl-title">Sprint 4 — Cierre <span class="hito-badge h3">Hito 3 · 25% [cite: 181, 230]</span></div>
+          <div class="tl-desc">Pulido final, redacción del artículo IEEE, documentación completa y preparación de demo en vivo[cite: 192].</div>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- EQUIPO -->
   <section>
     <div class="container">
       <div class="section-header">
-        <span class="section-number">03</span>
-        <h2>Equipo de Trabajo</h2>
+        <span class="section-number">05</span>
+        <h2>Equipo de Trabajo [cite: 6]</h2>
       </div>
       <div class="team-grid">
         <div class="member-card fade-in">
           <div class="member-avatar">JV</div>
           <div class="member-name">Johan Vilca Flores</div>
-          <div class="member-role">Líder · Sprint 0</div>
+          <div class="member-role">Líder · Sprint 0 [cite: 327]</div>
         </div>
         <div class="member-card fade-in">
           <div class="member-avatar">GY</div>
@@ -628,62 +748,22 @@
           <div class="member-role">Líder · Sprint 1</div>
         </div>
         <div class="member-card fade-in">
-          <div class="member-avatar">M3</div>
+          <div class="member-avatar">FC</div>
           <div class="member-name">Franco Cahua Soto</div>
-          <div class="member-role">Desarrollador</div>
+          <div class="member-role">Development Team [cite: 148]</div>
         </div>
         <div class="member-card fade-in">
           <div class="member-avatar">M4</div>
           <div class="member-name">Miembro 4</div>
-          <div class="member-role">Desarrollador</div>
+          <div class="member-role">Development Team [cite: 148]</div>
         </div>
         <div class="member-card fade-in">
           <div class="member-avatar">M5</div>
           <div class="member-name">Miembro 5</div>
-          <div class="member-role">Desarrollador</div>
+          <div class="member-role">Development Team [cite: 148]</div>
         </div>
       </div>
-      <p style="font-size:.8rem;color:var(--muted);margin-top:1rem;">* El rol de líder de equipo es rotativo por Sprint, conforme a la metodología del curso.</p>
-    </div>
-  </section>
-
-  <!-- HERRAMIENTAS -->
-  <section>
-    <div class="container">
-      <div class="section-header">
-        <span class="section-number">04</span>
-        <h2>Herramientas Scrum + DevOps</h2>
-      </div>
-      <div class="tools-grid">
-        <div class="tool-card fade-in">
-          <div class="tool-icon">📋</div>
-          <div>
-            <div class="tool-name">GitHub Projects</div>
-            <div class="tool-desc">Gestión del Product Backlog, Sprints y asignación de historias de usuario en tablero Kanban.</div>
-          </div>
-        </div>
-        <div class="tool-card fade-in">
-          <div class="tool-icon">⚙️</div>
-          <div>
-            <div class="tool-name">GitHub Actions</div>
-            <div class="tool-desc">Pipeline CI/CD automatizado: compilación, pruebas, detección de errores y despliegue a staging.</div>
-          </div>
-        </div>
-        <div class="tool-card fade-in">
-          <div class="tool-icon">🌐</div>
-          <div>
-            <div class="tool-name">GitHub Pages</div>
-            <div class="tool-desc">Publicación del entorno de staging, documentación técnica y burndown chart del proyecto.</div>
-          </div>
-        </div>
-        <div class="tool-card fade-in">
-          <div class="tool-icon">🎫</div>
-          <div>
-            <div class="tool-name">GitHub Issues</div>
-            <div class="tool-desc">Registro de historias de usuario, reporte de bugs y documentación de decisiones técnicas.</div>
-          </div>
-        </div>
-      </div>
+      <p style="font-size:.8rem;color:var(--muted);margin-top:1rem;">* Los roles de Scrum (Product Owner, Scrum Master y Development Team) rotan por sprint, garantizando que todos ejerzan cada rol al menos una vez[cite: 146, 147, 148, 149].</p>
     </div>
   </section>
 
@@ -691,7 +771,7 @@
 
 <footer>
   <div class="container">
-    <p class="footer-text">EPIS · UNSA · Ingeniería y Procesos de Software · 2026-A &nbsp;—&nbsp; Prof. Robert Arisaca</p>
+    <p class="footer-text">EPIS · UNSA · Ingeniería y Procesos de Software · 2026-A &nbsp;—&nbsp; Equipo: Unsa-ips-grupo [cite: 6]</p>
   </div>
 </footer>
 

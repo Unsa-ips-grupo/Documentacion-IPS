@@ -9,7 +9,7 @@
 3. Riveros Vilca Alberth Edwar
 
 ## 1. Producto de Software Seleccionado: Krayin CRM
-Hemos seleccionado **Krayin CRM** como segunda opción para el desarrollo del curso. Cumple con todos los criterios exigidos:
+Hemos seleccionado **Krayin CRM** como nuestra opción para el desarrollo del curso. Cumple con todos los criterios exigidos:
 
 - **Dominio:** CRM Empresarial para PYMES y Empresas.
 - **Licencia:** MIT(Krayin CRM es completamente open-source y siempre será gratuito bajo la Licencia MIT).

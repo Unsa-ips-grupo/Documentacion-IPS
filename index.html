@@ -4,68 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guía Integral Krayin CRM – IPS UNSA 2026-A</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0b0f1a;
-    --surface: #111827;
-    --border: #1e2d40;
-    --accent: #3b82f6;
-    --accent2: #06b6d4;
-    --green: #10b981;
-    --orange: #f59e0b;
-    --text: #e2e8f0;
-    --muted: #64748b;
-    --card: #131c2e;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --primary: #2563eb;
+    --secondary: #0ea5e9;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --green: #059669;
+    --orange: #d97706;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
     min-height: 100vh;
   }
 
-  /* GRID NOISE BACKGROUND */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
-    background-size: 48px 48px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
   .container {
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 2rem;
-    position: relative;
-    z-index: 1;
   }
 
   /* HEADER */
   header {
+    background: var(--surface);
     padding: 4rem 0 3rem;
     border-bottom: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-
-  header::after {
-    content: '';
-    position: absolute;
-    top: -60px; right: -80px;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
-    pointer-events: none;
   }
 
   .badge {
@@ -73,59 +47,60 @@
     align-items: center;
     gap: .4rem;
     font-family: 'DM Mono', monospace;
-    font-size: .72rem;
-    color: var(--accent2);
-    background: rgba(6,182,212,0.08);
-    border: 1px solid rgba(6,182,212,0.2);
+    font-size: .75rem;
+    color: var(--primary);
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
     padding: .3rem .8rem;
-    border-radius: 2px;
-    letter-spacing: .08em;
+    border-radius: 4px;
+    letter-spacing: .05em;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
   }
 
-  .badge::before { content: '●'; font-size: .5rem; animation: blink 1.4s infinite; }
-
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
-
   h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: 800;
-    line-height: 1.15;
-    max-width: 820px;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
     margin-bottom: 1.2rem;
-    background: linear-gradient(135deg, #e2e8f0 30%, #3b82f6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-main);
   }
 
   .meta-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 2rem;
     margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
   }
 
   .meta-item {
     display: flex;
     flex-direction: column;
-    gap: .15rem;
+    gap: .2rem;
   }
 
   .meta-label {
     font-family: 'DM Mono', monospace;
-    font-size: .65rem;
-    color: var(--muted);
+    font-size: .7rem;
+    color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: .1em;
   }
 
   .meta-value {
-    font-size: .9rem;
-    color: var(--text);
+    font-size: .95rem;
     font-weight: 500;
+  }
+
+  .meta-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .meta-link:hover {
+    text-decoration: underline;
   }
 
   /* SECTIONS */
@@ -143,307 +118,189 @@
 
   .section-number {
     font-family: 'DM Mono', monospace;
-    font-size: .7rem;
-    color: var(--accent);
-    background: rgba(59,130,246,0.1);
-    border: 1px solid rgba(59,130,246,0.2);
-    padding: .2rem .55rem;
-    border-radius: 2px;
-    letter-spacing: .05em;
+    font-size: .8rem;
+    color: var(--primary);
+    background: #eff6ff;
+    padding: .2rem .6rem;
+    border-radius: 4px;
+    font-weight: 500;
   }
 
   h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.35rem;
-    font-weight: 700;
-    letter-spacing: -.01em;
+    font-size: 1.4rem;
+    font-weight: 600;
   }
 
   /* CARDS */
-  .cards {
+  .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 1.5rem;
   }
 
   .card {
-    background: var(--card);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 1.8rem;
-    position: relative;
-    overflow: hidden;
-    transition: border-color .2s, transform .2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   }
-
-  .card:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    opacity: 0;
-    transition: opacity .2s;
-  }
-
-  .card:hover::before { opacity: 1; }
 
   .card-tag {
     font-family: 'DM Mono', monospace;
-    font-size: .65rem;
-    color: var(--accent2);
+    font-size: .7rem;
+    color: var(--secondary);
     text-transform: uppercase;
-    letter-spacing: .1em;
-    margin-bottom: .7rem;
+    margin-bottom: .8rem;
+    font-weight: 500;
   }
 
   .card h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: .3rem;
+    font-size: 1.15rem;
+    margin-bottom: .5rem;
   }
 
   .card p {
-    font-size: .85rem;
-    color: var(--muted);
-    margin-bottom: 1rem;
-  }
-
-  .card .repo-link {
-    font-family: 'DM Mono', monospace;
-    font-size: .72rem;
-    color: var(--accent);
-    text-decoration: none;
-    display: block;
+    font-size: .9rem;
+    color: var(--text-muted);
     margin-bottom: 1.2rem;
-    opacity: .8;
   }
 
-  .card .repo-link:hover { opacity: 1; text-decoration: underline; }
-
-  .spec-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: .6rem;
-    margin-top: .8rem;
-  }
-
-  .spec-item {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: .5rem .7rem;
-  }
-
-  .spec-key {
+  .repo-link {
     font-family: 'DM Mono', monospace;
-    font-size: .6rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    margin-bottom: .15rem;
+    font-size: .8rem;
+    color: var(--primary);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 1.2rem;
   }
 
-  .spec-val {
-    font-size: .82rem;
-    font-weight: 500;
-    color: var(--text);
+  .repo-link:hover { text-decoration: underline; }
+
+  /* CHIPS */
+  .chip-group {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
   }
 
   .chip {
     display: inline-block;
     font-family: 'DM Mono', monospace;
-    font-size: .65rem;
-    padding: .2rem .5rem;
-    border-radius: 3px;
-    margin: .15rem .1rem;
+    font-size: .7rem;
+    padding: .25rem .6rem;
+    border-radius: 4px;
     font-weight: 500;
   }
 
-  .chip-blue { background: rgba(59,130,246,.12); color: #93c5fd; border: 1px solid rgba(59,130,246,.2); }
-  .chip-green { background: rgba(16,185,129,.12); color: #6ee7b7; border: 1px solid rgba(16,185,129,.2); }
-  .chip-orange { background: rgba(245,158,11,.12); color: #fcd34d; border: 1px solid rgba(245,158,11,.2); }
+  .chip-green { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+  .chip-blue { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+  .chip-orange { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
 
-  /* CRONOGRAMA */
-  .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    position: relative;
-    padding-left: 2rem;
+  /* LIST GRID */
+  .list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
   }
 
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 7px; top: 8px; bottom: 8px;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+  .list-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.2rem;
+  }
+
+  .list-item-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: .4rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  .list-item-desc {
+    font-size: .85rem;
+    color: var(--text-muted);
+  }
+
+  /* TIMELINE */
+  .timeline {
+    border-left: 2px solid #cbd5e1;
+    padding-left: 2rem;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 
   .tl-item {
     position: relative;
-    padding: 0 0 2rem 1.5rem;
   }
 
   .tl-item::before {
     content: '';
     position: absolute;
-    left: -1.75rem;
-    top: 7px;
-    width: 10px; height: 10px;
+    left: -2.45rem;
+    top: .3rem;
+    width: 12px; height: 12px;
     border-radius: 50%;
-    background: var(--bg);
-    border: 2px solid var(--accent);
+    background: var(--surface);
+    border: 2px solid #cbd5e1;
   }
 
   .tl-item.hito::before {
-    width: 14px; height: 14px;
-    left: calc(-1.75rem - 2px);
-    background: var(--accent);
-    box-shadow: 0 0 12px rgba(59,130,246,.5);
+    background: var(--primary);
+    border-color: #bfdbfe;
+    box-shadow: 0 0 0 4px #eff6ff;
   }
 
   .tl-date {
     font-family: 'DM Mono', monospace;
-    font-size: .68rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    margin-bottom: .2rem;
-  }
-
-  .tl-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
+    font-size: .75rem;
+    color: var(--text-muted);
     margin-bottom: .3rem;
   }
 
+  .tl-title {
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: .4rem;
+  }
+
   .tl-desc {
-    font-size: .85rem;
-    color: var(--muted);
-    max-width: 600px;
+    font-size: .9rem;
+    color: var(--text-muted);
   }
 
   .hito-badge {
     display: inline-block;
     font-family: 'DM Mono', monospace;
-    font-size: .62rem;
-    background: rgba(59,130,246,.15);
-    color: var(--accent);
-    border: 1px solid rgba(59,130,246,.3);
+    font-size: .65rem;
+    background: #eff6ff;
+    color: var(--primary);
+    border: 1px solid #bfdbfe;
     padding: .15rem .5rem;
-    border-radius: 3px;
-    margin-left: .6rem;
-    vertical-align: middle;
-    text-transform: uppercase;
-    letter-spacing: .05em;
-  }
-
-  .hito-badge.h2 { background: rgba(6,182,212,.12); color: var(--accent2); border-color: rgba(6,182,212,.3); }
-  .hito-badge.h3 { background: rgba(16,185,129,.12); color: var(--green); border-color: rgba(16,185,129,.3); }
-
-  /* TEAM */
-  .team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 1rem;
-  }
-
-  .member-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 1.2rem 1rem;
-    text-align: center;
-  }
-
-  .member-avatar {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Syne', sans-serif;
-    font-size: .9rem;
-    font-weight: 800;
-    color: white;
-    margin: 0 auto .8rem;
-  }
-
-  .member-name {
-    font-size: .83rem;
-    font-weight: 500;
-    margin-bottom: .2rem;
-  }
-
-  .member-role {
-    font-family: 'DM Mono', monospace;
-    font-size: .62rem;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: .06em;
-  }
-
-  /* TOOLS */
-  .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
-  }
-
-  .tool-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 1.2rem;
-    display: flex;
-    gap: .9rem;
-    align-items: flex-start;
-  }
-
-  .tool-icon {
-    font-size: 1.3rem;
-    flex-shrink: 0;
-    margin-top: .1rem;
-  }
-
-  .tool-name {
-    font-family: 'DM Mono', monospace;
-    font-size: .75rem;
-    font-weight: 500;
-    color: var(--accent2);
-    margin-bottom: .25rem;
-    text-transform: uppercase;
-    letter-spacing: .05em;
-  }
-
-  .tool-desc {
-    font-size: .8rem;
-    color: var(--muted);
-    line-height: 1.5;
+    border-radius: 4px;
+    margin-left: .5rem;
+    vertical-align: text-bottom;
   }
 
   /* TABLES */
   .table-container {
     width: 100%;
     overflow-x: auto;
-    margin-top: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
   }
 
   table {
     width: 100%;
     border-collapse: collapse;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
   }
 
   th, td {
@@ -453,81 +310,55 @@
   }
 
   th {
-    background: rgba(255,255,255,0.02);
+    background: #f8fafc;
     font-family: 'DM Mono', monospace;
-    font-size: .75rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: .05em;
+    font-size: .8rem;
+    color: var(--text-muted);
+    font-weight: 500;
   }
 
   td {
-    font-size: .85rem;
-    color: var(--text);
+    font-size: .9rem;
   }
 
-  tr:last-child td {
-    border-bottom: none;
-  }
+  tr:last-child td { border-bottom: none; }
 
   /* FOOTER */
   footer {
-    padding: 2.5rem 0;
+    padding: 3rem 0;
     text-align: center;
   }
 
   .footer-text {
     font-family: 'DM Mono', monospace;
-    font-size: .7rem;
-    color: var(--muted);
-    letter-spacing: .05em;
+    font-size: .8rem;
+    color: var(--text-muted);
   }
 
-  /* ANIMATIONS */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(18px);
-    animation: fadeIn .6s ease forwards;
-  }
-
-  @keyframes fadeIn {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .fade-in:nth-child(1) { animation-delay: .05s; }
-  .fade-in:nth-child(2) { animation-delay: .15s; }
-  .fade-in:nth-child(3) { animation-delay: .25s; }
-  .fade-in:nth-child(4) { animation-delay: .35s; }
-  .fade-in:nth-child(5) { animation-delay: .45s; }
-
-  @media (max-width: 640px) {
-    .spec-grid { grid-template-columns: 1fr; }
-    .meta-row { gap: 1rem; }
-  }
 </style>
 </head>
 <body>
 
 <header>
   <div class="container">
-    <div class="badge">EPIS · UNSA · 2026-A [cite: 6]</div>
-    <h1>Guía Integral del Proyecto Krayin CRM [cite: 2]</h1>
+    <div class="badge">EPIS · UNSA · 2026-A</div>
+    <h1>Guía Técnica del Proyecto Krayin CRM</h1>
     <div class="meta-row">
       <div class="meta-item">
         <span class="meta-label">Curso</span>
-        <span class="meta-value">Ingeniería y Procesos de Software [cite: 4]</span>
+        <span class="meta-value">Ingeniería y Procesos de Software</span>
       </div>
       <div class="meta-item">
         <span class="meta-label">Docente</span>
-        <span class="meta-value">Prof. Robert Arisaca [cite: 5]</span>
+        <span class="meta-value">Prof. Robert Arisaca</span>
       </div>
       <div class="meta-item">
         <span class="meta-label">Fecha Base</span>
-        <span class="meta-value">13 de mayo de 2026 [cite: 7]</span>
+        <span class="meta-value">13 de mayo de 2026</span>
       </div>
       <div class="meta-item">
         <span class="meta-label">Organización</span>
-        <a href="https://github.com/Unsa-ips-grupo" style="color:#3b82f6;font-size:.9rem;font-weight:500;text-decoration:none;" target="_blank">Unsa-ips-grupo [cite: 6]</a>
+        <a href="https://github.com/Unsa-ips-grupo" class="meta-link" target="_blank">Unsa-ips-grupo</a>
       </div>
     </div>
   </div>
@@ -541,39 +372,38 @@
         <span class="section-number">01</span>
         <h2>Software Base Seleccionado</h2>
       </div>
-      <div class="cards">
-
-        <div class="card fade-in">
-          <div class="card-tag">Proyecto Principal · CRM</div>
-          <h3>Krayin CRM [cite: 27]</h3>
-          <a class="repo-link" href="https://github.com/Unsa-ips-grupo/laravel-crm" target="_blank">github.com/Unsa-ips-grupo/laravel-crm [cite: 241]</a>
-          <p>Sistema de gestión de relaciones con clientes (CRM) de código abierto. Desarrollado por Webkul Software Pvt. Ltd., diseñado para centralizar contactos, leads y oportunidades empresariales[cite: 16, 28].</p>
-          <div style="margin-bottom:.8rem;">
-            <span class="chip chip-green">MIT License ✓ [cite: 28]</span>
-            <span class="chip chip-blue">Laravel [cite: 29]</span>
-            <span class="chip chip-blue">Vue.js [cite: 29]</span>
-            <span class="chip chip-orange">Docker Compose [cite: 106]</span>
-          </div>
-          <div class="spec-grid">
-            <div class="spec-item">
-              <div class="spec-key">Dominio</div>
-              <div class="spec-val">CRM Empresarial [cite: 248]</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-key">Docker Oficial</div>
-              <div class="spec-val">webkul/krayin (>50k pulls) [cite: 64]</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-key">Módulos [cite: 123]</div>
-              <div class="spec-val">Leads, Contactos, Cotizaciones, Workflows [cite: 124, 125, 127, 130]</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-key">Licencia</div>
-              <div class="spec-val">MIT Pura (Req. del curso) [cite: 137]</div>
-            </div>
-          </div>
+      
+      <div class="card">
+        <div class="card-tag">Proyecto Principal · CRM</div>
+        <h3>Krayin CRM</h3>
+        <a class="repo-link" href="https://github.com/Unsa-ips-grupo/laravel-crm" target="_blank">github.com/Unsa-ips-grupo/laravel-crm</a>
+        <p>Sistema de gestión de relaciones con clientes (CRM) de código abierto. Desarrollado por Webkul Software Pvt. Ltd., está diseñado para centralizar contactos, leads y oportunidades comerciales reemplazando procesos manuales desorganizados.</p>
+        
+        <div class="chip-group">
+          <span class="chip chip-green">MIT License ✓</span>
+          <span class="chip chip-blue">Laravel</span>
+          <span class="chip chip-blue">Vue.js</span>
+          <span class="chip chip-orange">Docker Compose</span>
         </div>
 
+        <div class="table-container" style="margin-top: 1.5rem;">
+          <table>
+            <tbody>
+              <tr>
+                <td style="width: 30%; color: var(--text-muted);"><strong>Dominio</strong></td>
+                <td>CRM Empresarial</td>
+              </tr>
+              <tr>
+                <td style="color: var(--text-muted);"><strong>Docker Oficial</strong></td>
+                <td>Imagen oficial en Docker Hub (`webkul/krayin`)</td>
+              </tr>
+              <tr>
+                <td style="color: var(--text-muted);"><strong>Licencia</strong></td>
+                <td>MIT Pura (Cumple requisito del curso)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>
@@ -582,49 +412,86 @@
     <div class="container">
       <div class="section-header">
         <span class="section-number">02</span>
-        <h2>Stack Tecnológico y Arquitectura [cite: 65]</h2>
+        <h2>Módulos Principales de Krayin CRM</h2>
       </div>
-      <p style="margin-bottom: 1.5rem; color: var(--muted);">El proyecto Krayin se fundamenta en tecnologías robustas que serán el entorno de trabajo para el despliegue de las prácticas DevOps[cite: 66, 164].</p>
+      <p style="margin-bottom: 2rem; color: var(--text-muted);">Krayin posee una arquitectura modular basada en paquetes de Laravel. Estos son los componentes clave que gestionan la lógica de negocio:</p>
       
-      <div class="table-container fade-in">
+      <div class="list-grid">
+        <div class="list-item">
+          <div class="list-item-title">🎯 Lead (Prospectos)</div>
+          <div class="list-item-desc">Gestión completa de prospectos. Incluye la definición de etapas, fuentes de contacto, tipos de lead y la visualización interactiva mediante un pipeline estilo Kanban.</div>
+        </div>
+        <div class="list-item">
+          <div class="list-item-title">👥 Contact</div>
+          <div class="list-item-desc">Manejo centralizado de las personas físicas y las organizaciones/empresas con las que existe una relación comercial establecida.</div>
+        </div>
+        <div class="list-item">
+          <div class="list-item-title">📅 Activity</div>
+          <div class="list-item-desc">Registro detallado del historial de interacción: llamadas realizadas, reuniones agendadas, correos y tareas pendientes asociadas a un lead o contacto.</div>
+        </div>
+        <div class="list-item">
+          <div class="list-item-title">📄 Quote</div>
+          <div class="list-item-desc">Módulo orientado a la generación y el seguimiento formal de cotizaciones o propuestas comerciales emitidas a los clientes.</div>
+        </div>
+        <div class="list-item">
+          <div class="list-item-title">✉️ Email</div>
+          <div class="list-item-desc">Integración directa con servidores de correo para el envío de campañas y herramientas de parsing entrante (ej. vía Sendgrid).</div>
+        </div>
+        <div class="list-item">
+          <div class="list-item-title">⚙️ Workflow</div>
+          <div class="list-item-desc">Sistema de automatizaciones basado en reglas que dispara correos, notificaciones o asignaciones automáticas cuando ocurren eventos específicos en el CRM.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2>Stack Tecnológico y Arquitectura</h2>
+      </div>
+      <p style="margin-bottom: 1.5rem; color: var(--text-muted);">Infraestructura técnica sobre la cual se ejecutará el pipeline de CI/CD y los despliegues.</p>
+      
+      <div class="table-container">
         <table>
           <thead>
             <tr>
-              <th>Componente [cite: 108]</th>
-              <th>Función dentro de Krayin [cite: 108]</th>
-              <th>Versión [cite: 108]</th>
+              <th>Tecnología</th>
+              <th>Función en la Arquitectura</th>
+              <th>Versión</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><strong>PHP</strong></td>
-              <td>Lenguaje base del backend[cite: 70]. Procesa peticiones y lógica.</td>
-              <td>8.2+ [cite: 108]</td>
+              <td>Lenguaje base del backend que ejecuta la lógica de Krayin.</td>
+              <td>8.2+</td>
             </tr>
             <tr>
               <td><strong>Laravel</strong></td>
-              <td>Framework MVC principal[cite: 73]. Implementa Eloquent ORM.</td>
-              <td>11.x [cite: 108]</td>
+              <td>Framework MVC principal. Provee el ORM Eloquent, rutas y modularidad.</td>
+              <td>11.x</td>
             </tr>
             <tr>
               <td><strong>Blade</strong></td>
-              <td>Motor de plantillas para vistas renderizadas en servidor[cite: 76].</td>
-              <td>Integrado [cite: 108]</td>
+              <td>Motor de plantillas para renderizado rápido de vistas en servidor.</td>
+              <td>N/A</td>
             </tr>
             <tr>
               <td><strong>Vue.js</strong></td>
-              <td>Interactividad reactiva del frontend (Kanban, modales)[cite: 83].</td>
-              <td>3.x [cite: 108]</td>
+              <td>Añade reactividad al frontend (ej. arrastrar tarjetas en Kanban).</td>
+              <td>3.x</td>
             </tr>
             <tr>
               <td><strong>MySQL</strong></td>
-              <td>Base de datos relacional para persistencia[cite: 86].</td>
-              <td>8.0.32+ [cite: 108]</td>
+              <td>Base de datos relacional persistente.</td>
+              <td>8.0.32+</td>
             </tr>
             <tr>
               <td><strong>Docker</strong></td>
-              <td>Contenedorización oficial para aislar dependencias[cite: 104].</td>
-              <td>Imagen 2.2.0 [cite: 108]</td>
+              <td>Contenedorización para aislar entorno (krayin-docker).</td>
+              <td>2.2.0</td>
             </tr>
           </tbody>
         </table>
@@ -635,97 +502,32 @@
   <section>
     <div class="container">
       <div class="section-header">
-        <span class="section-number">03</span>
-        <h2>El Producto Final y los 6 Entregables [cite: 203]</h2>
-      </div>
-      <p style="margin-bottom: 2rem; color: var(--muted);">El producto evaluable no es el CRM per se, sino <strong>la aplicación rigurosa de un proceso de Ingeniería de Software (Scrum + DevOps) sobre Krayin CRM</strong>[cite: 199].</p>
-      
-      <div class="tools-grid">
-        <div class="tool-card fade-in">
-          <div class="tool-icon">01</div>
-          <div>
-            <div class="tool-name">Fork con Mejoras [cite: 204]</div>
-            <div class="tool-desc">Modificación sobre el fork en Unsa-ips-grupo integrando funcionalidades nuevas (ej. mejora al pipeline Kanban)[cite: 206, 207].</div>
-          </div>
-        </div>
-        <div class="tool-card fade-in">
-          <div class="tool-icon">02</div>
-          <div>
-            <div class="tool-name">Pipeline CI/CD Funcional [cite: 208]</div>
-            <div class="tool-desc">Automatización de pruebas (PHPUnit/Pest) y validaciones en GitHub Actions[cite: 210]. Entregable clave del Hito 2[cite: 209].</div>
-          </div>
-        </div>
-        <div class="tool-card fade-in">
-          <div class="tool-icon">03</div>
-          <div>
-            <div class="tool-name">Despliegue a Staging [cite: 211]</div>
-            <div class="tool-desc">Entorno de Krayin desplegado en la nube (ej. Render, Railway) actualizado automáticamente tras merge a main[cite: 212, 213].</div>
-          </div>
-        </div>
-        <div class="tool-card fade-in">
-          <div class="tool-icon">04</div>
-          <div>
-            <div class="tool-name">Documentación Scrum + DevOps [cite: 215]</div>
-            <div class="tool-desc">Trazabilidad en repositorio público evidenciando Sprints, Backlogs y Retrospectivas reales[cite: 216, 217].</div>
-          </div>
-        </div>
-        <div class="tool-card fade-in">
-          <div class="tool-icon">05</div>
-          <div>
-            <div class="tool-name">Artículo IEEE [cite: 219]</div>
-            <div class="tool-desc">Documento académico documentando contexto, metodología Scrum/DevOps, decisiones y resultados[cite: 220]. Clave del Hito 3[cite: 220].</div>
-          </div>
-        </div>
-        <div class="tool-card fade-in">
-          <div class="tool-icon">06</div>
-          <div>
-            <div class="tool-name">Demo Final en Vivo [cite: 222]</div>
-            <div class="tool-desc">Presentación técnica demostrando código funcionando, pipeline CI/CD en vivo y despliegue exitoso[cite: 223].</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="section-header">
         <span class="section-number">04</span>
-        <h2>Cronograma Maestro de Sprints [cite: 180]</h2>
+        <h2>El Producto Final y los Entregables</h2>
       </div>
-      <p style="margin-bottom: 2rem; color: var(--muted);">Cada iteración tiene una duración estricta de 15 días calendario[cite: 160].</p>
-      <div class="timeline">
-
-        <div class="tl-item hito fade-in">
-          <div class="tl-date">22 Abr – 13 May [cite: 181]</div>
-          <div class="tl-title">Sprint 0 — Planificación y Selección <span class="hito-badge">Hito 1 · 15% [cite: 181, 228]</span></div>
-          <div class="tl-desc">Planificación, selección de proyecto, configuración de GitHub Pages[cite: 181].</div>
+      <p style="margin-bottom: 2rem; color: var(--text-muted);">El producto a evaluar no es el CRM construido desde cero, sino <strong>la aplicación documentada de Scrum y DevOps</strong> sobre este sistema.</p>
+      
+      <div class="list-grid">
+        <div class="list-item">
+          <div class="list-item-title">1. Fork con Mejoras</div>
+          <div class="list-item-desc">Repositorio modificado integrando funcionalidades nuevas (ej. mejoras al módulo Kanban o nuevos campos).</div>
         </div>
-
-        <div class="tl-item fade-in">
-          <div class="tl-date">14 May – 27 May [cite: 181]</div>
-          <div class="tl-title">Sprint 1 — Setup Técnico [cite: 182]</div>
-          <div class="tl-desc">Krayin corriendo en local mediante Docker Compose, análisis de arquitectura y consolidación del Product Backlog[cite: 183, 184].</div>
+        <div class="list-item">
+          <div class="list-item-title">2. Pipeline CI/CD Funcional</div>
+          <div class="list-item-desc">Automatización en GitHub Actions (validación de estilos y pruebas con PHPUnit/Pest). Entregable clave del Hito 2.</div>
         </div>
-
-        <div class="tl-item hito fade-in">
-          <div class="tl-date">28 May – 10 Jun [cite: 181]</div>
-          <div class="tl-title">Sprint 2 — CI/CD Básico <span class="hito-badge h2">Hito 2 · 60% [cite: 181, 229]</span></div>
-          <div class="tl-desc">Configuración de workflows de GitHub Actions para ejecutar pruebas y validar estilos ante cada pull request[cite: 186].</div>
+        <div class="list-item">
+          <div class="list-item-title">3. Despliegue a Staging</div>
+          <div class="list-item-desc">Entorno web accesible públicamente actualizado en automático tras aplicar cambios en la rama principal.</div>
         </div>
-
-        <div class="tl-item fade-in">
-          <div class="tl-date">11 Jun – 24 Jun [cite: 181]</div>
-          <div class="tl-title">Sprint 3 — Mejora funcional y despliegue [cite: 188]</div>
-          <div class="tl-desc">Implementación de nueva funcionalidad y automatización de despliegue a entorno de staging[cite: 189].</div>
+        <div class="list-item">
+          <div class="list-item-title">4. Documentación del Proceso</div>
+          <div class="list-item-desc">Actas y bitácoras trazables evidenciando Sprints reales, Backlogs y retrospectivas.</div>
         </div>
-
-        <div class="tl-item hito fade-in">
-          <div class="tl-date">25 Jun – 8 Jul [cite: 181]</div>
-          <div class="tl-title">Sprint 4 — Cierre <span class="hito-badge h3">Hito 3 · 25% [cite: 181, 230]</span></div>
-          <div class="tl-desc">Pulido final, redacción del artículo IEEE, documentación completa y preparación de demo en vivo[cite: 192].</div>
+        <div class="list-item">
+          <div class="list-item-title">5. Artículo IEEE</div>
+          <div class="list-item-desc">Documento formal que sintetiza la metodología, decisiones técnicas y lecciones aprendidas (Hito 3).</div>
         </div>
-
       </div>
     </div>
   </section>
@@ -734,36 +536,72 @@
     <div class="container">
       <div class="section-header">
         <span class="section-number">05</span>
-        <h2>Equipo de Trabajo [cite: 6]</h2>
+        <h2>Cronograma Maestro de Sprints</h2>
       </div>
-      <div class="team-grid">
-        <div class="member-card fade-in">
-          <div class="member-avatar">JV</div>
-          <div class="member-name">Johan Vilca Flores</div>
-          <div class="member-role">Líder · Sprint 0 [cite: 327]</div>
+      
+      <div class="timeline">
+        <div class="tl-item hito">
+          <div class="tl-date">22 Abr – 13 May</div>
+          <div class="tl-title">Sprint 0 — Planificación y Selección <span class="hito-badge">Hito 1</span></div>
+          <div class="tl-desc">Definición inicial, elección del software base y setup de documentación en GitHub Pages.</div>
         </div>
-        <div class="member-card fade-in">
-          <div class="member-avatar">GY</div>
-          <div class="member-name">Gustavo Yunque</div>
-          <div class="member-role">Líder · Sprint 1</div>
+
+        <div class="tl-item">
+          <div class="tl-date">14 May – 27 May</div>
+          <div class="tl-title">Sprint 1 — Setup Técnico</div>
+          <div class="tl-desc">Levantamiento local con Docker Compose, análisis de arquitectura y backlog consolidado.</div>
         </div>
-        <div class="member-card fade-in">
-          <div class="member-avatar">FC</div>
-          <div class="member-name">Franco Cahua Soto</div>
-          <div class="member-role">Development Team [cite: 148]</div>
+
+        <div class="tl-item hito">
+          <div class="tl-date">28 May – 10 Jun</div>
+          <div class="tl-title">Sprint 2 — CI/CD Básico <span class="hito-badge">Hito 2</span></div>
+          <div class="tl-desc">Creación del workflow en GitHub Actions para pruebas automatizadas en cada Pull Request.</div>
         </div>
-        <div class="member-card fade-in">
-          <div class="member-avatar">M4</div>
-          <div class="member-name">Miembro 4</div>
-          <div class="member-role">Development Team [cite: 148]</div>
+
+        <div class="tl-item">
+          <div class="tl-date">11 Jun – 24 Jun</div>
+          <div class="tl-title">Sprint 3 — Mejora funcional y despliegue</div>
+          <div class="tl-desc">Codificación de mejoras en los módulos e implementación del despliegue en servidor Staging.</div>
         </div>
-        <div class="member-card fade-in">
-          <div class="member-avatar">M5</div>
-          <div class="member-name">Miembro 5</div>
-          <div class="member-role">Development Team [cite: 148]</div>
+
+        <div class="tl-item hito">
+          <div class="tl-date">25 Jun – 8 Jul</div>
+          <div class="tl-title">Sprint 4 — Cierre <span class="hito-badge">Hito 3</span></div>
+          <div class="tl-desc">Redacción final del artículo IEEE, pulido de la documentación y demo en vivo.</div>
         </div>
       </div>
-      <p style="font-size:.8rem;color:var(--muted);margin-top:1rem;">* Los roles de Scrum (Product Owner, Scrum Master y Development Team) rotan por sprint, garantizando que todos ejerzan cada rol al menos una vez[cite: 146, 147, 148, 149].</p>
+    </div>
+  </section>
+
+  <section style="border-bottom: none;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">06</span>
+        <h2>Equipo de Trabajo</h2>
+      </div>
+      <div class="list-grid">
+        <div class="list-item" style="padding: 1rem;">
+          <strong>Johan Vilca Flores</strong><br>
+          <span style="font-size: .8rem; color: var(--text-muted);">Líder (Sprint 0)</span>
+        </div>
+        <div class="list-item" style="padding: 1rem;">
+          <strong>Gustavo Yunque</strong><br>
+          <span style="font-size: .8rem; color: var(--text-muted);">Líder (Sprint 1)</span>
+        </div>
+        <div class="list-item" style="padding: 1rem;">
+          <strong>Franco Cahua Soto</strong><br>
+          <span style="font-size: .8rem; color: var(--text-muted);">Development Team</span>
+        </div>
+        <div class="list-item" style="padding: 1rem;">
+          <strong>Miembro 4</strong><br>
+          <span style="font-size: .8rem; color: var(--text-muted);">Development Team</span>
+        </div>
+        <div class="list-item" style="padding: 1rem;">
+          <strong>Miembro 5</strong><br>
+          <span style="font-size: .8rem; color: var(--text-muted);">Development Team</span>
+        </div>
+      </div>
+      <p style="font-size:.85rem; color:var(--text-muted); margin-top:1.5rem;">Nota: Los roles ágiles (Product Owner, Scrum Master y Development Team) rotan cada sprint para cumplir con los objetivos formativos del curso.</p>
     </div>
   </section>
 
@@ -771,7 +609,7 @@
 
 <footer>
   <div class="container">
-    <p class="footer-text">EPIS · UNSA · Ingeniería y Procesos de Software · 2026-A &nbsp;—&nbsp; Equipo: Unsa-ips-grupo [cite: 6]</p>
+    <p class="footer-text">EPIS · UNSA · Ingeniería y Procesos de Software · 2026-A</p>
   </div>
 </footer>
 

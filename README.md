@@ -3,15 +3,16 @@
 **Equipo:** 5 Estudiantes (Grupo A1 )  
 **Líder Sprint 0:** Johan Vilca Flores  
 **Líder Sprint 1:** Yunque Quispe Gustavo Alonso
-                    1. Navarro Quispe Henry Alex
-                    2. Cahua Soto Franco Jesus
-                    3. Riveros Vilca Alberth Edwar
+**Development Team:**
+1. Navarro Quispe Henry Alex
+2. Cahua Soto Franco Jesus
+3. Riveros Vilca Alberth Edwar
 
 ## 1. Producto de Software Seleccionado: Krayin CRM
 Hemos seleccionado **Krayin CRM** como segunda opción para el desarrollo del curso. Cumple con todos los criterios exigidos:
 
 - **Dominio:** CRM Empresarial para PYMES y Empresas.
-- **Licencia:** MIT (Verificada).
+- **Licencia:** MIT(Krayin CRM es completamente open-source y siempre será gratuito bajo la Licencia MIT).
 - **Complejidad:** >10,000 líneas de código, arquitectura modular.
 - **Stack:** Laravel (PHP 8.3) + Vue.js + MySQL, Docker Compose oficial disponible.
 - **Repositorio fork:** https://github.com/Unsa-ips-grupo/laravel-crm

@@ -2,7 +2,7 @@
 **Curso:** Ingeniería y Procesos de Software  
 **Equipo:** 5 Estudiantes (Grupo A1 )  
 **Líder Sprint 0:** Johan Vilca Flores  
-**Líder Sprint 1:** Yunque Quispe Gustavo Alonso
+**Líder Sprint 1:** Yunque Quispe Gustavo Alonso\
 **Development Team:**
 1. Navarro Quispe Henry Alex
 2. Cahua Soto Franco Jesus

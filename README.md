@@ -5,6 +5,7 @@
                     Yunque Quispe Gustavo Alonso
                     Navarro Quispe Henry Alex
                     Cahua Soto Franco Jesus
+                    Riveros Vilca Alberth Edwar
 
 ## 1. Producto de Software Seleccionado: InvenTree
 Hemos seleccionado **InvenTree** como nuestra base principal para el desarrollo del curso.Cumple con todos los criterios exigidos

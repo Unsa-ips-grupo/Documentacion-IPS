@@ -1,25 +1,28 @@
-# Plan de Proyecto - Sprint 0 (Hito 1)
-**Curso:** Ingeniería y Procesos de Software  
-**Equipo:** 5 Estudiantes (Grupo A1 )  
-**Líder Sprint 0:** Johan Vilca Flores  
-**Líder Sprint 1:** Yunque Quispe Gustavo Alonso\
-**Development Team:**
-1. Navarro Quispe Henry Alex
-2. Cahua Soto Franco Jesus
-3. Riveros Vilca Alberth Edwar
+# Documentacion-IPS
 
-## 1. Producto de Software Seleccionado: Krayin CRM
-Hemos seleccionado **Krayin CRM** como nuestra opción para el desarrollo del curso. Cumple con todos los criterios exigidos:
+> **Curso:** Ingeniería y Procesos de Software
+> **Equipo:** 5 Estudiantes (Grupo A1)
+> **Líder Sprint 0:** Johan Vilca Flores
+> **Líder Sprint 1:** Yunque Quispe Gustavo Alonso
+> **Development Team:**
+> 1. Navarro Quispe Henry Alex
+> 2. Cahua Soto Franco Jesus
+> 3. Riveros Vilca Alberth Edwar
 
-- **Dominio:** CRM Empresarial para PYMES y Empresas.
-- **Licencia:** MIT(Krayin CRM es completamente open-source y siempre será gratuito bajo la Licencia MIT).
-- **Complejidad:** >10,000 líneas de código, arquitectura modular.
-- **Stack:** Laravel (PHP 8.3) + Vue.js + MySQL, Docker Compose oficial disponible.
-- **Repositorio fork:** https://github.com/Unsa-ips-grupo/laravel-crm
+## 1. Producto de Software Seleccionado: Danphe EMR
 
-##2. Cronograma General (Sprints de 15 días)
-* **Sprint 0 (Hito 1):** Cierre 13 de Mayo (Plan y Selección).
-* **Sprint 1:** 14 de Mayo - 27 de Mayo.
-* **Sprint 2 (Hito 2):** 28 de Mayo - 10 de Junio (CI/CD funcionando).
-* **Sprint 3:** 11 de Junio - 24 de Junio.
-* **Sprint 4 (Hito 3):** 25 de Junio - 13 de Julio (Entrega Final e IEEE).
+Hemos seleccionado **Danphe EMR** como nuestra opción para el desarrollo del curso. Cumple con todos los criterios exigidos:
+
+* **Dominio:** Sistema de Información Hospitalaria (HIS + EMR + EHR) para hospitales y clínicas.
+* **Licencia:** MIT (Danphe EMR es completamente open-source bajo Licencia MIT).
+* **Complejidad:** >10,000 líneas de código, arquitectura modular con más de 40 módulos integrados.
+* **Stack:** Angular + ASP.NET Core (C#) + SQL Server, Docker Compose disponible.
+* **Repositorio fork:** https://github.com/Unsa-ips-grupo/hospital-management-emr
+
+## 2. Cronograma General (Sprints de 15 días)
+
+* **Sprint 0 (Hito 1):** Cierre 13 de Mayo (Plan y Selección). ✅
+* **Sprint 1:** 14 de Mayo - 27 de Mayo. 🔄
+* **Sprint 2 (Hito 2):** 28 de Mayo - 10 de Junio (CI/CD funcionando). ⏳
+* **Sprint 3:** 11 de Junio - 24 de Junio. ⏳
+* **Sprint 4 (Hito 3):** 25 de Junio - 13 de Julio (Entrega Final e IEEE). ⏳

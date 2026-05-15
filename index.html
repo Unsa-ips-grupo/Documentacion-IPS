@@ -1,616 +1,621 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Krayin CRM — IPS UNSA 2026-A</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Proyecto IPS — Danphe EMR + Scrum + DevOps | UNSA</title>
+<meta name="description" content="Aplicación de Scrum y DevOps sobre Danphe EMR, sistema de información hospitalaria de código abierto. Curso de Ingeniería y Procesos de Software, EPIS-UNSA 2026-A." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --navy:   #0f1f3d;
-    --blue:   #1a3a6b;
-    --accent: #2563eb;
-    --sky:    #e8f0fe;
-    --line:   #d1ddf7;
-    --text:   #1a1f2e;
-    --muted:  #64748b;
-    --bg:     #f8f9fc;
-    --card:   #ffffff;
-    --serif:  'Playfair Display', serif;
-    --sans:   'Jost', sans-serif;
+    --navy: #0f2447;
+    --blue: #1e4d8b;
+    --sky: #4a90d9;
+    --accent: #c9a96e;
+    --bg: #f7f5f0;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --muted: #6b6b6b;
+    --border: #e6e2d8;
+    --success: #2e7d32;
+    --warn: #b8860b;
   }
-
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-
   body {
-    font-family: var(--sans);
+    font-family: 'Jost', sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-size: 16px;
     line-height: 1.7;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
   }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
 
-  /* ─── NAV ─── */
+  /* NAV */
   nav {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(255,255,255,0.92);
+    background: rgba(247, 245, 240, 0.92);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
-    padding: 0 2rem;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 56px;
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
   }
-  .nav-logo { font-family: var(--serif); font-size: 1rem; color: var(--navy); font-weight: 700; }
-  .nav-links { display: flex; gap: 1.8rem; list-style: none; }
-  .nav-links a { text-decoration: none; font-size: .8rem; font-weight: 500; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; transition: color .2s; }
-  .nav-links a:hover { color: var(--accent); }
+  nav .container { display: flex; justify-content: space-between; align-items: center; }
+  nav .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700; color: var(--navy);
+    letter-spacing: -0.3px;
+  }
+  nav .brand span { color: var(--accent); }
+  nav ul { display: flex; gap: 32px; list-style: none; }
+  nav ul a {
+    color: var(--text); text-decoration: none; font-size: 15px; font-weight: 500;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--blue); }
+  @media (max-width: 768px) { nav ul { display: none; } }
 
-  /* ─── HERO ─── */
+  /* HERO */
   .hero {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, #1e4d9b 100%);
-    color: white;
-    padding: 5rem 2rem 4rem;
-    position: relative; overflow: hidden;
+    padding: 100px 0 80px;
+    background: linear-gradient(180deg, var(--bg) 0%, #fdfcf8 100%);
+    border-bottom: 1px solid var(--border);
   }
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  .hero .badges {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px;
   }
-  .hero-inner { max-width: 860px; margin: 0 auto; position: relative; }
-  .hero-tag {
-    display: inline-block;
-    background: rgba(255,255,255,.12);
-    border: 1px solid rgba(255,255,255,.25);
-    padding: .3rem 1rem; border-radius: 99px;
-    font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-    margin-bottom: 1.5rem;
-  }
-  .hero h1 {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 900; line-height: 1.15;
-    margin-bottom: .8rem;
-  }
-  .hero-sub { font-size: 1.05rem; font-weight: 300; opacity: .8; margin-bottom: 2rem; }
-  .hero-meta { display: flex; flex-wrap: wrap; gap: 1.5rem; }
-  .hero-meta-item { display: flex; flex-direction: column; gap: .15rem; }
-  .hero-meta-label { font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; opacity: .6; }
-  .hero-meta-value { font-size: .9rem; font-weight: 500; }
-  .hero-badges { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 2rem; }
   .badge {
-    background: rgba(255,255,255,.1);
-    border: 1px solid rgba(255,255,255,.2);
-    padding: .25rem .8rem; border-radius: 99px;
-    font-size: .75rem; font-weight: 500;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--card); border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 100px; font-size: 13px;
+    color: var(--navy); font-weight: 500;
   }
-
-  /* ─── LAYOUT ─── */
-  main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 5rem; }
-
-  section { margin-bottom: 4rem; }
-
-  .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.8rem; border-bottom: 2px solid var(--line); padding-bottom: .8rem; }
-  .section-num { font-family: var(--serif); font-size: 2rem; font-weight: 900; color: var(--line); line-height: 1; }
-  .section-title { font-family: var(--serif); font-size: 1.35rem; font-weight: 700; color: var(--navy); }
-
-  /* ─── CARDS ─── */
-  .card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 1.6rem 2rem;
-    box-shadow: 0 2px 12px rgba(15,31,61,.06);
+  .badge.accent { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .badge.success { background: #e8f5e9; color: var(--success); border-color: #c8e6c9; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 5.5vw, 68px);
+    font-weight: 800; color: var(--navy);
+    line-height: 1.05; letter-spacing: -1.5px; margin-bottom: 24px;
   }
-  .card + .card { margin-top: 1rem; }
+  .hero h1 em { color: var(--accent); font-style: italic; }
+  .hero .lead {
+    font-size: 20px; color: var(--muted); max-width: 760px;
+    margin-bottom: 40px; line-height: 1.6;
+  }
+  .hero .meta {
+    display: flex; gap: 48px; flex-wrap: wrap;
+    padding-top: 32px; border-top: 1px solid var(--border);
+  }
+  .meta-item .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+  .meta-item .value { font-size: 17px; color: var(--navy); font-weight: 600; }
 
-  /* ─── PROJECT CARD ─── */
-  .project-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 2px 16px rgba(15,31,61,.07);
+  /* SECTION */
+  section { padding: 90px 0; }
+  section.alt { background: #fdfcf8; }
+  .section-label {
+    font-size: 13px; color: var(--accent); text-transform: uppercase;
+    letter-spacing: 2.5px; font-weight: 600; margin-bottom: 16px;
   }
-  .project-card-header {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
-    padding: 1.4rem 2rem;
-    display: flex; align-items: center; justify-content: space-between;
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700; color: var(--navy);
+    line-height: 1.15; letter-spacing: -0.8px; margin-bottom: 24px;
   }
-  .project-card-header h3 { font-family: var(--serif); font-size: 1.3rem; color: white; font-weight: 700; }
-  .project-type { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25); color: white; padding: .2rem .7rem; border-radius: 99px; font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
-  .project-card-body { padding: 1.5rem 2rem; }
-  .project-desc { color: var(--muted); font-size: .92rem; margin-bottom: 1.2rem; }
-  .project-link { display: inline-flex; align-items: center; gap: .4rem; color: var(--accent); font-size: .82rem; font-weight: 600; text-decoration: none; }
-  .project-link:hover { text-decoration: underline; }
-  .project-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
-  .pill { background: var(--sky); color: var(--accent); border: 1px solid var(--line); padding: .2rem .7rem; border-radius: 99px; font-size: .75rem; font-weight: 600; }
-  .pill.green { background: #ecfdf5; color: #059669; border-color: #a7f3d0; }
-  .pill.gray { background: #f1f5f9; color: var(--muted); border-color: #e2e8f0; }
-  .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.2rem; }
-  .project-stat { }
-  .project-stat-label { font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  .project-stat-value { font-size: .88rem; font-weight: 600; color: var(--text); margin-top: .15rem; }
+  .section-lead { font-size: 18px; color: var(--muted); max-width: 720px; margin-bottom: 56px; line-height: 1.65; }
 
-  /* ─── TABLE ─── */
-  .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--line); box-shadow: 0 2px 12px rgba(15,31,61,.05); }
-  table { width: 100%; border-collapse: collapse; font-size: .88rem; }
-  thead { background: var(--navy); color: white; }
-  th { padding: .8rem 1.2rem; text-align: left; font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
-  td { padding: .85rem 1.2rem; border-bottom: 1px solid var(--line); vertical-align: top; }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: var(--sky); }
-  .tech-name { font-weight: 600; color: var(--navy); }
-  .tech-version { display: inline-block; background: #f1f5f9; color: var(--muted); border-radius: 4px; padding: .1rem .4rem; font-size: .75rem; font-family: monospace; }
-
-  /* ─── DELIVERABLES GRID ─── */
-  .deliverables-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
-  .deliverable-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 1.4rem;
-    box-shadow: 0 2px 10px rgba(15,31,61,.05);
-    display: flex; flex-direction: column; gap: .6rem;
+  /* PRODUCT CARD */
+  .product-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 48px; display: grid;
+    grid-template-columns: 1fr; gap: 32px;
   }
-  .deliverable-num { font-family: var(--serif); font-size: 2rem; font-weight: 900; color: var(--line); line-height: 1; }
-  .deliverable-title { font-size: .95rem; font-weight: 700; color: var(--navy); }
-  .deliverable-desc { font-size: .82rem; color: var(--muted); line-height: 1.6; }
-  .deliverable-hito { font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-top: auto; padding-top: .5rem; border-top: 1px solid var(--line); }
-
-  /* ─── TIMELINE ─── */
-  .timeline { position: relative; }
-  .timeline::before { content: ''; position: absolute; left: 90px; top: 0; bottom: 0; width: 2px; background: var(--line); }
-  .timeline-item { display: flex; gap: 2rem; margin-bottom: 1.2rem; position: relative; }
-  .timeline-dates {
-    min-width: 80px; text-align: right;
-    font-size: .72rem; font-weight: 600; color: var(--muted);
-    line-height: 1.4; padding-top: .3rem;
+  .product-card .head { display: flex; align-items: start; gap: 24px; flex-wrap: wrap; }
+  .product-card .icon-wrap {
+    width: 72px; height: 72px; background: var(--navy);
+    border-radius: 16px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
   }
-  .timeline-dot {
-    position: relative; z-index: 1;
-    width: 14px; height: 14px; border-radius: 50%;
-    border: 2px solid var(--accent); background: white;
-    margin-top: .4rem; flex-shrink: 0;
-    margin-left: -6px;
+  .product-card .icon-wrap svg { width: 38px; height: 38px; color: var(--accent); }
+  .product-card .title-block { flex: 1; min-width: 280px; }
+  .product-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 700; color: var(--navy); margin-bottom: 8px;
   }
-  .timeline-dot.filled { background: var(--accent); }
-  .timeline-content { flex: 1; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 1rem 1.2rem; box-shadow: 0 1px 8px rgba(15,31,61,.05); }
-  .timeline-sprint { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  .timeline-title { font-weight: 700; color: var(--navy); font-size: .95rem; margin: .15rem 0 .4rem; }
-  .timeline-desc { font-size: .83rem; color: var(--muted); line-height: 1.55; }
-  .hito-badge {
-    display: inline-block; margin-top: .6rem;
-    background: var(--accent); color: white;
-    padding: .15rem .6rem; border-radius: 99px;
-    font-size: .7rem; font-weight: 700;
+  .product-card .subtitle { font-size: 16px; color: var(--muted); }
+  .product-card .description {
+    font-size: 16px; color: var(--text); line-height: 1.75;
   }
-  .hito-badge.h1 { background: #059669; }
-  .hito-badge.h2 { background: #d97706; }
-  .hito-badge.h3 { background: #7c3aed; }
-
-  /* ─── TEAM ─── */
-  .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
-  .team-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 1.4rem 1rem;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(15,31,61,.05);
+  .product-card .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    padding: 28px; background: var(--bg); border-radius: 12px;
   }
-  .team-avatar {
-    width: 52px; height: 52px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--navy), var(--accent));
-    color: white; font-family: var(--serif); font-size: 1.1rem; font-weight: 900;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto .9rem;
+  .product-card .stat { text-align: center; }
+  .product-card .stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 700; color: var(--blue); margin-bottom: 4px;
   }
-  .team-name { font-size: .88rem; font-weight: 700; color: var(--navy); }
-  .team-role { font-size: .72rem; color: var(--muted); margin-top: .25rem; }
-  .team-sprint { font-size: .68rem; font-weight: 700; color: var(--accent); letter-spacing: .06em; text-transform: uppercase; margin-top: .4rem; }
-
-  /* ─── INFO BOX ─── */
-  .info-box { background: var(--sky); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; padding: 1rem 1.4rem; font-size: .88rem; color: var(--blue); }
-  .info-box strong { color: var(--navy); }
-
-  /* ─── LINKS ─── */
-  .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .8rem; }
-  .link-item {
-    display: flex; align-items: center; gap: .8rem;
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 10px; padding: .9rem 1.1rem;
-    text-decoration: none; color: var(--text);
-    box-shadow: 0 1px 6px rgba(15,31,61,.04);
-    transition: box-shadow .2s, border-color .2s;
+  .product-card .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; }
+  .product-card .repo-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--blue); text-decoration: none; font-weight: 500; font-size: 15px;
+    margin-top: 12px;
   }
-  .link-item:hover { border-color: var(--accent); box-shadow: 0 4px 14px rgba(37,99,235,.12); }
-  .link-icon { font-size: 1.2rem; }
-  .link-label { font-size: .78rem; font-weight: 600; color: var(--navy); }
-  .link-url { font-size: .7rem; color: var(--muted); }
-
-  /* ─── FOOTER ─── */
-  footer {
-    border-top: 1px solid var(--line);
-    text-align: center; padding: 2rem;
-    font-size: .8rem; color: var(--muted);
-  }
-
-  /* ─── RESPONSIVE ─── */
+  .product-card .repo-link:hover { color: var(--navy); }
   @media (max-width: 640px) {
-    .nav-links { display: none; }
-    .project-grid { grid-template-columns: 1fr; }
-    .timeline::before { left: 70px; }
-    .timeline-dates { min-width: 60px; font-size: .65rem; }
+    .product-card { padding: 28px; }
+    .product-card .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* STACK */
+  .stack-table {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+  }
+  .stack-row {
+    display: grid; grid-template-columns: 240px 1fr 160px;
+    padding: 22px 28px; border-bottom: 1px solid var(--border);
+    align-items: center; gap: 20px;
+  }
+  .stack-row:last-child { border-bottom: none; }
+  .stack-row.header { background: var(--navy); color: #fff; font-weight: 600; }
+  .stack-row .name { font-weight: 600; color: var(--navy); }
+  .stack-row.header .name { color: #fff; }
+  .stack-row .desc { font-size: 15px; color: var(--muted); }
+  .stack-row.header .desc { color: rgba(255,255,255,0.85); }
+  .stack-row .version {
+    font-family: 'Jost', monospace; font-size: 13px; color: var(--blue); font-weight: 500;
+    background: var(--bg); padding: 6px 12px; border-radius: 6px; text-align: center;
+  }
+  .stack-row.header .version { background: rgba(255,255,255,0.15); color: #fff; }
+  @media (max-width: 768px) {
+    .stack-row { grid-template-columns: 1fr; gap: 8px; }
+    .stack-row .version { justify-self: start; }
+  }
+
+  /* DELIVERABLES */
+  .deliverables { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .deliv-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 32px;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  }
+  .deliv-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(15, 36, 71, 0.08);
+    border-color: var(--sky);
+  }
+  .deliv-card .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px; font-weight: 700; color: var(--accent);
+    line-height: 1; margin-bottom: 16px;
+  }
+  .deliv-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px; font-weight: 700; color: var(--navy); margin-bottom: 12px;
+  }
+  .deliv-card p { font-size: 15px; color: var(--muted); line-height: 1.7; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px;
+    width: 2px; background: linear-gradient(180deg, var(--accent), var(--sky));
+  }
+  .sprint {
+    position: relative; padding-bottom: 32px;
+  }
+  .sprint::before {
+    content: ''; position: absolute; left: -32px; top: 6px;
+    width: 18px; height: 18px; background: var(--card);
+    border: 3px solid var(--accent); border-radius: 50%;
+  }
+  .sprint.done::before { background: var(--accent); }
+  .sprint.active::before { background: var(--sky); border-color: var(--sky); }
+  .sprint .head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+  .sprint .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700; color: var(--navy);
+  }
+  .sprint .dates { font-size: 14px; color: var(--muted); }
+  .sprint .status {
+    font-size: 11px; padding: 4px 10px; border-radius: 100px;
+    text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
+  }
+  .sprint.done .status { background: #e8f5e9; color: var(--success); }
+  .sprint.active .status { background: #e3f2fd; color: var(--blue); }
+  .sprint.pending .status { background: #fff8e1; color: var(--warn); }
+  .sprint p { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 720px; }
+
+  /* TEAM */
+  .team { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .member {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px; text-align: center;
+  }
+  .member .avatar {
+    width: 64px; height: 64px; margin: 0 auto 16px;
+    background: linear-gradient(135deg, var(--blue), var(--navy));
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: var(--accent); font-family: 'Playfair Display', serif;
+    font-size: 26px; font-weight: 700;
+  }
+  .member .name { font-weight: 600; color: var(--navy); font-size: 16px; margin-bottom: 4px; }
+  .member .role { font-size: 13px; color: var(--muted); }
+
+  /* LINKS */
+  .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .link-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px; text-decoration: none;
+    color: var(--text); display: flex; gap: 16px; align-items: center;
+    transition: all 0.2s;
+  }
+  .link-card:hover { border-color: var(--blue); transform: translateX(4px); }
+  .link-card svg { width: 28px; height: 28px; color: var(--blue); flex-shrink: 0; }
+  .link-card .title { font-weight: 600; color: var(--navy); font-size: 15px; margin-bottom: 2px; }
+  .link-card .url { font-size: 13px; color: var(--muted); word-break: break-all; }
+
+  /* FOOTER */
+  footer { background: var(--navy); color: rgba(255,255,255,0.85); padding: 56px 0 32px; }
+  footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+  footer .brand {
+    font-family: 'Playfair Display', serif; font-size: 24px; color: #fff; font-weight: 700;
+  }
+  footer .brand span { color: var(--accent); }
+  footer .info { font-size: 14px; color: rgba(255,255,255,0.65); }
+
+  /* DECORATIVE */
+  .ornament {
+    text-align: center; margin: 48px 0; color: var(--accent);
+    font-family: 'Playfair Display', serif; font-size: 24px; letter-spacing: 8px;
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <span class="nav-logo">IPS · Unsa-ips-grupo</span>
-  <ul class="nav-links">
-    <li><a href="#proyecto">Proyecto</a></li>
-    <li><a href="#stack">Stack</a></li>
-    <li><a href="#producto">Entregables</a></li>
-    <li><a href="#cronograma">Cronograma</a></li>
-    <li><a href="#equipo">Equipo</a></li>
-    <li><a href="#links">Links</a></li>
-  </ul>
+  <div class="container">
+    <div class="brand">Unsa<span>·</span>ips<span>·</span>grupo</div>
+    <ul>
+      <li><a href="#producto">Producto</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#entregables">Entregables</a></li>
+      <li><a href="#cronograma">Cronograma</a></li>
+      <li><a href="#equipo">Equipo</a></li>
+    </ul>
+  </div>
 </nav>
 
-<!-- HERO -->
 <header class="hero">
-  <div class="hero-inner">
-    <div class="hero-tag">EPIS · UNSA · 2026-A</div>
-    <h1>Proyecto Krayin CRM<br>aplicando Scrum & DevOps</h1>
-    <p class="hero-sub">Ingeniería y Procesos de Software — Prof. Robert Arisaca</p>
-    <div class="hero-meta">
-      <div class="hero-meta-item">
-        <span class="hero-meta-label">Organización</span>
-        <span class="hero-meta-value">Unsa-ips-grupo</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="hero-meta-label">Hito 1</span>
-        <span class="hero-meta-value">13 mayo 2026 ✓</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="hero-meta-label">Hito 2</span>
-        <span class="hero-meta-value">10 junio 2026</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="hero-meta-label">Hito 3</span>
-        <span class="hero-meta-value">13 julio 2026</span>
-      </div>
+  <div class="container">
+    <div class="badges">
+      <span class="badge accent">EPIS · UNSA · 2026-A</span>
+      <span class="badge">Ingeniería y Procesos de Software</span>
+      <span class="badge success">Hito 1 entregado</span>
     </div>
-    <div class="hero-badges">
-      <span class="badge">Licencia MIT ✓</span>
-      <span class="badge">Laravel + Vue.js</span>
-      <span class="badge">Docker Compose oficial</span>
-      <span class="badge">CRM Empresarial</span>
-      <span class="badge">22K+ ⭐ GitHub</span>
+    <h1>Scrum y DevOps aplicado a un sistema hospitalario en <em>producción real</em></h1>
+    <p class="lead">
+      Tomamos Danphe EMR, un sistema de información hospitalaria de código abierto utilizado en más de 60 hospitales de Asia y África, y le aplicamos un proceso riguroso de Scrum integrado con prácticas DevOps. Lo que entregamos al curso es ese proceso, documentado y verificable.
+    </p>
+    <div class="meta">
+      <div class="meta-item">
+        <div class="label">Docente</div>
+        <div class="value">Prof. Robert Arisaca</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Curso</div>
+        <div class="value">Ingeniería y Procesos de Software</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Equipo</div>
+        <div class="value">Unsa-ips-grupo · 5 integrantes</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Período</div>
+        <div class="value">Abril — Julio 2026</div>
+      </div>
     </div>
   </div>
 </header>
 
-<main>
+<section id="producto">
+  <div class="container">
+    <div class="section-label">Producto seleccionado</div>
+    <h2 class="section-title">Danphe EMR</h2>
+    <p class="section-lead">
+      Sistema de información hospitalaria de código abierto, desarrollado en Nepal y utilizado en producción por más de sesenta hospitales en India, Nepal, Bangladesh, Kenia y Sudáfrica. Cuenta con licencia MIT, más de cuarenta módulos integrados y una comunidad activa de contribuyentes.
+    </p>
 
-  <!-- PROYECTO -->
-  <section id="proyecto">
-    <div class="section-header">
-      <span class="section-num">01</span>
-      <span class="section-title">Software seleccionado</span>
-    </div>
-
-    <div class="project-card" style="margin-bottom:1rem">
-      <div class="project-card-header">
-        <h3>Krayin CRM</h3>
-        <span class="project-type">Proyecto Principal · CRM</span>
-      </div>
-      <div class="project-card-body">
-        <p class="project-desc">Sistema de gestión de relaciones con clientes (CRM) de código abierto, desarrollado por Webkul Software Pvt. Ltd. Centraliza leads, contactos, oportunidades, cotizaciones y actividades comerciales en una plataforma autoalojable y completamente configurable.</p>
-        <a class="project-link" href="https://github.com/Unsa-ips-grupo/laravel-crm" target="_blank">
-          ↗ github.com/Unsa-ips-grupo/laravel-crm
-        </a>
-        <div class="project-pills">
-          <span class="pill green">MIT License ✓</span>
-          <span class="pill">Laravel 11.x</span>
-          <span class="pill">Vue.js 3.x</span>
-          <span class="pill">MySQL 8+</span>
-          <span class="pill">Docker Oficial</span>
-          <span class="pill gray">Webkul · 650+ empleados</span>
+    <div class="product-card">
+      <div class="head">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2 4 6v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4z"/>
+            <path d="M12 8v6M9 11h6"/>
+          </svg>
         </div>
-        <div class="project-grid">
-          <div class="project-stat">
-            <div class="project-stat-label">Dominio</div>
-            <div class="project-stat-value">CRM Empresarial</div>
-          </div>
-          <div class="project-stat">
-            <div class="project-stat-label">Docker Hub</div>
-            <div class="project-stat-value">webkul/krayin · 50K+ pulls</div>
-          </div>
-          <div class="project-stat">
-            <div class="project-stat-label">Módulos</div>
-            <div class="project-stat-value">Leads, Contactos, Cotizaciones, Workflows</div>
-          </div>
-          <div class="project-stat">
-            <div class="project-stat-label">Versión actual</div>
-            <div class="project-stat-value">v2.2.0 · activo en 2026</div>
-          </div>
+        <div class="title-block">
+          <h3>Danphe EMR · Hospital Management System</h3>
+          <div class="subtitle">Sistema HIS + EMR + EHR · Licencia MIT · Sector Salud</div>
+          <a class="repo-link" href="https://github.com/opensource-emr/hospital-management-emr" target="_blank">
+            github.com/opensource-emr/hospital-management-emr →
+          </a>
         </div>
       </div>
-    </div>
 
-    <div class="info-box" style="margin-top:1.2rem">
-      <strong>¿Por qué Krayin CRM?</strong> Licencia MIT pura verificada, Docker Compose oficial mantenido por Webkul, stack moderno Laravel + Vue.js, dominio CRM empresarial puro y actividad demostrable en 2026. Nueve alternativas fueron descartadas por licencias AGPL o GPL incompatibles con la rúbrica del curso.
-    </div>
-  </section>
+      <p class="description">
+        Danphe EMR cubre el ciclo completo de gestión hospitalaria: admisión y registro de pacientes, citas y agendamiento, gestión clínica con historia médica, farmacia con control de inventario, laboratorios con integración a más de cincuenta máquinas analizadoras, radiología, enfermería, emergencias, facturación, contabilidad y administración de personal. Su arquitectura modular permite que cada hospital active solo los módulos que necesita.
+      </p>
 
-  <!-- STACK -->
-  <section id="stack">
-    <div class="section-header">
-      <span class="section-num">02</span>
-      <span class="section-title">Stack tecnológico y arquitectura</span>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Componente</th>
-            <th>Función dentro de Krayin</th>
-            <th>Versión</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="tech-name">PHP</span></td>
-            <td>Lenguaje base del backend. Procesa peticiones y lógica de negocio.</td>
-            <td><span class="tech-version">8.2+</span></td>
-          </tr>
-          <tr>
-            <td><span class="tech-name">Laravel</span></td>
-            <td>Framework MVC principal. ORM Eloquent, rutas, autenticación, colas.</td>
-            <td><span class="tech-version">11.x</span></td>
-          </tr>
-          <tr>
-            <td><span class="tech-name">Blade</span></td>
-            <td>Motor de plantillas de Laravel. Vistas dinámicas con directivas @if, @foreach.</td>
-            <td><span class="tech-version">integrado</span></td>
-          </tr>
-          <tr>
-            <td><span class="tech-name">Vue.js</span></td>
-            <td>Framework JS reactivo. Kanban de leads, modales, validaciones en tiempo real.</td>
-            <td><span class="tech-version">3.x</span></td>
-          </tr>
-          <tr>
-            <td><span class="tech-name">MySQL</span></td>
-            <td>Base de datos relacional. Leads, contactos, usuarios, configuraciones.</td>
-            <td><span class="tech-version">8.0.32+</span></td>
-          </tr>
-          <tr>
-            <td><span class="tech-name">Composer</span></td>
-            <td>Gestor de dependencias PHP. Carga paquetes y configura el autoloader PSR-4.</td>
-            <td><span class="tech-version">2.x</span></td>
-          </tr>
-          <tr>
-            <td><span class="tech-name">Vite + Node.js</span></td>
-            <td>Bundler de assets frontend. Compila Vue.js y CSS con recarga en caliente.</td>
-            <td><span class="tech-version">5.x</span></td>
-          </tr>
-          <tr>
-            <td><span class="tech-name">Docker Compose</span></td>
-            <td>Contenedorización oficial por Webkul. Un solo comando levanta toda la app.</td>
-            <td><span class="tech-version">imagen 2.2.0</span></td>
-          </tr>
-          <tr>
-            <td><span class="tech-name">GitHub Actions</span></td>
-            <td>CI/CD automatizado. Pruebas, validaciones y despliegue ante cada push.</td>
-            <td><span class="tech-version">Sprint 2</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- PRODUCTO FINAL -->
-  <section id="producto">
-    <div class="section-header">
-      <span class="section-num">03</span>
-      <span class="section-title">El producto final: 6 entregables</span>
-    </div>
-
-    <div class="info-box" style="margin-bottom:1.4rem">
-      <strong>El producto evaluable no es Krayin CRM.</strong> Es la aplicación rigurosa de un proceso de Ingeniería de Software (Scrum + DevOps) sobre Krayin CRM como caso de estudio.
-    </div>
-
-    <div class="deliverables-grid">
-      <div class="deliverable-card">
-        <div class="deliverable-num">01</div>
-        <div class="deliverable-title">Fork con mejoras implementadas</div>
-        <div class="deliverable-desc">Una o dos funcionalidades nuevas o extensiones a módulos existentes de Krayin, mergeadas vía pull request al fork de la organización.</div>
-        <div class="deliverable-hito">Sprint 3 · Hito 3</div>
-      </div>
-      <div class="deliverable-card">
-        <div class="deliverable-num">02</div>
-        <div class="deliverable-title">Pipeline CI/CD en GitHub Actions</div>
-        <div class="deliverable-desc">Workflow YAML que ejecuta PHPUnit, Pest y Laravel Pint en cada push o pull request. Badge de build en el README.</div>
-        <div class="deliverable-hito">Sprint 2 · Hito 2 ★</div>
-      </div>
-      <div class="deliverable-card">
-        <div class="deliverable-num">03</div>
-        <div class="deliverable-title">Despliegue automatizado a staging</div>
-        <div class="deliverable-desc">Krayin desplegado en la nube (Railway, Render o VPS) y actualizado automáticamente con cada merge a main vía GitHub Actions.</div>
-        <div class="deliverable-hito">Sprint 3 · Hito 3</div>
-      </div>
-      <div class="deliverable-card">
-        <div class="deliverable-num">04</div>
-        <div class="deliverable-title">Documentación Scrum completa</div>
-        <div class="deliverable-desc">Sprint Reviews, Retrospectivas y backlog trazables en el repositorio. Evidencia real de la aplicación de Scrum, no solo tarjetas movidas.</div>
-        <div class="deliverable-hito">Todos los sprints</div>
-      </div>
-      <div class="deliverable-card">
-        <div class="deliverable-num">05</div>
-        <div class="deliverable-title">Artículo en formato IEEE</div>
-        <div class="deliverable-desc">Paper académico documentando contexto, marco teórico de Scrum/DevOps, decisiones técnicas, resultados y conclusiones del proceso completo.</div>
-        <div class="deliverable-hito">Sprint 4 · Hito 3 ★</div>
-      </div>
-      <div class="deliverable-card">
-        <div class="deliverable-num">06</div>
-        <div class="deliverable-title">Demostración final en vivo</div>
-        <div class="deliverable-desc">Presentación técnica mostrando el pipeline CI/CD ejecutándose, el entorno de staging accesible y las mejoras implementadas funcionando.</div>
-        <div class="deliverable-hito">13 julio 2026</div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">60+</div>
+          <div class="stat-label">Hospitales</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">40</div>
+          <div class="stat-label">Módulos</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Países</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">MIT</div>
+          <div class="stat-label">Licencia</div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- CRONOGRAMA -->
-  <section id="cronograma">
-    <div class="section-header">
-      <span class="section-num">04</span>
-      <span class="section-title">Cronograma maestro de sprints</span>
+    <div class="ornament">· · ·</div>
+  </div>
+</section>
+
+<section id="stack" class="alt">
+  <div class="container">
+    <div class="section-label">Stack tecnológico</div>
+    <h2 class="section-title">Tecnologías que sustentan el sistema</h2>
+    <p class="section-lead">
+      Danphe EMR está construido sobre un stack empresarial real, ampliamente adoptado en la industria del software, con tecnologías open source en frontend y backend.
+    </p>
+
+    <div class="stack-table">
+      <div class="stack-row header">
+        <div class="name">Componente</div>
+        <div class="desc">Función dentro del sistema</div>
+        <div class="version">Versión</div>
+      </div>
+      <div class="stack-row">
+        <div class="name">Angular</div>
+        <div class="desc">Framework frontend para interfaces dinámicas y SPA</div>
+        <div class="version">8+</div>
+      </div>
+      <div class="stack-row">
+        <div class="name">ASP.NET Core</div>
+        <div class="desc">Framework backend para APIs REST y lógica de negocio</div>
+        <div class="version">3.1</div>
+      </div>
+      <div class="stack-row">
+        <div class="name">C#</div>
+        <div class="desc">Lenguaje principal del backend</div>
+        <div class="version">8.0+</div>
+      </div>
+      <div class="stack-row">
+        <div class="name">SQL Server</div>
+        <div class="desc">Base de datos relacional empresarial</div>
+        <div class="version">2017+</div>
+      </div>
+      <div class="stack-row">
+        <div class="name">Entity Framework</div>
+        <div class="desc">ORM para acceso a base de datos</div>
+        <div class="version">Core 3.x</div>
+      </div>
+      <div class="stack-row">
+        <div class="name">TypeScript</div>
+        <div class="desc">Lenguaje del frontend Angular</div>
+        <div class="version">3.x+</div>
+      </div>
+      <div class="stack-row">
+        <div class="name">Node.js</div>
+        <div class="desc">Entorno para compilación de assets del frontend</div>
+        <div class="version">18+</div>
+      </div>
+      <div class="stack-row">
+        <div class="name">Docker (mejora)</div>
+        <div class="desc">Containerización completa del stack — implementación nuestra</div>
+        <div class="version">Sprint 3</div>
+      </div>
     </div>
+  </div>
+</section>
+
+<section id="entregables">
+  <div class="container">
+    <div class="section-label">Producto final del curso</div>
+    <h2 class="section-title">Lo que entregamos al cierre del semestre</h2>
+    <p class="section-lead">
+      El producto que evaluamos no es Danphe en sí mismo, sino la aplicación rigurosa de Scrum y DevOps sobre él. A continuación los seis entregables tangibles que componen ese producto final.
+    </p>
+
+    <div class="deliverables">
+      <div class="deliv-card">
+        <div class="num">01</div>
+        <h4>Fork con mejoras del equipo</h4>
+        <p>Repositorio fork en la organización Unsa-ips-grupo con funcionalidades nuevas implementadas vía pull requests, siguiendo flujo Git profesional con protección de rama main.</p>
+      </div>
+      <div class="deliv-card">
+        <div class="num">02</div>
+        <h4>Containerización con Docker</h4>
+        <p>Dockerfile + docker-compose.yml que orquestan ASP.NET Core, SQL Server y el frontend Angular en un solo comando. Mejora estrella del proyecto, no existía oficialmente.</p>
+      </div>
+      <div class="deliv-card">
+        <div class="num">03</div>
+        <h4>Pipeline CI/CD en GitHub Actions</h4>
+        <p>Workflows YAML que ejecutan tests xUnit, validan estilo de código .NET, construyen imágenes Docker y verifican que la aplicación arranca en cada push o pull request.</p>
+      </div>
+      <div class="deliv-card">
+        <div class="num">04</div>
+        <h4>Despliegue automatizado a staging</h4>
+        <p>Sistema desplegado en cloud (Railway, Render o VPS) actualizándose automáticamente con cada merge a la rama main. Demostración pública del Continuous Deployment.</p>
+      </div>
+      <div class="deliv-card">
+        <div class="num">05</div>
+        <h4>Documentación Scrum completa</h4>
+        <p>Actas de Sprint Planning, Reviews, Retrospectivas y backlog del producto. Todo trazable en el repositorio de documentación, demostrando aplicación real del marco ágil.</p>
+      </div>
+      <div class="deliv-card">
+        <div class="num">06</div>
+        <h4>Artículo IEEE y demo final</h4>
+        <p>Artículo académico siguiendo plantilla IEEE que documenta el proceso completo, decisiones técnicas, resultados y conclusiones. Más demostración en vivo del sistema funcionando.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cronograma" class="alt">
+  <div class="container">
+    <div class="section-label">Cronograma</div>
+    <h2 class="section-title">Cuatro sprints, tres hitos</h2>
+    <p class="section-lead">
+      Cada sprint dura quince días calendario. El liderazgo del equipo rota por sprint conforme a la metodología establecida en el curso.
+    </p>
 
     <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-dates">22 Abr<br>13 May</div>
-        <div class="timeline-dot filled"></div>
-        <div class="timeline-content">
-          <div class="timeline-sprint">Sprint 0 — Completado</div>
-          <div class="timeline-title">Planificación y selección del proyecto</div>
-          <div class="timeline-desc">Plan de proyecto, cronograma, selección de Krayin CRM e InvenTree, configuración de GitHub Projects y publicación del sitio en GitHub Pages.</div>
-          <span class="hito-badge h1">Hito 1 · 15%</span>
+      <div class="sprint done">
+        <div class="head">
+          <div class="name">Sprint 0 · Planificación</div>
+          <div class="dates">22 abril — 13 mayo</div>
+          <span class="status">Completado · Hito 1</span>
         </div>
+        <p>Selección del producto, definición de roles, configuración del repositorio organizacional, tablero GitHub Projects y publicación de GitHub Pages. Cierre con la entrega del Hito 1, valorado en quince por ciento del trabajo final.</p>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-dates">14 May<br>27 May</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-sprint">Sprint 1</div>
-          <div class="timeline-title">Setup técnico de Krayin</div>
-          <div class="timeline-desc">Krayin corriendo en local mediante Docker Compose, análisis de arquitectura modular, diagrama de componentes y consolidación del Product Backlog.</div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dates">28 May<br>10 Jun</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-sprint">Sprint 2</div>
-          <div class="timeline-title">CI/CD básico funcionando</div>
-          <div class="timeline-desc">Workflow de GitHub Actions ejecutando pruebas PHPUnit/Pest y validaciones de estilo con Laravel Pint ante cada pull request. Integración Scrum + DevOps documentada.</div>
-          <span class="hito-badge h2">Hito 2 · 60%</span>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dates">11 Jun<br>24 Jun</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-sprint">Sprint 3</div>
-          <div class="timeline-title">Mejora funcional y despliegue</div>
-          <div class="timeline-desc">Implementación de funcionalidad nueva al fork de Krayin y despliegue automatizado a entorno de staging actualizado automáticamente desde GitHub Actions.</div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dates">25 Jun<br>13 Jul</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-sprint">Sprint 4</div>
-          <div class="timeline-title">Cierre, artículo IEEE y demo final</div>
-          <div class="timeline-desc">Pulido de la documentación, redacción del artículo IEEE y preparación de la demostración técnica final del proceso completo.</div>
-          <span class="hito-badge h3">Hito 3 · 25%</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- EQUIPO -->
-  <section id="equipo">
-    <div class="section-header">
-      <span class="section-num">05</span>
-      <span class="section-title">Equipo de trabajo</span>
-    </div>
+      <div class="sprint active">
+        <div class="head">
+          <div class="name">Sprint 1 · Setup técnico</div>
+          <div class="dates">14 mayo — 27 mayo</div>
+          <span class="status">En curso</span>
+        </div>
+        <p>Levantar Danphe EMR en local, analizar su arquitectura modular, definir el backlog del producto y diseñar el primer borrador de la containerización con Docker. Documentación técnica completa de requisitos y arquitectura.</p>
+      </div>
 
-    <div class="team-grid">
-      <div class="team-card">
-        <div class="team-avatar">JV</div>
-        <div class="team-name">Johan Vilca Flores</div>
-        <div class="team-role">Development Team</div>
-        <div class="team-sprint">Líder · Sprint 0</div>
+      <div class="sprint pending">
+        <div class="head">
+          <div class="name">Sprint 2 · CI/CD básico</div>
+          <div class="dates">28 mayo — 10 junio</div>
+          <span class="status">Pendiente · Hito 2</span>
+        </div>
+        <p>Pipeline funcional de GitHub Actions con ejecución de pruebas xUnit, validaciones de estilo y construcción de imagen Docker. Cierre con la entrega del Hito 2, valorado en sesenta por ciento del trabajo final.</p>
       </div>
-      <div class="team-card">
-        <div class="team-avatar">GY</div>
-        <div class="team-name">Gustavo Alonso Yunque Quispe</div>
-        <div class="team-role">Development Team</div>
-        <div class="team-sprint">Líder · Sprint 1</div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">HN</div>
-        <div class="team-name">Henry Alex Navarro Quispe</div>
-        <div class="team-role">Development Team</div>
-        <div class="team-sprint">Rol por definir</div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">FC</div>
-        <div class="team-name">Franco Jesus Cahua Soto</div>
-        <div class="team-role">Development Team</div>
-        <div class="team-sprint">Rol por definir</div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">AR</div>
-        <div class="team-name">Alberth Edwar Riveros Vilca</div>
-        <div class="team-role">Development Team</div>
-        <div class="team-sprint">Rol por definir</div>
-      </div>
-    </div>
 
-    <div class="info-box" style="margin-top:1.2rem">
-      Los roles Scrum (Product Owner, Scrum Master y Development Team) rotan por sprint, garantizando que todos los integrantes ejerzan cada rol al menos una vez durante el semestre.
-    </div>
-  </section>
+      <div class="sprint pending">
+        <div class="head">
+          <div class="name">Sprint 3 · Mejora funcional</div>
+          <div class="dates">11 junio — 24 junio</div>
+          <span class="status">Pendiente</span>
+        </div>
+        <p>Implementación de mejora funcional sobre un módulo seleccionado y despliegue automatizado al entorno de staging. Containerización completa funcional con docker-compose.yml.</p>
+      </div>
 
-  <!-- LINKS -->
-  <section id="links">
-    <div class="section-header">
-      <span class="section-num">06</span>
-      <span class="section-title">Repositorios y recursos</span>
+      <div class="sprint pending">
+        <div class="head">
+          <div class="name">Sprint 4 · Cierre y artículo IEEE</div>
+          <div class="dates">25 junio — 8 julio</div>
+          <span class="status">Pendiente · Hito 3</span>
+        </div>
+        <p>Redacción del artículo en formato IEEE, pulido de documentación, preparación de la demostración final. Entrega del Hito 3 el 13 de julio, valorado al cien por ciento del trabajo final.</p>
+      </div>
     </div>
+  </div>
+</section>
+
+<section id="equipo">
+  <div class="container">
+    <div class="section-label">Equipo</div>
+    <h2 class="section-title">Cinco estudiantes, un objetivo</h2>
+    <p class="section-lead">
+      El liderazgo del equipo rota por sprint conforme a la metodología del curso, garantizando que cada integrante ejerza los roles principales de Scrum a lo largo del semestre.
+    </p>
+
+    <div class="team">
+      <div class="member">
+        <div class="avatar">JV</div>
+        <div class="name">Johan Vilca Flores</div>
+        <div class="role">Líder Sprint 0</div>
+      </div>
+      <div class="member">
+        <div class="avatar">GY</div>
+        <div class="name">Gustavo Alonso Yunque Quispe</div>
+        <div class="role">Integrante · Lead Sprint 1</div>
+      </div>
+      <div class="member">
+        <div class="avatar">HN</div>
+        <div class="name">Henry Alex Navarro Quispe</div>
+        <div class="role">Integrante</div>
+      </div>
+      <div class="member">
+        <div class="avatar">FC</div>
+        <div class="name">Franco Jesus Cahua Soto</div>
+        <div class="role">Integrante</div>
+      </div>
+      <div class="member">
+        <div class="avatar">AR</div>
+        <div class="name">Alberth Edwar Riveros Vilca</div>
+        <div class="role">Integrante</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="container">
+    <div class="section-label">Recursos</div>
+    <h2 class="section-title">Enlaces del proyecto</h2>
 
     <div class="links-grid">
-      <a class="link-item" href="https://github.com/Unsa-ips-grupo" target="_blank">
-        <span class="link-icon">🏢</span>
-        <div><div class="link-label">Organización GitHub</div><div class="link-url">Unsa-ips-grupo</div></div>
+      <a class="link-card" href="https://github.com/Unsa-ips-grupo" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        <div>
+          <div class="title">Organización GitHub</div>
+          <div class="url">github.com/Unsa-ips-grupo</div>
+        </div>
       </a>
-      <a class="link-item" href="https://github.com/Unsa-ips-grupo/laravel-crm" target="_blank">
-        <span class="link-icon">📦</span>
-        <div><div class="link-label">Fork Krayin CRM</div><div class="link-url">laravel-crm</div></div>
+      <a class="link-card" href="https://github.com/Unsa-ips-grupo/Documentacion-IPS" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <div>
+          <div class="title">Repositorio de documentación</div>
+          <div class="url">Unsa-ips-grupo/Documentacion-IPS</div>
+        </div>
       </a>
-      <a class="link-item" href="https://github.com/Unsa-ips-grupo/InvenTree" target="_blank">
-        <span class="link-icon">📦</span>
-        <div><div class="link-label">Fork InvenTree</div><div class="link-url">InvenTree</div></div>
+      <a class="link-card" href="https://github.com/opensource-emr/hospital-management-emr" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 6v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4z"/></svg>
+        <div>
+          <div class="title">Danphe EMR (upstream)</div>
+          <div class="url">opensource-emr/hospital-management-emr</div>
+        </div>
       </a>
-      <a class="link-item" href="https://github.com/Unsa-ips-grupo/Documentacion-IPS" target="_blank">
-        <span class="link-icon">📄</span>
-        <div><div class="link-label">Documentación</div><div class="link-url">Documentacion-IPS</div></div>
-      </a>
-      <a class="link-item" href="https://github.com/orgs/Unsa-ips-grupo/projects" target="_blank">
-        <span class="link-icon">📋</span>
-        <div><div class="link-label">GitHub Projects</div><div class="link-url">Sprint 1 — Krayin CRM Setup</div></div>
-      </a>
-      <a class="link-item" href="https://github.com/krayin/laravel-crm" target="_blank">
-        <span class="link-icon">🔗</span>
-        <div><div class="link-label">Krayin CRM oficial</div><div class="link-url">krayin/laravel-crm</div></div>
+      <a class="link-card" href="https://github.com/orgs/Unsa-ips-grupo/projects" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <div>
+          <div class="title">Tablero Scrum (GitHub Projects)</div>
+          <div class="url">orgs/Unsa-ips-grupo/projects</div>
+        </div>
       </a>
     </div>
-  </section>
-
-</main>
+  </div>
+</section>
 
 <footer>
-  EPIS · UNSA · Ingeniería y Procesos de Software · 2026-A &nbsp;—&nbsp; Equipo: Unsa-ips-grupo
+  <div class="container">
+    <div class="brand">Unsa<span>·</span>ips<span>·</span>grupo</div>
+    <div class="info">
+      EPIS · UNSA · 2026-A &nbsp; · &nbsp; Curso de Ingeniería y Procesos de Software &nbsp; · &nbsp; Prof. Robert Arisaca
+    </div>
+  </div>
 </footer>
 
 </body>

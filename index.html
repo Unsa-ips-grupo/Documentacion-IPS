@@ -150,11 +150,15 @@
     .product-card .stats { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* MODULES GRID (NUEVO) */
+  /* MODULES GRID */
   .modules-wrapper { margin-top: 60px; }
+  .category-title {
+    font-family: 'Playfair Display', serif;
+    color: var(--blue); font-size: 24px; font-weight: 700;
+    margin: 40px 0 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px;
+  }
   .modules-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
-    margin-top: 32px;
   }
   .module-card {
     background: var(--card); border: 1px solid var(--border);
@@ -166,10 +170,10 @@
     border-color: var(--sky);
   }
   .module-card h4 {
-    font-family: 'Playfair Display', serif; color: var(--navy); font-size: 20px; font-weight: 700;
-    margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+    font-family: 'Playfair Display', serif; color: var(--navy); font-size: 18px; font-weight: 700;
+    margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
   }
-  .module-card p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+  .module-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
 
   /* STACK */
   .stack-table {
@@ -348,7 +352,7 @@
     <div class="section-label">Producto seleccionado</div>
     <h2 class="section-title">Danphe EMR</h2>
     <p class="section-lead">
-      Sistema de información hospitalaria de código abierto, desarrollado en Nepal y utilizado en producción por más de sesenta hospitales en India, Nepal, Bangladesh, Kenia y Sudáfrica. Cuenta con licencia MIT, más de cuarenta módulos integrados y una comunidad activa de contribuyentes.
+      Sistema de información hospitalaria de código abierto, desarrollado en Nepal y utilizado en producción por más de sesenta hospitales. Cuenta con licencia MIT, más de cuarenta módulos integrados a nivel de arquitectura y una base de datos centralizada empresarial.
     </p>
 
     <div class="product-card">
@@ -369,7 +373,7 @@
       </div>
 
       <p class="description">
-        Danphe EMR cubre el ciclo completo de gestión hospitalaria: admisión y registro de pacientes, citas y agendamiento, gestión clínica con historia médica, farmacia con control de inventario, laboratorios con integración a máquinas analizadoras, facturación, contabilidad y administración de personal.
+        Danphe EMR cubre el ciclo completo de gestión hospitalaria: admisión y registro de pacientes, citas y agendamiento, gestión clínica con historia médica, farmacia con control de inventario, laboratorios con integración a máquinas analizadoras, facturación, contabilidad y administración de personal. Su arquitectura modular en C# permite que cada hospital active solo los servicios que necesita.
       </p>
 
       <div class="stats">
@@ -378,12 +382,12 @@
           <div class="stat-label">Hospitales</div>
         </div>
         <div class="stat">
-          <div class="stat-value">40</div>
-          <div class="stat-label">Módulos</div>
+          <div class="stat-value">>40</div>
+          <div class="stat-label">Módulos (Backend)</div>
         </div>
         <div class="stat">
-          <div class="stat-value">5</div>
-          <div class="stat-label">Países</div>
+          <div class="stat-value">34</div>
+          <div class="stat-label">Interfaces (Front)</div>
         </div>
         <div class="stat">
           <div class="stat-value">MIT</div>
@@ -393,34 +397,190 @@
     </div>
 
     <div class="modules-wrapper">
-      <h3 class="section-title" style="font-size: 28px; margin-bottom: 8px;">Módulos Estructurales</h3>
-      <p class="section-lead" style="margin-bottom: 20px;">Análisis de las funcionalidades principales sobre las que ejecutaremos nuestras iteraciones Scrum.</p>
+      <h3 class="section-title" style="font-size: 28px; margin-bottom: 8px;">Arquitectura de Módulos Operativos</h3>
+      <p class="section-lead" style="margin-bottom: 20px;">Análisis de la estructura del sistema (Backlog Base) sobre el cual ejecutaremos nuestras iteraciones Scrum y prácticas DevOps.</p>
       
+<div class="modules-wrapper">
+      <h3 class="section-title" style="font-size: 28px; margin-bottom: 8px;">Arquitectura de Módulos Operativos</h3>
+      <p class="section-lead" style="margin-bottom: 20px;">Desglose completo de los módulos identificados en el código fuente y la interfaz del sistema para nuestra planificación Scrum.</p>
+      
+      <h4 class="category-title">🏥 Módulos de Atención y Flujo de Pacientes</h4>
       <div class="modules-grid">
         <div class="module-card">
-          <h4>🏥 Admisión y Registro (ADT)</h4>
-          <p>Gestión completa del ciclo de vida del ingreso hospitalario. Incluye el registro inicial de pacientes ambulatorios, asignación y transferencia de camas para pacientes internados, y el flujo de alta médica.</p>
+          <h4>Patient (Pacientes)</h4>
+          <p>Es el registro maestro. Aquí se gestionan los datos demográficos (nombre, edad, contacto) y se genera el identificador único del paciente (Historia Clínica) que conectará con el resto del sistema.</p>
         </div>
         <div class="module-card">
-          <h4>💊 Farmacia y Dispensario</h4>
-          <p>Módulo de control de inventario médico (SCM). Maneja alertas automáticas por caducidad de medicamentos, control de lotes, dispensación conectada a las recetas de los doctores y control de devoluciones.</p>
+          <h4>Appointment (Citas)</h4>
+          <p>Controla la agenda del hospital. Permite reservar turnos con médicos específicos, ver la disponibilidad de horarios y registrar las llegadas (check-in).</p>
         </div>
         <div class="module-card">
-          <h4>👨‍⚕️ Gestión Clínico/Médica</h4>
-          <p>El núcleo operativo para el personal de salud. Permite a doctores y enfermeras registrar signos vitales, redactar notas de evolución, generar prescripciones electrónicas y solicitar pruebas diagnósticas.</p>
+          <h4>QueueMngmt (Gestión de Colas)</h4>
+          <p>Funciona como el sistema de tickets de un banco. Organiza las pantallas de las salas de espera para llamar a los pacientes de forma ordenada a sus consultorios.</p>
         </div>
         <div class="module-card">
-          <h4>🧪 Laboratorio y Radiología</h4>
-          <p>Recepción de muestras y digitalización de resultados. El sistema permite crear plantillas personalizadas para diferentes tipos de análisis y se integra directamente con el estado de cuenta del paciente.</p>
-        </div>
-        <div class="module-card">
-          <h4>💵 Facturación Integrada</h4>
-          <p>Centraliza los cobros generados por farmacia, consultas, laboratorio y uso de cama. Gestiona depósitos, coberturas de seguros de salud y emisión de comprobantes fiscales automatizados.</p>
+          <h4>ADT (Admission, Discharge, Transfer)</h4>
+          <p>Controla el flujo de hospitalización (pacientes internados). Gestiona cuándo entra el paciente a piso, en qué cama está, si lo transfieren a UCI, y el proceso de alta médica.</p>
         </div>
       </div>
+
+      <h4 class="category-title">👨‍⚕️ Módulos Médicos y Clínicos</h4>
+      <div class="modules-grid">
+        <div class="module-card">
+          <h4>Doctor</h4>
+          <p>Es el panel de control exclusivo para el médico. Aquí ven la lista de pacientes que tienen asignados para el día y un resumen de su carga laboral.</p>
+        </div>
+        <div class="module-card">
+          <h4>Clinical (Clínico)</h4>
+          <p>El corazón del Registro Médico Electrónico (EHR). Aquí es donde médicos y enfermeras escriben el historial, registran signos vitales, alergias, diagnósticos y emiten recetas electrónicas.</p>
+        </div>
+        <div class="module-card">
+          <h4>ClinicalSettings (Configuración)</h4>
+          <p>Permite a los administradores médicos crear plantillas (ej. formatos estándar para revisar síntomas) y configurar términos médicos predeterminados.</p>
+        </div>
+        <div class="module-card">
+          <h4>OperationTheatre (Centro Quirúrgico)</h4>
+          <p>Módulo de alta complejidad para coordinar quirófanos. Agenda cirugías, asigna al cirujano y anestesiólogo, y registra los insumos consumidos durante la operación.</p>
+        </div>
+        <div class="module-card">
+          <h4>Vaccination (Vacunación)</h4>
+          <p>Lleva el control de los esquemas de inmunización, dosis aplicadas y fechas de refuerzos para los pacientes.</p>
+        </div>
+      </div>
+
+      <h4 class="category-title">🚨 Módulos de Atención Crítica y Cuidado</h4>
+      <div class="modules-grid">
+        <div class="module-card">
+          <h4>Emergency (Emergencia)</h4>
+          <p>Un flujo rápido diseñado para saltarse la burocracia. Permite admitir pacientes críticos, hacer triaje y registrar tratamientos inmediatos antes de formalizar su ingreso completo al hospital.</p>
+        </div>
+        <div class="module-card">
+          <h4>Nursing (Enfermería)</h4>
+          <p>El panel de control de las enfermeras de piso. Aquí gestionan las rondas de camas, administran la medicación exacta a la hora indicada (Kardex) y monitorean signos vitales de los pacientes internados.</p>
+        </div>
+        <div class="module-card">
+          <h4>Pharmacy (Farmacia Principal)</h4>
+          <p>Mientras que el "Dispensary" es la ventanilla donde se le entrega la pastilla al paciente, este módulo suele ser el almacén central de narcóticos y medicinas que abastece a esos dispensarios.</p>
+        </div>
+      </div>
+
+      <h4 class="category-title">🧪 Módulos de Diagnóstico</h4>
+      <div class="modules-grid">
+        <div class="module-card">
+          <h4>Laboratory (Laboratorio)</h4>
+          <p>Gestiona la recolección de muestras (sangre, orina, etc.), se integra con las máquinas de análisis y publica los resultados directamente en la historia del paciente.</p>
+        </div>
+        <div class="module-card">
+          <h4>Radiology (Radiología)</h4>
+          <p>Controla las órdenes de rayos X, tomografías o ecografías, y permite a los radiólogos subir sus informes diagnósticos.</p>
+        </div>
+      </div>
+
+      <h4 class="category-title">💊 Módulos Logísticos (Cadena de Suministro)</h4>
+      <div class="modules-grid">
+        <div class="module-card">
+          <h4>Dispensary (Dispensario)</h4>
+          <p>Es la farmacia que atiende al público o a los pacientes. Recibe las recetas electrónicas de los médicos y descuenta los medicamentos del stock al entregarlos.</p>
+        </div>
+        <div class="module-card">
+          <h4>Procurement (Adquisiciones)</h4>
+          <p>El sistema B2B del hospital. Gestiona las órdenes de compra a proveedores externos, recepción de lotes de medicinas y control del almacén principal.</p>
+        </div>
+      </div>
+
+      <h4 class="category-title">📦 Módulos de Logística Extendida y Activos</h4>
+      <div class="modules-grid">
+        <div class="module-card">
+          <h4>Inventory (Inventario)</h4>
+          <p>A diferencia de Farmacia, este módulo maneja los insumos generales del hospital: jeringas, guantes, sábanas, material de oficina y limpieza. Es un SCM puro.</p>
+        </div>
+        <div class="module-card">
+          <h4>SubStore (Sub-Almacenes)</h4>
+          <p>Gestiona inventarios satélite. Por ejemplo, el pabellón de UCI tiene su propio "mini-inventario" que debe solicitar reposiciones al almacén principal.</p>
+        </div>
+        <div class="module-card">
+          <h4>FixedAssets (Activos Fijos)</h4>
+          <p>Gestiona el ciclo de vida del equipamiento costoso del hospital (máquinas de resonancia, camas eléctricas). Calcula su depreciación y programa mantenimientos.</p>
+        </div>
+        <div class="module-card">
+          <h4>CSSD (Esterilización)</h4>
+          <p>Central de Esterilización. Controla la trazabilidad del instrumental quirúrgico: recoge herramientas sucias, registra su esterilización en autoclave y las devuelve selladas.</p>
+        </div>
+      </div>
+
+      <h4 class="category-title">💵 Módulos Financieros y Administrativos</h4>
+      <div class="modules-grid">
+        <div class="module-card">
+          <h4>Billing (Facturación)</h4>
+          <p>La caja central. Recolecta automáticamente todos los gastos que generó el paciente (medicinas, laboratorio, días de cama) y emite la boleta o factura final.</p>
+        </div>
+        <div class="module-card">
+          <h4>ClaimMgmt (Gestión de Seguros)</h4>
+          <p>Conecta los gastos médicos con las empresas aseguradoras (EPS). Permite enviar los expedientes para que el seguro pague su parte correspondiente.</p>
+        </div>
+        <div class="module-card">
+          <h4>SocialService (Servicio Social)</h4>
+          <p>Administra fondos de ayuda o esquemas gubernamentales para aplicar descuentos automáticos a pacientes de bajos recursos.</p>
+        </div>
+        <div class="module-card">
+          <h4>MktReferral (Marketing)</h4>
+          <p>Rastrea qué médicos externos o clínicas pequeñas derivaron pacientes a este hospital para calcular comisiones o medir el impacto comercial.</p>
+        </div>
+      </div>
+
+      <h4 class="category-title">💰 Módulos Financieros y Auditoría</h4>
+      <div class="modules-grid">
+        <div class="module-card">
+          <h4>Accounting (Contabilidad)</h4>
+          <p>El libro mayor (Ledger). Va más allá de la simple facturación a pacientes; aquí se registran los pagos a proveedores, pago de planillas, flujo de caja, y P&L del hospital.</p>
+        </div>
+        <div class="module-card">
+          <h4>Incentive (Comisiones)</h4>
+          <p>Calcula los bonos o comisiones de los médicos según los servicios que hayan prestado (por ejemplo, un porcentaje por cada cirugía realizada o consulta atendida).</p>
+        </div>
+        <div class="module-card">
+          <h4>Verification (Verificación)</h4>
+          <p>Módulo de control interno. Permite a los auditores o jefaturas aprobar y verificar facturas, compras o reclamos antes de que se procesen definitivamente, evitando fraudes.</p>
+        </div>
+      </div>
+
+      <h4 class="category-title">🗄️ Módulos de Administración y Soporte</h4>
+      <div class="modules-grid">
+        <div class="module-card">
+          <h4>MedicalRecords (Archivo)</h4>
+          <p>Gestiona la codificación oficial de enfermedades (como el estándar internacional ICD-10), la auditoría de historias clínicas incompletas y el archivo legal de defunciones/nacimientos.</p>
+        </div>
+        <div class="module-card">
+          <h4>Helpdesk (Mesa de Ayuda)</h4>
+          <p>Para el área de informes. Permite al personal buscar rápidamente en qué cama o pabellón está internado un paciente para informar a sus familiares.</p>
+        </div>
+        <div class="module-card">
+          <h4>Settings (Configuración)</h4>
+          <p>Configuración del negocio. Aquí se definen los precios de los exámenes, los impuestos aplicables, los pabellones existentes y las reglas de facturación.</p>
+        </div>
+        <div class="module-card">
+          <h4>SystemAdmin (Admin. del Sistema)</h4>
+          <p>Exclusivo para el equipo de TI. Gestiona los roles y permisos de los usuarios, audita los logs (quién borró un registro) y maneja las copias de seguridad de la base de datos.</p>
+        </div>
+      </div>
+
+      <h4 class="category-title">⚙️ Módulos del Sistema</h4>
+      <div class="modules-grid">
+        <div class="module-card">
+          <h4>Reports (Reportes)</h4>
+          <p>Informes predefinidos estáticos (financieros, cierre de caja diario, ocupación de camas).</p>
+        </div>
+        <div class="module-card">
+          <h4>DynamicReport (Dinámicos)</h4>
+          <p>Un constructor de consultas donde el usuario puede cruzar variables (ej. "Pacientes ingresados por COVID en mayo que usaron seguro MAPFRE").</p>
+        </div>
+        <div class="module-card">
+          <h4>Utilities (Utilidades)</h4>
+          <p>Herramientas de soporte y mantenimiento para el administrador del sistema informático.</p>
+        </div>
+      </div>
+
     </div>
-    <div class="ornament">· · ·</div>
-  </div>
 </section>
 
 <section id="stack" class="alt">

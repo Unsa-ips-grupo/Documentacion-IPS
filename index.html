@@ -1,1023 +1,2082 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Proyecto IPS — Danphe EMR + Scrum + DevOps | UNSA</title>
-<meta name="description" content="Aplicación de Scrum y DevOps sobre Danphe EMR, sistema de información hospitalaria de código abierto. Curso de Ingeniería y Procesos de Software, EPIS-UNSA 2026-A." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --navy: #0f2447;
-    --blue: #1e4d8b;
-    --sky: #4a90d9;
-    --accent: #c9a96e;
-    --bg: #f7f5f0;
-    --card: #ffffff;
-    --text: #1a1a1a;
-    --muted: #6b6b6b;
-    --border: #e6e2d8;
-    --success: #2e7d32;
-    --warn: #b8860b;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Jost', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-  }
-  .container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>CARE · Scrum & DevOps · UNSA IPS 2026-A</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #080f1a;
+      --bg2: #0d1726;
+      --bg3: #111f32;
+      --border: rgba(0, 229, 200, 0.12);
+      --border2: rgba(255, 255, 255, 0.07);
+      --cyan: #00e5c8;
+      --cyan-dim: rgba(0, 229, 200, 0.15);
+      --cyan-dk: #00b8a0;
+      --red: #ff4040;
+      --red-dim: rgba(255, 64, 64, 0.12);
+      --amber: #ffb830;
+      --white: #f0f6fc;
+      --gray: #8899aa;
+      --gray2: #4a5a6a;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'Inter', sans-serif;
+    }
 
-  /* NAV */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(247, 245, 240, 0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 18px 0;
-  }
-  nav .container { display: flex; justify-content: space-between; align-items: center; }
-  nav .brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px; font-weight: 700; color: var(--navy);
-    letter-spacing: -0.3px;
-  }
-  nav .brand span { color: var(--accent); }
-  nav ul { display: flex; gap: 32px; list-style: none; }
-  nav ul a {
-    color: var(--text); text-decoration: none; font-size: 15px; font-weight: 500;
-    transition: color 0.2s;
-  }
-  nav ul a:hover { color: var(--blue); }
-  @media (max-width: 768px) { nav ul { display: none; } }
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* HERO */
-  .hero {
-    padding: 100px 0 80px;
-    background: linear-gradient(180deg, var(--bg) 0%, #fdfcf8 100%);
-    border-bottom: 1px solid var(--border);
-  }
-  .hero .badges {
-    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px;
-  }
-  .badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: var(--card); border: 1px solid var(--border);
-    padding: 8px 16px; border-radius: 100px; font-size: 13px;
-    color: var(--navy); font-weight: 500;
-  }
-  .badge.accent { background: var(--navy); color: #fff; border-color: var(--navy); }
-  .badge.success { background: #e8f5e9; color: var(--success); border-color: #c8e6c9; }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(40px, 5.5vw, 68px);
-    font-weight: 800; color: var(--navy);
-    line-height: 1.05; letter-spacing: -1.5px; margin-bottom: 24px;
-  }
-  .hero h1 em { color: var(--accent); font-style: italic; }
-  .hero .lead {
-    font-size: 20px; color: var(--muted); max-width: 760px;
-    margin-bottom: 40px; line-height: 1.6;
-  }
-  .hero .meta {
-    display: flex; gap: 48px; flex-wrap: wrap;
-    padding-top: 32px; border-top: 1px solid var(--border);
-  }
-  .meta-item .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
-  .meta-item .value { font-size: 17px; color: var(--navy); font-weight: 600; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  /* SECTION */
-  section { padding: 90px 0; }
-  section.alt { background: #fdfcf8; }
-  .section-label {
-    font-size: 13px; color: var(--accent); text-transform: uppercase;
-    letter-spacing: 2.5px; font-weight: 600; margin-bottom: 16px;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 4vw, 48px);
-    font-weight: 700; color: var(--navy);
-    line-height: 1.15; letter-spacing: -0.8px; margin-bottom: 24px;
-  }
-  .section-lead { font-size: 18px; color: var(--muted); max-width: 720px; margin-bottom: 56px; line-height: 1.65; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  /* PRODUCT CARD */
-  .product-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 16px; padding: 48px; display: grid;
-    grid-template-columns: 1fr; gap: 32px;
-  }
-  .product-card .head { display: flex; align-items: start; gap: 24px; flex-wrap: wrap; }
-  .product-card .icon-wrap {
-    width: 72px; height: 72px; background: var(--navy);
-    border-radius: 16px; display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .product-card .icon-wrap svg { width: 38px; height: 38px; color: var(--accent); }
-  .product-card .title-block { flex: 1; min-width: 280px; }
-  .product-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px; font-weight: 700; color: var(--navy); margin-bottom: 8px;
-  }
-  .product-card .subtitle { font-size: 16px; color: var(--muted); }
-  .product-card .description {
-    font-size: 16px; color: var(--text); line-height: 1.75;
-  }
-  .product-card .stats {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
-    padding: 28px; background: var(--bg); border-radius: 12px;
-  }
-  .product-card .stat { text-align: center; }
-  .product-card .stat-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px; font-weight: 700; color: var(--blue); margin-bottom: 4px;
-  }
-  .product-card .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; }
-  .product-card .repo-link {
-    display: inline-flex; align-items: center; gap: 8px;
-    color: var(--blue); text-decoration: none; font-weight: 500; font-size: 15px;
-    margin-top: 12px;
-  }
-  .product-card .repo-link:hover { color: var(--navy); }
-  @media (max-width: 640px) {
-    .product-card { padding: 28px; }
-    .product-card .stats { grid-template-columns: repeat(2, 1fr); }
-  }
+    /* SCROLLBAR */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
 
-  /* MODULES GRID */
-  .modules-wrapper { margin-top: 60px; }
-  .category-title {
-    font-family: 'Playfair Display', serif;
-    color: var(--blue); font-size: 24px; font-weight: 700;
-    margin: 40px 0 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px;
-  }
-  .modules-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
-  }
-  .module-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 28px;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .module-card:hover {
-    transform: translateY(-4px); box-shadow: 0 12px 24px rgba(15, 36, 71, 0.06);
-    border-color: var(--sky);
-  }
-  .module-card h4 {
-    font-family: 'Playfair Display', serif; color: var(--navy); font-size: 18px; font-weight: 700;
-    margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
-  }
-  .module-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
 
-  /* HISTORIA TIMELINE */
-  .history-timeline { position: relative; padding-left: 32px; margin-top: 0; }
-  .history-timeline::before {
-    content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px;
-    width: 2px; background: linear-gradient(180deg, var(--accent), var(--sky));
-  }
-  .history-event { position: relative; padding-bottom: 36px; }
-  .history-event:last-child { padding-bottom: 0; }
-  .history-event::before {
-    content: ''; position: absolute; left: -32px; top: 6px;
-    width: 18px; height: 18px; background: var(--card);
-    border: 3px solid var(--accent); border-radius: 50%;
-  }
-  .history-event.major::before { background: var(--accent); }
-  .history-event .ev-year {
-    font-family: 'Playfair Display', serif;
-    font-size: 13px; font-weight: 700; color: var(--accent);
-    text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;
-  }
-  .history-event .ev-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 8px;
-  }
-  .history-event p { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 760px; }
+    ::-webkit-scrollbar-thumb {
+      background: var(--cyan-dk);
+      border-radius: 4px;
+    }
 
-  /* HISTORY STATS ROW */
-  .history-stats {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px;
-    margin-bottom: 56px;
-  }
-  .hstat {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 24px; text-align: center;
-  }
-  .hstat-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px; font-weight: 700; color: var(--blue); margin-bottom: 6px;
-  }
-  .hstat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; }
+    /* ─── NAV ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 15, 26, 0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+    }
 
-  /* STACK */
-  .stack-table {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; overflow: hidden;
-  }
-  .stack-row {
-    display: grid; grid-template-columns: 220px 1fr 180px 160px;
-    padding: 22px 28px; border-bottom: 1px solid var(--border);
-    align-items: center; gap: 20px;
-  }
-  .stack-row:last-child { border-bottom: none; }
-  .stack-row.header { background: var(--navy); color: #fff; font-weight: 600; }
-  .stack-row .name { font-weight: 600; color: var(--navy); }
-  .stack-row.header .name { color: #fff; }
-  .stack-row .desc { font-size: 15px; color: var(--muted); }
-  .stack-row.header .desc { color: rgba(255,255,255,0.85); }
-  .stack-row .version {
-    font-family: 'Jost', monospace; font-size: 13px; color: var(--blue); font-weight: 600;
-    background: var(--bg); padding: 6px 12px; border-radius: 6px; text-align: center;
-  }
-  .stack-row.header .version { background: rgba(255,255,255,0.15); color: #fff; }
-  .stack-row .source-tag {
-    font-size: 11px; padding: 4px 10px; border-radius: 100px;
-    text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
-    text-align: center;
-  }
-  .source-tag.official { background: #e8f5e9; color: var(--success); }
-  .source-tag.group   { background: #e3f2fd; color: var(--blue); }
-  .stack-row.header .source-tag { background: rgba(255,255,255,0.15); color: #fff; }
-  @media (max-width: 900px) {
-    .stack-row { grid-template-columns: 1fr 1fr; gap: 8px; }
-    .stack-row .source-tag { justify-self: start; }
-  }
-  @media (max-width: 600px) {
-    .stack-row { grid-template-columns: 1fr; gap: 6px; }
-    .stack-row .version { justify-self: start; }
-  }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      height: 56px;
+    }
 
-  /* STACK NOTE */
-  .stack-note {
-    margin-top: 20px; padding: 20px 24px;
-    background: var(--card); border: 1px solid var(--border);
-    border-left: 4px solid var(--accent);
-    border-radius: 0 8px 8px 0;
-    font-size: 14px; color: var(--muted); line-height: 1.7;
-  }
-  .stack-note strong { color: var(--navy); }
+    .brand {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
 
-  /* DELIVERABLES */
-  .deliverables { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-  .deliv-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 32px;
-    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-  }
-  .deliv-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(15, 36, 71, 0.08);
-    border-color: var(--sky);
-  }
-  .deliv-card .num {
-    font-family: 'Playfair Display', serif;
-    font-size: 42px; font-weight: 700; color: var(--accent);
-    line-height: 1; margin-bottom: 16px;
-  }
-  .deliv-card h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 21px; font-weight: 700; color: var(--navy); margin-bottom: 12px;
-  }
-  .deliv-card p { font-size: 15px; color: var(--muted); line-height: 1.7; }
+    .brand .br-dot {
+      color: var(--cyan);
+    }
 
-  /* TIMELINE */
-  .timeline { position: relative; padding-left: 32px; }
-  .timeline::before {
-    content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px;
-    width: 2px; background: linear-gradient(180deg, var(--accent), var(--sky));
-  }
-  .sprint {
-    position: relative; padding-bottom: 32px;
-  }
-  .sprint::before {
-    content: ''; position: absolute; left: -32px; top: 6px;
-    width: 18px; height: 18px; background: var(--card);
-    border: 3px solid var(--accent); border-radius: 50%;
-  }
-  .sprint.done::before { background: var(--accent); }
-  .sprint.active::before { background: var(--sky); border-color: var(--sky); }
-  .sprint .head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
-  .sprint .name {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px; font-weight: 700; color: var(--navy);
-  }
-  .sprint .dates { font-size: 14px; color: var(--muted); }
-  .sprint .status {
-    font-size: 11px; padding: 4px 10px; border-radius: 100px;
-    text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
-  }
-  .sprint.done .status { background: #e8f5e9; color: var(--success); }
-  .sprint.active .status { background: #e3f2fd; color: var(--blue); }
-  .sprint.pending .status { background: #fff8e1; color: var(--warn); }
-  .sprint p { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 720px; }
+    .brand .br-ver {
+      font-size: 10px;
+      color: var(--gray);
+      border: 1px solid var(--border2);
+      padding: 2px 6px;
+      border-radius: 3px;
+      letter-spacing: 1px;
+    }
 
-  /* TEAM */
-  .team { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-  .member {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 28px; text-align: center;
-  }
-  .member .avatar {
-    width: 64px; height: 64px; margin: 0 auto 16px;
-    background: linear-gradient(135deg, var(--blue), var(--navy));
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    color: var(--accent); font-family: 'Playfair Display', serif;
-    font-size: 26px; font-weight: 700;
-  }
-  .member .name { font-weight: 600; color: var(--navy); font-size: 16px; margin-bottom: 4px; }
-  .member .role { font-size: 13px; color: var(--muted); }
+    nav ul {
+      display: flex;
+      list-style: none;
+      height: 100%;
+    }
 
-  /* LINKS */
-  .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-  .link-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 24px; text-decoration: none;
-    color: var(--text); display: flex; gap: 16px; align-items: center;
-    transition: all 0.2s;
-  }
-  .link-card:hover { border-color: var(--blue); transform: translateX(4px); }
-  .link-card svg { width: 28px; height: 28px; color: var(--blue); flex-shrink: 0; }
-  .link-card .title { font-weight: 600; color: var(--navy); font-size: 15px; margin-bottom: 2px; }
-  .link-card .url { font-size: 13px; color: var(--muted); word-break: break-all; }
+    nav ul li {
+      display: flex;
+    }
 
-  /* FOOTER */
-  footer { background: var(--navy); color: rgba(255,255,255,0.85); padding: 56px 0 32px; }
-  footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
-  footer .brand {
-    font-family: 'Playfair Display', serif; font-size: 24px; color: #fff; font-weight: 700;
-  }
-  footer .brand span { color: var(--accent); }
-  footer .info { font-size: 14px; color: rgba(255,255,255,0.65); }
+    nav ul a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
 
-  /* DECORATIVE */
-  .ornament {
-    text-align: center; margin: 48px 0; color: var(--accent);
-    font-family: 'Playfair Display', serif; font-size: 24px; letter-spacing: 8px;
-  }
-</style>
+    nav ul a:hover {
+      color: var(--cyan);
+      border-bottom-color: var(--cyan);
+    }
+
+    @media(max-width:900px) {
+      nav ul {
+        display: none;
+      }
+    }
+
+    /* ─── ECG LINE ─── */
+    .ecg-wrap {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      pointer-events: none;
+    }
+
+    .ecg-wrap svg {
+      display: block;
+      width: 100%;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(0, 229, 200, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-glow2 {
+      position: absolute;
+      bottom: -300px;
+      left: -100px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 64, 64, 0.04) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px 72px;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      color: var(--gray);
+      background: var(--bg2);
+    }
+
+    .tag.live {
+      background: rgba(0, 229, 200, 0.1);
+      border-color: rgba(0, 229, 200, 0.3);
+      color: var(--cyan);
+    }
+
+    .tag.warn {
+      background: rgba(255, 184, 48, 0.1);
+      border-color: rgba(255, 184, 48, 0.3);
+      color: var(--amber);
+    }
+
+    .tag.dpg {
+      background: rgba(255, 64, 64, 0.1);
+      border-color: rgba(255, 64, 64, 0.3);
+      color: var(--red);
+    }
+
+    .hero h1 {
+      font-family: var(--mono);
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -2px;
+      margin-bottom: 28px;
+      color: var(--white);
+    }
+
+    .hero h1 .h-care {
+      color: var(--cyan);
+    }
+
+    .hero h1 .h-plus {
+      color: var(--gray2);
+    }
+
+    .hero h1 .h-fe {
+      color: rgba(240, 246, 252, 0.5);
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: var(--gray);
+      max-width: 620px;
+      line-height: 1.75;
+      margin-bottom: 52px;
+    }
+
+    .hero-desc strong {
+      color: var(--white);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 740px;
+    }
+
+    @media(max-width:700px) {
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .hstat {
+      padding: 20px 24px;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+
+    .hstat:last-child {
+      border-right: none;
+    }
+
+    .hstat::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--cyan);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .hstat:hover::before {
+      opacity: 1;
+    }
+
+    .hstat-val {
+      font-family: var(--mono);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--cyan);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .hstat-lbl {
+      font-size: 11px;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 500;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+      margin-top: 48px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border2);
+    }
+
+    .hmeta {
+      padding-right: 40px;
+      margin-right: 40px;
+      border-right: 1px solid var(--border2);
+    }
+
+    .hmeta:last-child {
+      border-right: none;
+    }
+
+    .hmeta-lbl {
+      font-size: 10px;
+      color: var(--gray2);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+
+    .hmeta-val {
+      font-size: 14px;
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    /* ─── SECTION BASE ─── */
+    .section {
+      padding: 88px 0;
+    }
+
+    .section.alt {
+      background: var(--bg2);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .sec-eye {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--cyan);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sec-eye::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--cyan);
+    }
+
+    .sec-title {
+      font-family: var(--mono);
+      font-size: clamp(26px, 3.5vw, 42px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 18px;
+    }
+
+    .sec-lead {
+      font-size: 16px;
+      color: var(--gray);
+      max-width: 660px;
+      margin-bottom: 56px;
+      line-height: 1.75;
+    }
+
+    .sec-lead strong {
+      color: var(--white);
+    }
+
+    /* ─── REPOS ─── */
+    .repos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 56px;
+    }
+
+    @media(max-width:800px) {
+      .repos-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .repo-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .repo-card:hover {
+      border-color: rgba(0, 229, 200, 0.4);
+    }
+
+    .repo-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .repo-card:hover::before {
+      opacity: 1;
+    }
+
+    .rc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 3px;
+      margin-bottom: 20px;
+    }
+
+    .rc-badge.be {
+      background: rgba(0, 229, 200, 0.1);
+      color: var(--cyan);
+      border: 1px solid rgba(0, 229, 200, 0.3);
+    }
+
+    .rc-badge.fe {
+      background: rgba(255, 184, 48, 0.1);
+      color: var(--amber);
+      border: 1px solid rgba(255, 184, 48, 0.3);
+    }
+
+    .repo-card h3 {
+      font-family: var(--mono);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+
+    .rc-sub {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 18px;
+    }
+
+    .repo-card p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    .rc-numbers {
+      display: flex;
+      gap: 28px;
+      margin-bottom: 24px;
+      padding: 16px 0;
+      border-top: 1px solid var(--border2);
+      border-bottom: 1px solid var(--border2);
+    }
+
+    .rcn-item .rcn-v {
+      font-family: var(--mono);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--cyan);
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .rcn-item .rcn-l {
+      font-size: 10px;
+      color: var(--gray2);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .rc-link {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--cyan);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+
+    .rc-link:hover {
+      gap: 10px;
+    }
+
+    /* ─── SCREENSHOTS ─── */
+    .shots-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    @media(max-width:700px) {
+      .shots-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .shot {
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 16/10;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .shot-bar {
+      background: #0d1726;
+      padding: 10px 14px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      border-bottom: 1px solid var(--border2);
+    }
+
+    .shot-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+
+    .shot-dot:nth-child(1) {
+      background: #ff5f56;
+    }
+
+    .shot-dot:nth-child(2) {
+      background: #ffbd2e;
+    }
+
+    .shot-dot:nth-child(3) {
+      background: #27c93f;
+    }
+
+    .shot-url {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+      padding: 3px 10px;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--gray2);
+      margin-left: 6px;
+    }
+
+    .shot-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .shot-lbl {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray);
+    }
+
+    .shot-note {
+      font-size: 11px;
+      color: var(--gray2);
+    }
+
+    /* ─── TIMELINE ─── */
+    .tl {
+      position: relative;
+      padding-left: 40px;
+    }
+
+    .tl::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 12px;
+      bottom: 12px;
+      width: 1px;
+      background: linear-gradient(180deg, var(--cyan), var(--red));
+    }
+
+    .tl-item {
+      position: relative;
+      padding-bottom: 48px;
+    }
+
+    .tl-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -40px;
+      top: 10px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--cyan);
+      transition: background 0.3s;
+    }
+
+    .tl-item.major::before {
+      background: var(--cyan);
+    }
+
+    .tl-year {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .tl-title {
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+      line-height: 1.3;
+    }
+
+    .tl-body {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.8;
+      max-width: 720px;
+    }
+
+    .tl-body strong {
+      color: var(--white);
+    }
+
+    /* ─── STATS ROW ─── */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 56px;
+    }
+
+    @media(max-width:900px) {
+      .stat-row {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media(max-width:500px) {
+      .stat-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .sr-item {
+      padding: 20px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .sr-item:last-child {
+      border-right: none;
+    }
+
+    .sr-v {
+      font-family: var(--mono);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+
+    .sr-l {
+      font-size: 10px;
+      color: var(--gray2);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 4px;
+    }
+
+    /* ─── MODULES ─── */
+    .mods-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    @media(max-width:900px) {
+      .mods-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mod-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .mod-tag-be,
+    .mod-tag-fe {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .mod-tag-be {
+      background: rgba(0, 229, 200, 0.15);
+      color: var(--cyan);
+    }
+
+    .mod-tag-fe {
+      background: rgba(255, 184, 48, 0.15);
+      color: var(--amber);
+    }
+
+    .mod-sub {
+      font-size: 12px;
+      color: var(--gray2);
+      font-family: var(--mono);
+      margin-bottom: 20px;
+    }
+
+    .mod-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .mod-item {
+      padding: 14px 18px;
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      border-left: 2px solid transparent;
+      transition: border-left-color 0.2s, background 0.2s;
+      cursor: default;
+    }
+
+    .mod-item:hover {
+      background: var(--bg3);
+      border-left-color: var(--cyan);
+    }
+
+    .mod-item.fe:hover {
+      border-left-color: var(--amber);
+    }
+
+    .mod-name {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 3px;
+    }
+
+    .mod-desc {
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    /* ─── STACK ─── */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    @media(max-width:700px) {
+      .stack-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .sk-card {
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .sk-card:hover {
+      background: var(--bg3);
+      border-color: var(--border);
+    }
+
+    .sk-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .sk-icon.py {
+      background: #1a3a5e;
+      color: #4da3e8;
+    }
+
+    .sk-icon.dj {
+      background: #0d3a20;
+      color: #2ecc71;
+    }
+
+    .sk-icon.pg {
+      background: #1a2060;
+      color: #7b8ff7;
+    }
+
+    .sk-icon.rd {
+      background: #3a0d0d;
+      color: #ff6b6b;
+    }
+
+    .sk-icon.re {
+      background: #3a1a0a;
+      color: #ff8c42;
+    }
+
+    .sk-icon.ts {
+      background: #0d1c50;
+      color: #6b9fff;
+    }
+
+    .sk-icon.vt {
+      background: #0d2a1a;
+      color: #41e096;
+    }
+
+    .sk-icon.pw {
+      background: #2a2a0d;
+      color: #f5d020;
+    }
+
+    .sk-icon.dk {
+      background: #0a1e3d;
+      color: #4b9ff5;
+    }
+
+    .sk-icon.gh {
+      background: #1a0d3a;
+      color: #b07fff;
+    }
+
+    .sk-name {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .sk-ver {
+      font-size: 11px;
+      color: var(--cyan);
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .sk-desc {
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    .sk-badge {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      border-radius: 3px;
+      align-self: start;
+      white-space: nowrap;
+    }
+
+    .sk-badge.be {
+      background: rgba(0, 229, 200, 0.1);
+      color: var(--cyan);
+      border: 1px solid rgba(0, 229, 200, 0.2);
+    }
+
+    .sk-badge.fe {
+      background: rgba(255, 184, 48, 0.1);
+      color: var(--amber);
+      border: 1px solid rgba(255, 184, 48, 0.2);
+    }
+
+    .sk-badge.both {
+      background: rgba(176, 127, 255, 0.1);
+      color: #b07fff;
+      border: 1px solid rgba(176, 127, 255, 0.2);
+    }
+
+    /* ─── PIPELINE ─── */
+    .pipeline {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 40px;
+      overflow-x: auto;
+    }
+
+    .pipe-title {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .pipe-sub {
+      font-size: 12px;
+      color: var(--gray2);
+      font-family: var(--mono);
+      margin-bottom: 36px;
+    }
+
+    .pipe-flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      min-width: 600px;
+    }
+
+    .pipe-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+
+    .pipe-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 12px;
+      position: relative;
+      transition: border-color 0.3s;
+    }
+
+    .pipe-box:hover {
+      border-color: var(--cyan);
+    }
+
+    .pipe-dot {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+    }
+
+    .pd-green {
+      background: #27c93f;
+    }
+
+    .pd-cyan {
+      background: var(--cyan);
+    }
+
+    .pd-amber {
+      background: var(--amber);
+    }
+
+    .pipe-name {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--white);
+      text-align: center;
+      margin-bottom: 2px;
+    }
+
+    .pipe-desc {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--gray2);
+      text-align: center;
+    }
+
+    .pipe-arr {
+      flex: 0 0 32px;
+      height: 1px;
+      background: var(--border);
+      position: relative;
+      margin-bottom: 28px;
+    }
+
+    .pipe-arr::after {
+      content: '';
+      position: absolute;
+      right: -5px;
+      top: -4px;
+      border: 5px solid transparent;
+      border-left: 6px solid var(--cyan);
+    }
+
+    .pipe-legend {
+      display: flex;
+      gap: 24px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border2);
+      flex-wrap: wrap;
+    }
+
+    .pl-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--gray);
+    }
+
+    .pl-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* ─── DELIVERABLES ─── */
+    .deliv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    @media(max-width:900px) {
+      .deliv-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:600px) {
+      .deliv-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .deliv {
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      padding: 28px;
+      transition: background 0.2s, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .deliv:hover {
+      background: var(--bg3);
+      border-color: var(--border);
+    }
+
+    .deliv-n {
+      font-family: var(--mono);
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--border2);
+      line-height: 1;
+      margin-bottom: 20px;
+      transition: color 0.3s;
+    }
+
+    .deliv:hover .deliv-n {
+      color: rgba(0, 229, 200, 0.15);
+    }
+
+    .deliv h4 {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .deliv p {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    .deliv p code {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: var(--bg2);
+      color: var(--cyan);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    /* ─── SPRINTS ─── */
+    .sprint-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+    }
+
+    @media(max-width:900px) {
+      .sprint-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:560px) {
+      .sprint-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .sp {
+      padding: 24px;
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sp::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+    }
+
+    .sp.done::before {
+      background: var(--cyan);
+    }
+
+    .sp.active::before {
+      background: var(--amber);
+    }
+
+    .sp.pending::before {
+      background: var(--border2);
+    }
+
+    .sp-status {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sp-status .sd {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .sp.done .sp-status {
+      color: var(--cyan);
+    }
+
+    .sp.done .sd {
+      background: var(--cyan);
+    }
+
+    .sp.active .sp-status {
+      color: var(--amber);
+    }
+
+    .sp.active .sd {
+      background: var(--amber);
+      animation: blink 1.2s infinite;
+    }
+
+    .sp.pending .sp-status {
+      color: var(--gray2);
+    }
+
+    .sp.pending .sd {
+      background: var(--gray2);
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    .sp-name {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .sp-date {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--gray2);
+      margin-bottom: 12px;
+    }
+
+    .sp-desc {
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    /* ─── TEAM ─── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+    }
+
+    @media(max-width:900px) {
+      .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media(max-width:560px) {
+      .team-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .member {
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      padding: 24px;
+      text-align: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .member:hover {
+      background: var(--bg3);
+      border-color: var(--border);
+    }
+
+    .av {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+
+    .mn {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .mr {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--gray2);
+      letter-spacing: 0.5px;
+    }
+
+    /* ─── LINKS ─── */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    @media(max-width:900px) {
+      .links-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:560px) {
+      .links-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .lk {
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      padding: 20px 24px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .lk:hover {
+      background: var(--bg3);
+      border-color: var(--border);
+    }
+
+    .lk-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      color: var(--cyan);
+    }
+
+    .lk-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .lk-t {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .lk-u {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--gray2);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .ft-brand {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.5px;
+    }
+
+    .ft-brand span {
+      color: var(--cyan);
+    }
+
+    .ft-info {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--gray2);
+    }
+
+    /* ─── DIVIDER ─── */
+    .rule {
+      border: none;
+      border-top: 1px solid var(--border2);
+      margin: 0;
+    }
+
+    code {
+      font-family: var(--mono);
+      font-size: 12px;
+      background: var(--bg2);
+      color: var(--cyan);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+  </style>
 </head>
+
 <body>
 
-<nav>
-  <div class="container">
-    <div class="brand">Unsa<span>·</span>ips<span>·</span>grupo</div>
-    <ul>
-      <li><a href="#producto">Producto</a></li>
-      <li><a href="#historia">Historia</a></li>
-      <li><a href="#stack">Stack</a></li>
-      <li><a href="#entregables">Entregables</a></li>
-      <li><a href="#cronograma">Cronograma</a></li>
-      <li><a href="#equipo">Equipo</a></li>
-    </ul>
-  </div>
-</nav>
-
-<header class="hero">
-  <div class="container">
-    <div class="badges">
-      <span class="badge accent">EPIS · UNSA · 2026-A</span>
-      <span class="badge">Ingeniería y Procesos de Software</span>
-      <span class="badge success">Hito 1 entregado</span>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="#">
+        UNSA<span class="br-dot"> · </span>IPS
+        <span class="br-ver">2026-A</span>
+      </a>
+      <ul>
+        <li><a href="#producto">Producto</a></li>
+        <li><a href="#historia">Historia</a></li>
+        <li><a href="#modulos">Módulos</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#cicd">CI/CD</a></li>
+        <li><a href="#entregables">Entregables</a></li>
+        <li><a href="#cronograma">Sprints</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+      </ul>
     </div>
-    <h1>Scrum y DevOps aplicado a un sistema hospitalario en <em>producción real</em></h1>
-    <p class="lead">
-      Tomamos Danphe EMR, un sistema de información hospitalaria de código abierto utilizado en más de 60 hospitales de Asia y África, y le aplicamos un proceso riguroso de Scrum integrado con prácticas DevOps. Lo que entregamos al curso es ese proceso, documentado y verificable.
-    </p>
-    <div class="meta">
-      <div class="meta-item">
-        <div class="label">Docente</div>
-        <div class="value">Prof. Robert Arisaca</div>
-      </div>
-      <div class="meta-item">
-        <div class="label">Curso</div>
-        <div class="value">Ingeniería y Procesos de Software</div>
-      </div>
-      <div class="meta-item">
-        <div class="label">Equipo</div>
-        <div class="value">Unsa-ips-grupo · 5 integrantes</div>
-      </div>
-      <div class="meta-item">
-        <div class="label">Período</div>
-        <div class="value">Abril — Julio 2026</div>
-      </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+
+    <!-- ECG Line -->
+    <div class="ecg-wrap">
+      <svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" height="56">
+        <path d="M0,28 L160,28 L180,28 L190,8 L200,48 L210,4 L220,52 L230,28 L260,28
+               L420,28 L440,28 L450,8 L460,48 L470,4 L480,52 L490,28 L520,28
+               L680,28 L700,28 L710,8 L720,48 L730,4 L740,52 L750,28 L780,28
+               L940,28 L960,28 L970,8 L980,48 L990,4 L1000,52 L1010,28 L1040,28
+               L1200,28 L1220,28 L1230,8 L1240,48 L1250,4 L1260,52 L1270,28 L1440,28" fill="none"
+          stroke="rgba(0,229,200,0.25)" stroke-width="1.5" />
+      </svg>
     </div>
-  </div>
-</header>
 
-<section id="producto">
-  <div class="container">
-    <div class="section-label">Producto seleccionado</div>
-    <h2 class="section-title">Danphe EMR</h2>
-    <p class="section-lead">
-      Sistema de información hospitalaria de código abierto, desarrollado en Nepal y utilizado en producción por más de sesenta hospitales. Cuenta con licencia MIT, más de cuarenta módulos integrados a nivel de arquitectura y una base de datos centralizada empresarial.
-    </p>
-
-    <div class="product-card">
-      <div class="head">
-        <div class="icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2 4 6v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4z"/>
-            <path d="M12 8v6M9 11h6"/>
-          </svg>
-        </div>
-        <div class="title-block">
-          <h3>Danphe EMR · Hospital Management System</h3>
-          <div class="subtitle">Sistema HIS + EMR + EHR · Licencia MIT · Sector Salud</div>
-          <a class="repo-link" href="https://github.com/opensource-emr/hospital-management-emr" target="_blank">
-            github.com/opensource-emr/hospital-management-emr →
-          </a>
-        </div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow">
+        <span class="tag live">● En curso — Sprint 1</span>
+        <span class="tag">EPIS · UNSA · 2026-A</span>
+        <span class="tag warn">Hito 1 ✓</span>
+        <span class="tag dpg">Bien Público Digital</span>
       </div>
 
-      <p class="description">
-        Danphe EMR cubre el ciclo completo de gestión hospitalaria: admisión y registro de pacientes, citas y agendamiento, gestión clínica con historia médica, farmacia con control de inventario, laboratorios con integración a máquinas analizadoras, facturación, contabilidad y administración de personal. Su arquitectura modular en C# permite que cada hospital active solo los servicios que necesita.
+      <h1>
+        Scrum & DevOps<br>
+        sobre <span class="h-care">CARE</span><span class="h-plus"> + </span><span class="h-fe">care_fe</span>
+      </h1>
+
+      <p class="hero-desc">
+        <strong>CARE</strong> es el sistema hospitalario open-source que nació durante el colapso de la pandemia en
+        India.
+        Hoy opera en <strong>11 estados</strong>, beneficia a <strong>186 millones</strong> de personas y está
+        certificado como Bien Público Digital.
+        Nosotros le aplicamos Scrum y DevOps.
       </p>
 
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-value">60+</div>
-          <div class="stat-label">Hospitales</div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-val">2020</div>
+          <div class="hstat-lbl">Fundación</div>
         </div>
-        <div class="stat">
-          <div class="stat-value">>40</div>
-          <div class="stat-label">Módulos (Backend)</div>
+        <div class="hstat">
+          <div class="hstat-val">11</div>
+          <div class="hstat-lbl">Estados</div>
         </div>
-        <div class="stat">
-          <div class="stat-value">34</div>
-          <div class="stat-label">Interfaces (Front)</div>
+        <div class="hstat">
+          <div class="hstat-val">186M+</div>
+          <div class="hstat-lbl">Beneficiados</div>
         </div>
-        <div class="stat">
-          <div class="stat-value">MIT</div>
-          <div class="stat-label">Licencia</div>
+        <div class="hstat">
+          <div class="hstat-val">MIT</div>
+          <div class="hstat-lbl">Licencia</div>
+        </div>
+      </div>
+
+      <div class="hero-meta">
+        <div class="hmeta">
+          <div class="hmeta-lbl">Docente</div>
+          <div class="hmeta-val">Prof. Robert Arisaca</div>
+        </div>
+        <div class="hmeta">
+          <div class="hmeta-lbl">Curso</div>
+          <div class="hmeta-val">Ingeniería y Procesos de Software</div>
+        </div>
+        <div class="hmeta">
+          <div class="hmeta-lbl">Equipo</div>
+          <div class="hmeta-val">5 integrantes</div>
+        </div>
+        <div class="hmeta">
+          <div class="hmeta-lbl">Período</div>
+          <div class="hmeta-val">Abril — Julio 2026</div>
         </div>
       </div>
     </div>
+  </header>
 
-    <div class="modules-wrapper">
-      <h3 class="section-title" style="font-size: 28px; margin-bottom: 8px; margin-top: 56px;">Arquitectura de Módulos Operativos</h3>
-      <p class="section-lead" style="margin-bottom: 20px;">Desglose completo de los módulos identificados en el código fuente y la interfaz del sistema para nuestra planificación Scrum.</p>
 
-      <h4 class="category-title">🏥 Módulos de Atención y Flujo de Pacientes</h4>
-      <div class="modules-grid">
-        <div class="module-card">
-          <h4>Patient (Pacientes)</h4>
-          <p>Es el registro maestro. Aquí se gestionan los datos demográficos (nombre, edad, contacto) y se genera el identificador único del paciente (Historia Clínica) que conectará con el resto del sistema.</p>
+
+  <!-- HISTORIA -->
+  <section class="section alt" id="historia">
+    <div class="container">
+      <div class="sec-eye">Historia del producto</div>
+      <h2 class="sec-title">Nacido en una pandemia,<br>certificado como bien público</h2>
+      <p class="sec-lead">
+        CARE no surgió de un laboratorio corporativo. Fue una respuesta de emergencia de voluntarios de tecnología
+        cuando el sistema de salud de India colapsaba. Hoy es uno de los sistemas hospitalarios open-source más activos
+        del mundo.
+      </p>
+
+      <div class="stat-row">
+        <div class="sr-item">
+          <div class="sr-v">2020</div>
+          <div class="sr-l">Año origen</div>
         </div>
-        <div class="module-card">
-          <h4>Appointment (Citas)</h4>
-          <p>Controla la agenda del hospital. Permite reservar turnos con médicos específicos, ver la disponibilidad de horarios y registrar las llegadas (check-in).</p>
+        <div class="sr-item">
+          <div class="sr-v">11</div>
+          <div class="sr-l">Estados</div>
         </div>
-        <div class="module-card">
-          <h4>QueueMngmt (Gestión de Colas)</h4>
-          <p>Funciona como el sistema de tickets de un banco. Organiza las pantallas de las salas de espera para llamar a los pacientes de forma ordenada a sus consultorios.</p>
+        <div class="sr-item">
+          <div class="sr-v">186M+</div>
+          <div class="sr-l">Beneficiados</div>
         </div>
-        <div class="module-card">
-          <h4>ADT (Admission, Discharge, Transfer)</h4>
-          <p>Controla el flujo de hospitalización (pacientes internados). Gestiona cuándo entra el paciente a piso, en qué cama está, si lo transfieren a UCI, y el proceso de alta médica.</p>
+        <div class="sr-item">
+          <div class="sr-v">DPG</div>
+          <div class="sr-l">Certificación</div>
+        </div>
+        <div class="sr-item">
+          <div class="sr-v">375+</div>
+          <div class="sr-l">Stars BE</div>
+        </div>
+        <div class="sr-item">
+          <div class="sr-v">611+</div>
+          <div class="sr-l">Stars FE</div>
         </div>
       </div>
 
-      <h4 class="category-title">👨‍⚕️ Módulos Médicos y Clínicos</h4>
-      <div class="modules-grid">
-        <div class="module-card">
-          <h4>Doctor</h4>
-          <p>Es el panel de control exclusivo para el médico. Aquí ven la lista de pacientes que tienen asignados para el día y un resumen de su carga laboral.</p>
+      <div class="tl">
+        <div class="tl-item major">
+          <div class="tl-year">Marzo 2020 — Origen en pandemia</div>
+          <div class="tl-title">COVID-19 colapsa Kerala: CARE nace en días</div>
+          <div class="tl-body">
+            El gobierno de Kerala no tenía forma de monitorear en tiempo real la disponibilidad de camas UCI,
+            ventiladores ni oxígeno. Un grupo de voluntarios de <strong>Coronasafe Network</strong> (hoy Open Healthcare
+            Network) construyó el primer prototipo en menos de dos semanas. El nombre es acrónimo de <em>Coronasafe
+              Analysis Response Engine</em>.
+          </div>
         </div>
-        <div class="module-card">
-          <h4>Clinical (Clínico)</h4>
-          <p>El corazón del Registro Médico Electrónico (EHR). Aquí es donde médicos y enfermeras escriben el historial, registran signos vitales, alergias, diagnósticos y emiten recetas electrónicas.</p>
-        </div>
-        <div class="module-card">
-          <h4>ClinicalSettings (Configuración)</h4>
-          <p>Permite a los administradores médicos crear plantillas (ej. formatos estándar para revisar síntomas) y configurar términos médicos predeterminados.</p>
-        </div>
-        <div class="module-card">
-          <h4>OperationTheatre (Centro Quirúrgico)</h4>
-          <p>Módulo de alta complejidad para coordinar quirófanos. Agenda cirugías, asigna al cirujano y anestesiólogo, y registra los insumos consumidos durante la operación.</p>
-        </div>
-        <div class="module-card">
-          <h4>Vaccination (Vacunación)</h4>
-          <p>Lleva el control de los esquemas de inmunización, dosis aplicadas y fechas de refuerzos para los pacientes.</p>
-        </div>
-      </div>
 
-      <h4 class="category-title">🚨 Módulos de Atención Crítica y Cuidado</h4>
-      <div class="modules-grid">
-        <div class="module-card">
-          <h4>Emergency (Emergencia)</h4>
-          <p>Un flujo rápido diseñado para saltarse la burocracia. Permite admitir pacientes críticos, hacer triaje y registrar tratamientos inmediatos antes de formalizar su ingreso completo al hospital.</p>
+        <div class="tl-item">
+          <div class="tl-year">2020 — Expansión</div>
+          <div class="tl-title">De Kerala a toda India: Proyecto 10BedICU</div>
+          <div class="tl-body">
+            El programa <strong>10BedICU</strong> llevó UCIs a hospitales rurales. CARE se convirtió en el sistema
+            central de TeleICU: médicos en ciudades grandes monitoreaban pacientes en UCIs remotas. Expansión a UP,
+            Himachal Pradesh y más estados.
+          </div>
         </div>
-        <div class="module-card">
-          <h4>Nursing (Enfermería)</h4>
-          <p>El panel de control de las enfermeras de piso. Aquí gestionan las rondas de camas, administran la medicación exacta a la hora indicada (Kardex) y monitorean signos vitales de los pacientes internados.</p>
-        </div>
-        <div class="module-card">
-          <h4>Pharmacy (Farmacia Principal)</h4>
-          <p>Mientras que el "Dispensary" es la ventanilla donde se le entrega la pastilla al paciente, este módulo suele ser el almacén central de narcóticos y medicinas que abastece a esos dispensarios.</p>
-        </div>
-      </div>
 
-      <h4 class="category-title">🧪 Módulos de Diagnóstico</h4>
-      <div class="modules-grid">
-        <div class="module-card">
-          <h4>Laboratory (Laboratorio)</h4>
-          <p>Gestiona la recolección de muestras (sangre, orina, etc.), se integra con las máquinas de análisis y publica los resultados directamente en la historia del paciente.</p>
+        <div class="tl-item">
+          <div class="tl-year">2021 — Madurez técnica</div>
+          <div class="tl-title">Separación BE/FE · Arquitectura de plugins</div>
+          <div class="tl-body">
+            Separación clara entre <code>care</code> (Python/Django) y <code>care_fe</code> (React/TypeScript). Sistema
+            de <strong>plugins</strong> que permite a estados e instituciones extender el sistema sin modificar el
+            núcleo.
+          </div>
         </div>
-        <div class="module-card">
-          <h4>Radiology (Radiología)</h4>
-          <p>Controla las órdenes de rayos X, tomografías o ecografías, y permite a los radiólogos subir sus informes diagnósticos.</p>
-        </div>
-      </div>
 
-      <h4 class="category-title">💊 Módulos Logísticos (Cadena de Suministro)</h4>
-      <div class="modules-grid">
-        <div class="module-card">
-          <h4>Dispensary (Dispensario)</h4>
-          <p>Es la farmacia que atiende al público o a los pacientes. Recibe las recetas electrónicas de los médicos y descuenta los medicamentos del stock al entregarlos.</p>
+        <div class="tl-item">
+          <div class="tl-year">2022 — Reconocimiento global</div>
+          <div class="tl-title">Certificación como Digital Public Good</div>
+          <div class="tl-body">
+            Certificado como <strong>Bien Público Digital</strong> por la Digital Public Goods Alliance (UNICEF, ONU,
+            Noruega). Mismo nivel que OpenMRS o DHIS2. Valida privacidad, seguridad, estándares abiertos y ausencia de
+            daño.
+          </div>
         </div>
-        <div class="module-card">
-          <h4>Procurement (Adquisiciones)</h4>
-          <p>El sistema B2B del hospital. Gestiona las órdenes de compra a proveedores externos, recepción de lotes de medicinas y control del almacén principal.</p>
-        </div>
-      </div>
 
-      <h4 class="category-title">📦 Módulos de Logística Extendida y Activos</h4>
-      <div class="modules-grid">
-        <div class="module-card">
-          <h4>Inventory (Inventario)</h4>
-          <p>A diferencia de Farmacia, este módulo maneja los insumos generales del hospital: jeringas, guantes, sábanas, material de oficina y limpieza. Es un SCM puro.</p>
-        </div>
-        <div class="module-card">
-          <h4>SubStore (Sub-Almacenes)</h4>
-          <p>Gestiona inventarios satélite. Por ejemplo, el pabellón de UCI tiene su propio "mini-inventario" que debe solicitar reposiciones al almacén principal.</p>
-        </div>
-        <div class="module-card">
-          <h4>FixedAssets (Activos Fijos)</h4>
-          <p>Gestiona el ciclo de vida del equipamiento costoso del hospital (máquinas de resonancia, camas eléctricas). Calcula su depreciación y programa mantenimientos.</p>
-        </div>
-        <div class="module-card">
-          <h4>CSSD (Esterilización)</h4>
-          <p>Central de Esterilización. Controla la trazabilidad del instrumental quirúrgico: recoge herramientas sucias, registra su esterilización en autoclave y las devuelve selladas.</p>
-        </div>
-      </div>
-
-      <h4 class="category-title">💵 Módulos Financieros y Administrativos</h4>
-      <div class="modules-grid">
-        <div class="module-card">
-          <h4>Billing (Facturación)</h4>
-          <p>La caja central. Recolecta automáticamente todos los gastos que generó el paciente (medicinas, laboratorio, días de cama) y emite la boleta o factura final.</p>
-        </div>
-        <div class="module-card">
-          <h4>ClaimMgmt (Gestión de Seguros)</h4>
-          <p>Conecta los gastos médicos con las empresas aseguradoras (EPS). Permite enviar los expedientes para que el seguro pague su parte correspondiente.</p>
-        </div>
-        <div class="module-card">
-          <h4>SocialService (Servicio Social)</h4>
-          <p>Administra fondos de ayuda o esquemas gubernamentales para aplicar descuentos automáticos a pacientes de bajos recursos.</p>
-        </div>
-        <div class="module-card">
-          <h4>MktReferral (Marketing)</h4>
-          <p>Rastrea qué médicos externos o clínicas pequeñas derivaron pacientes a este hospital para calcular comisiones o medir el impacto comercial.</p>
-        </div>
-      </div>
-
-      <h4 class="category-title">💰 Módulos Financieros y Auditoría</h4>
-      <div class="modules-grid">
-        <div class="module-card">
-          <h4>Accounting (Contabilidad)</h4>
-          <p>El libro mayor (Ledger). Va más allá de la simple facturación a pacientes; aquí se registran los pagos a proveedores, pago de planillas, flujo de caja, y P&L del hospital.</p>
-        </div>
-        <div class="module-card">
-          <h4>Incentive (Comisiones)</h4>
-          <p>Calcula los bonos o comisiones de los médicos según los servicios que hayan prestado (por ejemplo, un porcentaje por cada cirugía realizada o consulta atendida).</p>
-        </div>
-        <div class="module-card">
-          <h4>Verification (Verificación)</h4>
-          <p>Módulo de control interno. Permite a los auditores o jefaturas aprobar y verificar facturas, compras o reclamos antes de que se procesen definitivamente, evitando fraudes.</p>
-        </div>
-      </div>
-
-      <h4 class="category-title">🗄️ Módulos de Administración y Soporte</h4>
-      <div class="modules-grid">
-        <div class="module-card">
-          <h4>MedicalRecords (Archivo)</h4>
-          <p>Gestiona la codificación oficial de enfermedades (como el estándar internacional ICD-10), la auditoría de historias clínicas incompletas y el archivo legal de defunciones/nacimientos.</p>
-        </div>
-        <div class="module-card">
-          <h4>Helpdesk (Mesa de Ayuda)</h4>
-          <p>Para el área de informes. Permite al personal buscar rápidamente en qué cama o pabellón está internado un paciente para informar a sus familiares.</p>
-        </div>
-        <div class="module-card">
-          <h4>Settings (Configuración)</h4>
-          <p>Configuración del negocio. Aquí se definen los precios de los exámenes, los impuestos aplicables, los pabellones existentes y las reglas de facturación.</p>
-        </div>
-        <div class="module-card">
-          <h4>SystemAdmin (Admin. del Sistema)</h4>
-          <p>Exclusivo para el equipo de TI. Gestiona los roles y permisos de los usuarios, audita los logs (quién borró un registro) y maneja las copias de seguridad de la base de datos.</p>
-        </div>
-      </div>
-
-      <h4 class="category-title">⚙️ Módulos del Sistema</h4>
-      <div class="modules-grid">
-        <div class="module-card">
-          <h4>Reports (Reportes)</h4>
-          <p>Informes predefinidos estáticos (financieros, cierre de caja diario, ocupación de camas).</p>
-        </div>
-        <div class="module-card">
-          <h4>DynamicReport (Dinámicos)</h4>
-          <p>Un constructor de consultas donde el usuario puede cruzar variables (ej. "Pacientes ingresados por COVID en mayo que usaron seguro MAPFRE").</p>
-        </div>
-        <div class="module-card">
-          <h4>Utilities (Utilidades)</h4>
-          <p>Herramientas de soporte y mantenimiento para el administrador del sistema informático.</p>
+        <div class="tl-item major">
+          <div class="tl-year">2023 – 2026 — Estado actual</div>
+          <div class="tl-title">Open Healthcare Network · Desarrollo activo</div>
+          <div class="tl-body">
+            Renombrado a <strong>Open Healthcare Network (OHC)</strong>. El frontend tiene más de 1.094 forks y una
+            comunidad activa global. Evolución con soporte FHIR, integración con identidad nacional y mejoras al módulo
+            de telemedicina.
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     SECCIÓN NUEVA 1: HISTORIA DEL PRODUCTO
-════════════════════════════════════════════════════════ -->
-<section id="historia" class="alt">
-  <div class="container">
-    <div class="section-label">Historia del producto</div>
-    <h2 class="section-title">De Nepal al mundo: la evolución de Danphe EMR</h2>
-    <p class="section-lead">
-      Danphe EMR nació en el contexto de la digitalización de hospitales en economías emergentes de Asia del Sur. Su trayectoria es la de un proyecto que pasó del prototipo local a convertirse en referente de código abierto para la gestión hospitalaria en países en desarrollo.
-    </p>
+  <!-- MÓDULOS -->
+  <section class="section" id="modulos">
+    <div class="container">
+      <div class="sec-eye">Arquitectura funcional</div>
+      <h2 class="sec-title">Módulos del backend<br>y vistas del frontend</h2>
+      <p class="sec-lead">
+        El backend expone APIs organizadas por dominio clínico. El frontend implementa vistas para cada dominio,
+        corriendo en <code>localhost:4000</code> durante desarrollo.
+      </p>
 
-    <div class="history-stats">
-      <div class="hstat">
-        <div class="hstat-value">2017</div>
-        <div class="hstat-label">Año de inicio del desarrollo</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-value">v3.2</div>
-        <div class="hstat-label">Última versión (dic. 2023)</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-value">60+</div>
-        <div class="hstat-label">Hospitales en producción</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-value">466</div>
-        <div class="hstat-label">Estrellas en GitHub</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-value">301</div>
-        <div class="hstat-label">Forks del repositorio</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-value">86</div>
-        <div class="hstat-label">Commits en rama master</div>
-      </div>
-    </div>
-
-    <div class="history-timeline">
-
-      <div class="history-event major">
-        <div class="ev-year">2017 — Origen</div>
-        <div class="ev-title">Fundación y primeros despliegues en Nepal</div>
-        <p>
-          El proyecto fue creado por Shiv Koirala y un equipo de desarrolladores nepaleses con el objetivo de digitalizar la gestión hospitalaria en hospitales de mediano tamaño en Nepal. El sistema inició sus primeras instalaciones en hospitales locales como SGM Ayurvedic Hospital, Maya Metro Hospital y Buddhanilakantha Hospital, todos ubicados en Nepal. La apuesta arquitectónica desde el comienzo fue una SPA (Single-Page Application) en Angular con un backend en ASP.NET Core y SQL Server como base de datos relacional, eligiendo deliberadamente un stack empresarial estándar para facilitar el mantenimiento por equipos de TI hospitalarios.
-        </p>
-      </div>
-
-      <div class="history-event">
-        <div class="ev-year">2018 – 2019 — Expansión regional</div>
-        <div class="ev-title">Adopción en India y Bangladesh · Repositorio público en GitHub</div>
-        <p>
-          Con el crecimiento en el número de hospitales adoptantes, el equipo abrió el código fuente en GitHub bajo la organización <code>opensource-emr</code> con licencia MIT. Esto marcó el punto de inflexión: al publicarse gratuitamente, hospitales de India y Bangladesh comenzaron a adoptarlo. El repositorio acumuló rápidamente forks de equipos locales que adaptaban el sistema a sus necesidades de facturación e idioma. La documentación oficial de instalación publicada en <em>opensource-emr.github.io</em> estandarizó el proceso de despliegue en IIS sobre Windows Server.
-        </p>
-      </div>
-
-      <div class="history-event">
-        <div class="ev-year">2020 – 2021 — Madurez del núcleo</div>
-        <div class="ev-title">Más de 40 módulos integrados · Integración con máquinas de laboratorio</div>
-        <p>
-          La base de código alcanzó su mayor densidad funcional con la incorporación de módulos críticos como Operation Theatre (quirófano), CSSD (esterilización), Vaccination y la integración directa con máquinas analizadoras de laboratorio mediante interfaz HL7-compatible. Se documentan más de 50 tipos de máquinas de laboratorio integradas. En este período el sistema superó los 50 hospitales en producción activa en Asia (India, Nepal y Bangladesh), con hospitales de referencia como HAMS (Hospital for Advanced Medicine and Surgery) y Manmohan Memorial Medical College and Teaching Hospital.
-        </p>
-      </div>
-
-      <div class="history-event">
-        <div class="ev-year">2022 — Reconocimiento internacional</div>
-        <div class="ev-title">Primera adopción fuera de Asia · Carta de recomendación de Kenya</div>
-        <p>
-          El sistema traspasó el continente asiático con su instalación en Kalimoni Mission Hospital, Kenya — documentada con una carta de recomendación oficial que el equipo mantiene en su repositorio. Este hito consolidó a Danphe EMR como una solución HIS de alcance global para economías emergentes. La organización derivada <code>hospital-management-system-emr</code> en GitHub comenzó a mantener una rama activa del proyecto con actualizaciones y soporte independiente, elevando el número total de hospitales a más de 60 incluyendo África.
-        </p>
-      </div>
-
-      <div class="history-event major">
-        <div class="ev-year">Diciembre 2023 — Estado actual</div>
-        <div class="ev-title">Versión 3.2 · Última release oficial</div>
-        <p>
-          La versión 3.2 fue publicada el 9 de diciembre de 2023 por el autor principal (<code>opensource-emr</code>) y representa el estado del código base que nuestro equipo trabaja. El repositorio cuenta con 466 estrellas y 301 forks en GitHub, con 86 commits en la rama <code>master</code>. El proyecto se mantiene activo con una comunidad de contribuyentes y un canal de soporte por correo electrónico directo al autor. El stack tecnológico central —Angular 7, ASP.NET Core 3.1, SQL Server 2017— no ha sido actualizado de versión mayor desde su consolidación, lo que representa una deuda técnica conocida que varios forks de la comunidad han intentado resolver parcialmente (existe un Pull Request abierto que propone actualizar Angular de 7.1.0 a 10.2.5, aún sin mergear).
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     SECCIÓN NUEVA 2: STACK TECNOLÓGICO REAL
-════════════════════════════════════════════════════════ -->
-<section id="stack">
-  <div class="container">
-    <div class="section-label">Stack tecnológico real</div>
-    <h2 class="section-title">Tecnologías verificadas del código fuente</h2>
-    <p class="section-lead">
-      Versiones y herramientas exactas extraídas directamente del repositorio oficial: archivos <code>global.json</code>, <code>package.json</code>, documentación de setup y código fuente. La columna <em>Fuente</em> indica si el dato proviene del repositorio oficial o es una adición del equipo.
-    </p>
-
-    <div class="stack-table">
-      <div class="stack-row header">
-        <div class="name">Componente</div>
-        <div class="desc">Función dentro del sistema</div>
-        <div class="version">Versión exacta</div>
-        <div class="source-tag">Fuente</div>
-      </div>
-
-      <!-- FRONTEND -->
-      <div class="stack-row">
-        <div class="name">Angular</div>
-        <div class="desc">Framework SPA del frontend. La versión base del repositorio es <strong>7.1.0</strong> según el <code>package.json</code> original del proyecto (<code>@angular/core@7.1.0</code>). Hay un PR abierto sin mergear que propone subirlo a 10.2.5.</div>
-        <div class="version">7.1.0</div>
-        <div class="source-tag official">Repo oficial</div>
-      </div>
-      <div class="stack-row">
-        <div class="name">TypeScript</div>
-        <div class="desc">Lenguaje del frontend Angular. TypeScript 3.x es la versión compatible con Angular 7 y requerida por el compilador del proyecto.</div>
-        <div class="version">3.x</div>
-        <div class="source-tag official">Repo oficial</div>
-      </div>
-      <div class="stack-row">
-        <div class="name">Node.js</div>
-        <div class="desc">Entorno de ejecución requerido para compilar el frontend con <code>npm install</code> y <code>ng build --watch</code>. No se fija versión mínima explícita en la documentación oficial.</div>
-        <div class="version">LTS compatible</div>
-        <div class="source-tag official">Repo oficial</div>
-      </div>
-
-      <!-- BACKEND -->
-      <div class="stack-row">
-        <div class="name">ASP.NET Core</div>
-        <div class="desc">Framework backend para las APIs REST y la lógica de negocio. El archivo <code>global.json</code> en la ruta <code>Solution Items\global.json</code> fija el SDK en <strong>3.1.301</strong>.</div>
-        <div class="version">3.1 (SDK 3.1.301)</div>
-        <div class="source-tag official">global.json</div>
-      </div>
-      <div class="stack-row">
-        <div class="name">C#</div>
-        <div class="desc">Lenguaje principal del backend. La solución se abre con Visual Studio 2017 o 2019 y compila con .NET Core 3.1, lo que implica C# 8.0 como versión de lenguaje disponible.</div>
-        <div class="version">8.0</div>
-        <div class="source-tag official">Repo oficial</div>
-      </div>
-      <div class="stack-row">
-        <div class="name">Entity Framework Core</div>
-        <div class="desc">ORM para el acceso a base de datos desde el backend ASP.NET Core. Compatible con EF Core 3.x en el contexto del SDK 3.1.301.</div>
-        <div class="version">3.x</div>
-        <div class="source-tag official">Repo oficial</div>
-      </div>
-
-      <!-- BASE DE DATOS -->
-      <div class="stack-row">
-        <div class="name">MS SQL Server</div>
-        <div class="desc">Base de datos relacional empresarial. La documentación oficial de setup especifica la versión mínima como <strong>SQL Server 2017 (build 14.0.202)</strong> o superior. Se crean dos bases: <code>DanpheAdmin</code> y <code>DanpheEMR_OS</code>.</div>
-        <div class="version">2017 (14.0.202+)</div>
-        <div class="source-tag official">Docs oficiales</div>
-      </div>
-
-      <!-- IDEs / TOOLS -->
-      <div class="stack-row">
-        <div class="name">Visual Studio</div>
-        <div class="desc">IDE requerido para abrir y compilar la solución <code>DanpheEMR.sln</code>. Las versiones soportadas son <strong>2017 o 2019</strong> según la documentación oficial.</div>
-        <div class="version">2017 / 2019</div>
-        <div class="source-tag official">Docs oficiales</div>
-      </div>
-      <div class="stack-row">
-        <div class="name">Visual Studio Code</div>
-        <div class="desc">Editor recomendado oficialmente para trabajar con el proyecto Angular (<code>DanpheApp</code>). Se usa para ejecutar <code>npm install</code> y <code>ng build --watch</code> desde su terminal integrada.</div>
-        <div class="version">Cualquier versión LTS</div>
-        <div class="source-tag official">Docs oficiales</div>
-      </div>
-      <div class="stack-row">
-        <div class="name">IIS (Internet Information Services)</div>
-        <div class="desc">Servidor web de despliegue para producción en Windows Server. La documentación oficial incluye un video-laboratorio específico de configuración en IIS (Lab 2).</div>
-        <div class="version">Windows Server</div>
-        <div class="source-tag official">Docs oficiales</div>
-      </div>
-
-      <!-- ADICIÓN DEL EQUIPO -->
-      <div class="stack-row">
-        <div class="name">Docker + docker-compose</div>
-        <div class="desc">Containerización completa del stack (ASP.NET Core + SQL Server + Angular). <strong>No existe en el repositorio oficial</strong>; es la mejora técnica principal que implementa nuestro equipo como parte del Sprint 2 y Sprint 3.</div>
-        <div class="version">Implementado en Sprint 3</div>
-        <div class="source-tag group">Adición del equipo</div>
-      </div>
-      <div class="stack-row">
-        <div class="name">GitHub Actions (CI/CD)</div>
-        <div class="desc">Pipeline de integración y despliegue continuo. <strong>No existe en el repositorio oficial</strong> (solo tiene un <code>bitbucket-pipelines.yml</code> sin mantener). Nuestro equipo lo implementa desde cero en Sprint 2.</div>
-        <div class="version">Implementado en Sprint 2</div>
-        <div class="source-tag group">Adición del equipo</div>
-      </div>
-    </div>
-
-    <div class="stack-note">
-      <strong>Nota sobre versiones:</strong> El repositorio oficial (<code>opensource-emr/hospital-management-emr</code>) no ha tenido actualizaciones de versiones mayores de sus dependencias desde su consolidación. Existe un Pull Request abierto (#PR en la rama de dependencias) que propone actualizar <code>@angular/core</code> de <strong>7.1.0 a 10.2.5</strong>, pero no ha sido mergeado por el mantenedor principal. Nuestro equipo trabaja sobre la versión base oficial (Angular 7.x / .NET Core 3.1) para mantener fidelidad con el upstream y documentar las implicaciones de esta deuda técnica en el artículo IEEE final.
-    </div>
-  </div>
-</section>
-
-<section id="entregables" class="alt">
-  <div class="container">
-    <div class="section-label">Producto final del curso</div>
-    <h2 class="section-title">Lo que entregamos al cierre del semestre</h2>
-    <p class="section-lead">
-      El producto que evaluamos no es Danphe en sí mismo, sino la aplicación rigurosa de Scrum y DevOps sobre él. A continuación los seis entregables tangibles que componen ese producto final.
-    </p>
-
-    <div class="deliverables">
-      <div class="deliv-card">
-        <div class="num">01</div>
-        <h4>Fork con mejoras del equipo</h4>
-        <p>Repositorio fork en la organización Unsa-ips-grupo con funcionalidades nuevas implementadas vía pull requests, siguiendo flujo Git profesional con protección de rama main.</p>
-      </div>
-      <div class="deliv-card">
-        <div class="num">02</div>
-        <h4>Containerización con Docker</h4>
-        <p>Dockerfile + docker-compose.yml que orquestan ASP.NET Core, SQL Server y el frontend Angular en un solo comando. Mejora estrella del proyecto, no existía oficialmente.</p>
-      </div>
-      <div class="deliv-card">
-        <div class="num">03</div>
-        <h4>Pipeline CI/CD en GitHub Actions</h4>
-        <p>Workflows YAML que ejecutan tests xUnit, validan estilo de código .NET, construyen imágenes Docker y verifican que la aplicación arranca en cada push o pull request.</p>
-      </div>
-      <div class="deliv-card">
-        <div class="num">04</div>
-        <h4>Despliegue automatizado a staging</h4>
-        <p>Sistema desplegado en cloud (Railway, Render o VPS) actualizándose automáticamente con cada merge a la rama main. Demostración pública del Continuous Deployment.</p>
-      </div>
-      <div class="deliv-card">
-        <div class="num">05</div>
-        <h4>Documentación Scrum completa</h4>
-        <p>Actas de Sprint Planning, Reviews, Retrospectivas y backlog del producto. Todo trazable en el repositorio de documentación, demostrando aplicación real del marco ágil.</p>
-      </div>
-      <div class="deliv-card">
-        <div class="num">06</div>
-        <h4>Artículo IEEE y demo final</h4>
-        <p>Artículo académico siguiendo plantilla IEEE que documenta el proceso completo, decisiones técnicas, resultados y conclusiones. Más demostración en vivo del sistema funcionando.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="cronograma">
-  <div class="container">
-    <div class="section-label">Cronograma</div>
-    <h2 class="section-title">Cuatro sprints, tres hitos</h2>
-    <p class="section-lead">
-      Cada sprint dura quince días calendario. El liderazgo del equipo rota por sprint conforme a la metodología establecida en el curso.
-    </p>
-
-    <div class="timeline">
-      <div class="sprint done">
-        <div class="head">
-          <div class="name">Sprint 0 · Planificación</div>
-          <div class="dates">22 abril — 13 mayo</div>
-          <span class="status">Completado · Hito 1</span>
-        </div>
-        <p>Selección del producto, definición de roles, configuración del repositorio organizacional, tablero GitHub Projects y publicación de GitHub Pages. Cierre con la entrega del Hito 1, valorado en quince por ciento del trabajo final.</p>
-      </div>
-
-      <div class="sprint active">
-        <div class="head">
-          <div class="name">Sprint 1 · Setup técnico</div>
-          <div class="dates">14 mayo — 27 mayo</div>
-          <span class="status">En curso</span>
-        </div>
-        <p>Levantar Danphe EMR en local, analizar su arquitectura modular, definir el backlog del producto y diseñar el primer borrador de la containerización con Docker. Documentación técnica completa de requisitos y arquitectura.</p>
-      </div>
-
-      <div class="sprint pending">
-        <div class="head">
-          <div class="name">Sprint 2 · CI/CD básico</div>
-          <div class="dates">28 mayo — 10 junio</div>
-          <span class="status">Pendiente · Hito 2</span>
-        </div>
-        <p>Pipeline funcional de GitHub Actions con ejecución de pruebas xUnit, validaciones de estilo y construcción de imagen Docker. Cierre con la entrega del Hito 2, valorado en sesenta por ciento del trabajo final.</p>
-      </div>
-
-      <div class="sprint pending">
-        <div class="head">
-          <div class="name">Sprint 3 · Mejora funcional</div>
-          <div class="dates">11 junio — 24 junio</div>
-          <span class="status">Pendiente</span>
-        </div>
-        <p>Implementación de mejora funcional sobre un módulo seleccionado y despliegue automatizado al entorno de staging. Containerización completa funcional con docker-compose.yml.</p>
-      </div>
-
-      <div class="sprint pending">
-        <div class="head">
-          <div class="name">Sprint 4 · Cierre y artículo IEEE</div>
-          <div class="dates">25 junio — 8 julio</div>
-          <span class="status">Pendiente · Hito 3</span>
-        </div>
-        <p>Redacción del artículo en formato IEEE, pulido de documentación, preparación de la demostración final. Entrega del Hito 3 el 13 de julio, valorado al cien por ciento del trabajo final.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="equipo" class="alt">
-  <div class="container">
-    <div class="section-label">Equipo</div>
-    <h2 class="section-title">Cinco estudiantes, un objetivo</h2>
-    <p class="section-lead">
-      El liderazgo del equipo rota por sprint conforme a la metodología del curso, garantizando que cada integrante ejerza los roles principales de Scrum a lo largo del semestre.
-    </p>
-
-    <div class="team">
-      <div class="member">
-        <div class="avatar">JV</div>
-        <div class="name">Johan Vilca Flores</div>
-        <div class="role">Líder Sprint 0</div>
-      </div>
-      <div class="member">
-        <div class="avatar">GY</div>
-        <div class="name">Gustavo Alonso Yunque Quispe</div>
-        <div class="role">Integrante · Lead Sprint 1</div>
-      </div>
-      <div class="member">
-        <div class="avatar">HN</div>
-        <div class="name">Henry Alex Navarro Quispe</div>
-        <div class="role">Integrante</div>
-      </div>
-      <div class="member">
-        <div class="avatar">FC</div>
-        <div class="name">Franco Jesus Cahua Soto</div>
-        <div class="role">Integrante</div>
-      </div>
-      <div class="member">
-        <div class="avatar">AR</div>
-        <div class="name">Alberth Edwar Riveros Vilca</div>
-        <div class="role">Integrante</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <div class="section-label">Recursos</div>
-    <h2 class="section-title">Enlaces del proyecto</h2>
-
-    <div class="links-grid">
-      <a class="link-card" href="https://github.com/Unsa-ips-grupo" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      <div class="mods-grid">
+        <!-- BE -->
         <div>
-          <div class="title">Organización GitHub</div>
-          <div class="url">github.com/Unsa-ips-grupo</div>
+          <div class="mod-header">
+            <span class="mod-tag-be">BE</span>
+            Módulos del backend (care)
+          </div>
+          <div class="mod-sub">care/emr/ · care/facility/ · Django Apps</div>
+          <div class="mod-list">
+            <div class="mod-item">
+              <div class="mod-name">Facility</div>
+              <div class="mod-desc">Hospitales, clínicas y centros de salud. Gestiona camas, recursos y capacidad
+                instalada.</div>
+            </div>
+            <div class="mod-item">
+              <div class="mod-name">Patient</div>
+              <div class="mod-desc">Registro maestro de pacientes con historial, identificadores y datos demográficos.
+              </div>
+            </div>
+            <div class="mod-item">
+              <div class="mod-name">Encounter</div>
+              <div class="mod-desc">Admisiones, consultas y episodios de atención. Corazón del EMR.</div>
+            </div>
+            <div class="mod-item">
+              <div class="mod-name">Scheduling / Appointments</div>
+              <div class="mod-desc">Agendamiento de citas, slots, disponibilidad médica y turnos.</div>
+            </div>
+            <div class="mod-item">
+              <div class="mod-name">Users</div>
+              <div class="mod-desc">Autenticación, roles (médico, enfermera, admin) y permisos por establecimiento.
+              </div>
+            </div>
+            <div class="mod-item">
+              <div class="mod-name">Medication</div>
+              <div class="mod-desc">Prescripciones, administración, dispensación y reconciliación de medicamentos.</div>
+            </div>
+            <div class="mod-item">
+              <div class="mod-name">Observation</div>
+              <div class="mod-desc">Signos vitales y parámetros monitoreados en formato FHIR.</div>
+            </div>
+            <div class="mod-item">
+              <div class="mod-name">Assets</div>
+              <div class="mod-desc">Equipamiento hospitalario: ventiladores, monitores, camas UCI.</div>
+            </div>
+            <div class="mod-item">
+              <div class="mod-name">Organizations</div>
+              <div class="mod-desc">Estructura jerárquica: estados, distritos, redes hospitalarias.</div>
+            </div>
+            <div class="mod-item">
+              <div class="mod-name">Pluggable Apps</div>
+              <div class="mod-desc">Sistema de extensión modular por estado sin tocar el core.</div>
+            </div>
+          </div>
         </div>
-      </a>
-      <a class="link-card" href="https://github.com/Unsa-ips-grupo/Documentacion-IPS" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <div>
-          <div class="title">Repositorio de documentación</div>
-          <div class="url">Unsa-ips-grupo/Documentacion-IPS</div>
-        </div>
-      </a>
-      <a class="link-card" href="https://github.com/opensource-emr/hospital-management-emr" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 6v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4z"/></svg>
-        <div>
-          <div class="title">Danphe EMR (upstream)</div>
-          <div class="url">opensource-emr/hospital-management-emr</div>
-        </div>
-      </a>
-      <a class="link-card" href="https://github.com/orgs/Unsa-ips-grupo/projects" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        <div>
-          <div class="title">Tablero Scrum (GitHub Projects)</div>
-          <div class="url">orgs/Unsa-ips-grupo/projects</div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
 
-<footer>
-  <div class="container">
-    <div class="brand">Unsa<span>·</span>ips<span>·</span>grupo</div>
-    <div class="info">
-      EPIS · UNSA · 2026-A &nbsp; · &nbsp; Curso de Ingeniería y Procesos de Software &nbsp; · &nbsp; Prof. Robert Arisaca
+        <!-- FE -->
+        <div>
+          <div class="mod-header">
+            <span class="mod-tag-fe">FE</span>
+            Vistas del frontend (care_fe)
+          </div>
+          <div class="mod-sub">src/pages/ · React · localhost:4000</div>
+          <div class="mod-list">
+            <div class="mod-item fe">
+              <div class="mod-name">/login</div>
+              <div class="mod-desc">Pantalla de autenticación con soporte para múltiples roles y backends.</div>
+            </div>
+            <div class="mod-item fe">
+              <div class="mod-name">/ — Dashboard</div>
+              <div class="mod-desc">Panel de control: capacidad, pacientes activos y alertas del sistema.</div>
+            </div>
+            <div class="mod-item fe">
+              <div class="mod-name">/facility</div>
+              <div class="mod-desc">Lista, búsqueda, detalle, edición y gestión de camas de los centros.</div>
+            </div>
+            <div class="mod-item fe">
+              <div class="mod-name">/patients</div>
+              <div class="mod-desc">Búsqueda, registro, perfil completo del paciente e historial de encuentros.</div>
+            </div>
+            <div class="mod-item fe">
+              <div class="mod-name">/appointments</div>
+              <div class="mod-desc">Agendamiento de citas médicas con vista de slots disponibles.</div>
+            </div>
+            <div class="mod-item fe">
+              <div class="mod-name">/users</div>
+              <div class="mod-desc">Gestión de cuentas, roles y vinculación a establecimientos.</div>
+            </div>
+            <div class="mod-item fe">
+              <div class="mod-name">/assets</div>
+              <div class="mod-desc">Gestión de equipamiento: ventiladores, monitores y dispositivos UCI.</div>
+            </div>
+            <div class="mod-item fe">
+              <div class="mod-name">/encounters</div>
+              <div class="mod-desc">Admisiones, episodios clínicos y flujo completo de atención.</div>
+            </div>
+            <div class="mod-item fe">
+              <div class="mod-name">/resource</div>
+              <div class="mod-desc">Solicitudes de transferencia de pacientes y recursos entre establecimientos.</div>
+            </div>
+            <div class="mod-item fe">
+              <div class="mod-name">/notices</div>
+              <div class="mod-desc">Alertas, comunicados y tablero de información para el personal.</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</footer>
+  </section>
+
+  <!-- STACK -->
+  <section class="section alt" id="stack">
+    <div class="container">
+      <div class="sec-eye">Stack tecnológico real</div>
+      <h2 class="sec-title">Python · Django · React · PostgreSQL</h2>
+      <p class="sec-lead">
+        Tecnologías verificadas directamente en los repositorios oficiales. Backend en Python moderno con Django REST
+        Framework; frontend en React con TypeScript. Orquestado con Docker Compose.
+      </p>
+
+      <div class="stack-grid">
+        <div class="sk-card">
+          <div class="sk-icon py">Py</div>
+          <div>
+            <div class="sk-name">Python</div>
+            <div class="sk-ver">3.11+</div>
+            <div class="sk-desc">Lenguaje principal del backend. Gestiona toda la lógica de negocio hospitalaria.</div>
+          </div>
+          <span class="sk-badge be">Backend</span>
+        </div>
+        <div class="sk-card">
+          <div class="sk-icon dj">DJ</div>
+          <div>
+            <div class="sk-name">Django + DRF</div>
+            <div class="sk-ver">Django 4.x · DRF 3.x</div>
+            <div class="sk-desc">Framework web y REST Framework para las APIs. ORM integrado para base de datos.</div>
+          </div>
+          <span class="sk-badge be">Backend</span>
+        </div>
+        <div class="sk-card">
+          <div class="sk-icon pg">PG</div>
+          <div>
+            <div class="sk-name">PostgreSQL</div>
+            <div class="sk-ver">14+</div>
+            <div class="sk-desc">Base de datos relacional principal. Configurada vía Docker en desarrollo.</div>
+          </div>
+          <span class="sk-badge be">Backend</span>
+        </div>
+        <div class="sk-card">
+          <div class="sk-icon rd">RD</div>
+          <div>
+            <div class="sk-name">Redis + Celery</div>
+            <div class="sk-ver">Redis 7</div>
+            <div class="sk-desc">Cola de tareas asíncronas para notificaciones, reportes y procesos en background.</div>
+          </div>
+          <span class="sk-badge be">Backend</span>
+        </div>
+        <div class="sk-card">
+          <div class="sk-icon re">Re</div>
+          <div>
+            <div class="sk-name">React</div>
+            <div class="sk-ver">18+</div>
+            <div class="sk-desc">Librería UI principal del frontend. Componentes funcionales con hooks.</div>
+          </div>
+          <span class="sk-badge fe">Frontend</span>
+        </div>
+        <div class="sk-card">
+          <div class="sk-icon ts">TS</div>
+          <div>
+            <div class="sk-name">TypeScript</div>
+            <div class="sk-ver">5.x</div>
+            <div class="sk-desc">Tipado estático sobre JavaScript. Requerido en todo el proyecto frontend.</div>
+          </div>
+          <span class="sk-badge fe">Frontend</span>
+        </div>
+        <div class="sk-card">
+          <div class="sk-icon vt">Vt</div>
+          <div>
+            <div class="sk-name">Vite + Tailwind</div>
+            <div class="sk-ver">Vite 5 · Tailwind 3</div>
+            <div class="sk-desc">Bundler ultrarrápido y framework de estilos utility-first.</div>
+          </div>
+          <span class="sk-badge fe">Frontend</span>
+        </div>
+        <div class="sk-card">
+          <div class="sk-icon pw">PW</div>
+          <div>
+            <div class="sk-name">Playwright</div>
+            <div class="sk-ver">Tests E2E</div>
+            <div class="sk-desc">Suite de pruebas end-to-end para validar flujos completos del sistema.</div>
+          </div>
+          <span class="sk-badge fe">Frontend</span>
+        </div>
+        <div class="sk-card">
+          <div class="sk-icon dk">Dk</div>
+          <div>
+            <div class="sk-name">Docker + Compose</div>
+            <div class="sk-ver">Compose v2</div>
+            <div class="sk-desc">Levanta todo el stack con <code>make up</code>. Incluido en el repo oficial.</div>
+          </div>
+          <span class="sk-badge both">BE + FE</span>
+        </div>
+        <div class="sk-card">
+          <div class="sk-icon gh">GH</div>
+          <div>
+            <div class="sk-name">GitHub Actions</div>
+            <div class="sk-ver">CI/CD</div>
+            <div class="sk-desc">Pipeline oficial: lint, tests, build Docker y despliegue a staging.</div>
+          </div>
+          <span class="sk-badge both">BE + FE</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- CRONOGRAMA -->
+  <section class="section" id="cronograma">
+    <div class="container">
+      <div class="sec-eye">Cronograma</div>
+      <h2 class="sec-title">Cuatro sprints, tres hitos</h2>
+      <p class="sec-lead">Cada sprint dura 15 días calendario. El liderazgo rota para que cada integrante ejerza los
+        roles principales de Scrum.</p>
+      <div class="sprint-grid">
+        <div class="sp done">
+          <div class="sp-status"><span class="sd"></span>Completado · Hito 1</div>
+          <div class="sp-name">Sprint 0<br>Planificación</div>
+          <div class="sp-date">22 abr — 13 may</div>
+          <div class="sp-desc">Selección de CARE, roles, repositorio organizacional, tablero GitHub Projects y
+            publicación de esta GitHub Pages.</div>
+        </div>
+        <div class="sp active">
+          <div class="sp-status"><span class="sd"></span>En curso</div>
+          <div class="sp-name">Sprint 1<br>Setup técnico</div>
+          <div class="sp-date">14 may — 27 may</div>
+          <div class="sp-desc">Levantar CARE y care_fe en local con Docker. Analizar arquitectura, navegar módulos y
+            documentar en Wiki.</div>
+        </div>
+        <div class="sp pending">
+          <div class="sp-status"><span class="sd"></span>Pendiente · Hito 2</div>
+          <div class="sp-name">Sprint 2<br>CI/CD</div>
+          <div class="sp-date">28 may — 10 jun</div>
+          <div class="sp-desc">Pipeline funcional en GitHub Actions: lint, tests, build Docker. 60% del trabajo final.
+          </div>
+        </div>
+        <div class="sp pending">
+          <div class="sp-status"><span class="sd"></span>Pendiente</div>
+          <div class="sp-name">Sprint 3<br>Mejora funcional</div>
+          <div class="sp-date">11 jun — 24 jun</div>
+          <div class="sp-desc">Mejora funcional en un módulo de care_fe y despliegue automatizado a staging.</div>
+        </div>
+        <div class="sp pending">
+          <div class="sp-status"><span class="sd"></span>Pendiente · Hito 3</div>
+          <div class="sp-name">Sprint 4<br>Cierre IEEE</div>
+          <div class="sp-date">25 jun — 8 jul</div>
+          <div class="sp-desc">Artículo IEEE, documentación final y demostración. Entrega 13 jul — 100% del trabajo.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPO -->
+  <section class="section alt" id="equipo">
+    <div class="container">
+      <div class="sec-eye">Equipo</div>
+      <h2 class="sec-title">Cinco estudiantes, un sistema real</h2>
+      <p class="sec-lead">Liderazgo rotativo por sprint. Cada integrante ejerce los roles principales de Scrum a lo
+        largo del semestre.</p>
+      <div class="team-grid">
+        <div class="member">
+          <div class="av">JV</div>
+          <div class="mn">Johan Vilca Flores</div>
+          <div class="mr">Líder Sprint 0</div>
+        </div>
+        <div class="member">
+          <div class="av">GY</div>
+          <div class="mn">Gustavo Yunque Quispe</div>
+          <div class="mr">Líder Sprint 1</div>
+        </div>
+        <div class="member">
+          <div class="av">HN</div>
+          <div class="mn">Henry Navarro Quispe</div>
+          <div class="mr">Integrante</div>
+        </div>
+        <div class="member">
+          <div class="av">FC</div>
+          <div class="mn">Franco Cahua Soto</div>
+          <div class="mr">Integrante</div>
+        </div>
+        <div class="member">
+          <div class="av">AR</div>
+          <div class="mn">Alberth Riveros Vilca</div>
+          <div class="mr">Integrante</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LINKS -->
+  <section class="section" id="recursos">
+    <div class="container">
+      <div class="sec-eye">Recursos</div>
+      <h2 class="sec-title">Enlaces del proyecto</h2>
+      <div class="links-grid">
+        <a class="lk" href="https://github.com/Unsa-ips-grupo" target="_blank">
+          <div class="lk-icon"><svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+            </svg></div>
+          <div>
+            <div class="lk-t">Organización GitHub</div>
+            <div class="lk-u">github.com/Unsa-ips-grupo</div>
+          </div>
+        </a>
+        <a class="lk" href="https://github.com/ohcnetwork/care" target="_blank">
+          <div class="lk-icon"><svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+            </svg></div>
+          <div>
+            <div class="lk-t">CARE — Backend (upstream)</div>
+            <div class="lk-u">github.com/ohcnetwork/care</div>
+          </div>
+        </a>
+        <a class="lk" href="https://github.com/ohcnetwork/care_fe" target="_blank">
+          <div class="lk-icon"><svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+            </svg></div>
+          <div>
+            <div class="lk-t">care_fe — Frontend (upstream)</div>
+            <div class="lk-u">github.com/ohcnetwork/care_fe</div>
+          </div>
+        </a>
+        <a class="lk" href="https://github.com/Unsa-ips-grupo/Documentacion-IPS" target="_blank">
+          <div class="lk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg></div>
+          <div>
+            <div class="lk-t">Repositorio de Documentación</div>
+            <div class="lk-u">Unsa-ips-grupo/Documentacion-IPS</div>
+          </div>
+        </a>
+        <a class="lk" href="https://github.com/orgs/Unsa-ips-grupo/projects" target="_blank">
+          <div class="lk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+            </svg></div>
+          <div>
+            <div class="lk-t">Tablero Scrum (GitHub Projects)</div>
+            <div class="lk-u">orgs/Unsa-ips-grupo/projects</div>
+          </div>
+        </a>
+        <a class="lk" href="https://care-be-docs.ohc.network" target="_blank">
+          <div class="lk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg></div>
+          <div>
+            <div class="lk-t">Documentación oficial CARE</div>
+            <div class="lk-u">care-be-docs.ohc.network</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="ft-brand">UNSA<span> · </span>IPS<span> · </span>2026</div>
+      <div class="ft-info">EPIS · UNSA · 2026-A &nbsp;·&nbsp; Prof. Robert Arisaca &nbsp;·&nbsp; Ingeniería y Procesos
+        de Software</div>
+    </div>
+  </footer>
 
 </body>
+
 </html>

@@ -45,11 +45,11 @@ Hemos seleccionado **CARE** (Coronasafe Analysis Response Engine) como producto 
 
 | Sprint | Período | Objetivo | Estado |
 |--------|---------|----------|--------|
-| **Sprint 0** (Hito 1) | Hasta 13 de Mayo | Plan, selección de producto, roles, repositorio organizacional y GitHub Pages |
-| **Sprint 1** | 14 de Mayo — 27 de Mayo | Setup técnico: levantar CARE + care_fe en local con Docker, analizar módulos y documentar en Wiki |
-| **Sprint 2** (Hito 2) | 28 de Mayo — 10 de Junio | Pipeline CI/CD funcionando en GitHub Actions (lint, tests, build Docker) |
-| **Sprint 3** | 11 de Junio — 24 de Junio | Mejora funcional sobre un módulo de care_fe y despliegue a staging | 
-| **Sprint 4** (Hito 3) | 25 de Junio — 13 de Julio | Entrega final: artículo IEEE, demo en vivo y documentación completa · **100% del trabajo final** |
+| **Sprint 0** (Hito 1) | Hasta 13 de Mayo | Plan, selección de producto, roles, repositorio organizacional y GitHub Pages | Concluido |
+| **Sprint 1** | 14 de Mayo — 27 de Mayo | Setup técnico: levantar CARE + care_fe en local con Docker, analizar módulos y documentar en Wiki | Concluido |
+| **Sprint 2** (Hito 2) | 28 de Mayo — 10 de Junio | Pipeline CI/CD funcionando en GitHub Actions (lint, tests, build Docker) | Concluido |
+| **Sprint 3** | 11 de Junio — 24 de Junio | Mejora funcional sobre un módulo de care_fe y despliegue a staging | En progreso |
+| **Sprint 4** (Hito 3) | 25 de Junio — 13 de Julio | Entrega final: artículo IEEE, demo en vivo y documentación completa · **100% del trabajo final** | Pendiente |
 
 ---
 

@@ -2039,9 +2039,9 @@
 
             <div class="hero-inner">
                 <div class="hero-eyebrow">
-                    <span class="tag live">● En curso — Sprint 1</span>
+                    <span class="tag live">● En curso — Sprint 3</span>
                     <span class="tag">EPIS · UNSA · 2026-A</span>
-                    <span class="tag warn">Hito 1 ✓</span>
+                    <span class="tag warn">Hito 2 ✓</span>
                     <span class="tag dpg">Bien Público Digital</span>
                 </div>
 
@@ -2054,11 +2054,10 @@
 
                 <p class="hero-desc">
                     <strong>CARE</strong> es el sistema hospitalario open-source
-                    que nació durante el colapso de la pandemia en India. Hoy
-                    opera en <strong>11 estados</strong>, beneficia a
-                    <strong>186 millones</strong> de personas y está certificado
-                    como Bien Público Digital. Nosotros le aplicamos Scrum y
-                    DevOps.
+                    que nació durante el colapso de la pandemia en India. Se ha
+                    desplegado en varios estados a través del proyecto 10BedICU
+                    y está certificado como Bien Público Digital por las
+                    Naciones Unidas. Nosotros le aplicamos Scrum y DevOps.
                 </p>
 
                 <div class="hero-stats">
@@ -2067,12 +2066,12 @@
                         <div class="hstat-lbl">Fundación</div>
                     </div>
                     <div class="hstat">
-                        <div class="hstat-val">11</div>
-                        <div class="hstat-lbl">Estados</div>
+                        <div class="hstat-val">10BedICU</div>
+                        <div class="hstat-lbl">Proyecto</div>
                     </div>
                     <div class="hstat">
-                        <div class="hstat-val">186M+</div>
-                        <div class="hstat-lbl">Beneficiados</div>
+                        <div class="hstat-val">DPG</div>
+                        <div class="hstat-lbl">Bien Público</div>
                     </div>
                     <div class="hstat">
                         <div class="hstat-val">MIT</div>
@@ -2123,12 +2122,12 @@
                         <div class="sr-l">Año origen</div>
                     </div>
                     <div class="sr-item">
-                        <div class="sr-v">11</div>
-                        <div class="sr-l">Estados</div>
+                        <div class="sr-v">10BedICU</div>
+                        <div class="sr-l">Proyecto</div>
                     </div>
                     <div class="sr-item">
-                        <div class="sr-v">186M+</div>
-                        <div class="sr-l">Beneficiados</div>
+                        <div class="sr-v">India</div>
+                        <div class="sr-l">Origen</div>
                     </div>
                     <div class="sr-item">
                         <div class="sr-v">DPG</div>
@@ -2158,8 +2157,7 @@
                             ventiladores ni oxígeno. Un grupo de voluntarios de
                             <strong>Coronasafe Network</strong> (hoy Open
                             Healthcare Network) construyó el primer prototipo en
-                            menos de dos semanas. El nombre es acrónimo de
-                            <em>Coronasafe Analysis Response Engine</em>.
+                            menos de dos semanas, dando origen al sistema CARE.
                         </div>
                     </div>
 
@@ -3601,7 +3599,7 @@
                         <div class="sk-icon py">Py</div>
                         <div>
                             <div class="sk-name">Python</div>
-                            <div class="sk-ver">3.11+</div>
+                            <div class="sk-ver">3.13</div>
                             <div class="sk-desc">
                                 Lenguaje principal del backend. Gestiona toda la
                                 lógica de negocio hospitalaria.
@@ -3613,7 +3611,7 @@
                         <div class="sk-icon dj">DJ</div>
                         <div>
                             <div class="sk-name">Django + DRF</div>
-                            <div class="sk-ver">Django 4.x · DRF 3.x</div>
+                            <div class="sk-ver">Django 6.0 · DRF 3.x</div>
                             <div class="sk-desc">
                                 Framework web y REST Framework para las APIs.
                                 ORM integrado para base de datos.
@@ -3725,72 +3723,67 @@
         <section class="section" id="cronograma">
             <div class="container">
                 <div class="sec-eye">Cronograma</div>
-                <h2 class="sec-title">Cuatro sprints, tres hitos</h2>
+                <h2 class="sec-title">Cuatro sprints sobre CARE</h2>
                 <p class="sec-lead">
-                    Cada sprint dura 15 días calendario. El liderazgo rota para
-                    que cada integrante ejerza los roles principales de Scrum.
+                    Cada sprint dura dos semanas. El proyecto evolucionó de una
+                    evaluación inicial de Danphe EMR a CARE, sobre el cual se
+                    construyó todo el backlog y la planificación de los sprints.
                 </p>
                 <div class="sprint-grid">
                     <div class="sp done">
                         <div class="sp-status">
-                            <span class="sd"></span>Completado · Hito 1
+                            <span class="sd"></span>Completado
                         </div>
-                        <div class="sp-name">Sprint 0<br />Planificación</div>
-                        <div class="sp-date">22 abr — 13 may</div>
+                        <div class="sp-name">Sprint 1<br />Núcleo y Acceso</div>
+                        <div class="sp-date">25 may — 5 jun</div>
                         <div class="sp-desc">
-                            Selección de CARE, roles, repositorio
-                            organizacional, tablero GitHub Projects y
-                            publicación de esta GitHub Pages.
+                            Acceso seguro (registro, login, roles, RBAC),
+                            establecimientos con capacidad de camas y auditoría
+                            base. 49 SP.
+                        </div>
+                    </div>
+                    <div class="sp done">
+                        <div class="sp-status">
+                            <span class="sd"></span>Completado
+                        </div>
+                        <div class="sp-name">Sprint 2<br />Pacientes y EMR</div>
+                        <div class="sp-date">8 jun — 19 jun</div>
+                        <div class="sp-desc">
+                            Registro y búsqueda de pacientes, historia clínica,
+                            encuentros, diagnósticos y signos vitales. 47 SP.
                         </div>
                     </div>
                     <div class="sp active">
                         <div class="sp-status">
                             <span class="sd"></span>En curso
                         </div>
-                        <div class="sp-name">Sprint 1<br />Setup técnico</div>
-                        <div class="sp-date">14 may — 27 may</div>
+                        <div class="sp-name">
+                            Sprint 3<br />Operación Clínica
+                        </div>
+                        <div class="sp-date">22 jun — 3 jul</div>
                         <div class="sp-desc">
-                            Levantar CARE y care_fe en local con Docker.
-                            Analizar arquitectura, navegar módulos y documentar
-                            en Wiki.
+                            Camas, prescripciones, rondas, derivaciones, agenda
+                            y citas médicas. 46 SP.
                         </div>
                     </div>
                     <div class="sp pending">
                         <div class="sp-status">
-                            <span class="sd"></span>Pendiente · Hito 2
-                        </div>
-                        <div class="sp-name">Sprint 2<br />CI/CD</div>
-                        <div class="sp-date">28 may — 10 jun</div>
-                        <div class="sp-desc">
-                            Pipeline funcional en GitHub Actions: lint, tests,
-                            build Docker. 60% del trabajo final.
-                        </div>
-                    </div>
-                    <div class="sp pending">
-                        <div class="sp-status">
-                            <span class="sd"></span>Pendiente
+                            <span class="sd"></span>Planificado
                         </div>
                         <div class="sp-name">
-                            Sprint 3<br />Mejora funcional
+                            Sprint 4<br />Cierre y Madurez
                         </div>
-                        <div class="sp-date">11 jun — 24 jun</div>
+                        <div class="sp-date">6 jul — 17 jul</div>
                         <div class="sp-desc">
-                            Mejora funcional en un módulo de care_fe y
-                            despliegue automatizado a staging.
-                        </div>
-                    </div>
-                    <div class="sp pending">
-                        <div class="sp-status">
-                            <span class="sd"></span>Pendiente · Hito 3
-                        </div>
-                        <div class="sp-name">Sprint 4<br />Cierre IEEE</div>
-                        <div class="sp-date">25 jun — 8 jul</div>
-                        <div class="sp-desc">
-                            Artículo IEEE, documentación final y demostración.
-                            Entrega 13 jul — 100% del trabajo.
+                            Cuestionarios, archivos, flujo de derivación, citas,
+                            altas, auditoría y cuenta de usuario. 47 SP.
                         </div>
                     </div>
                 </div>
+                <p class="sec-lead" style="margin-top: 24px">
+                    <strong>Total:</strong> 34 historias de usuario · 189 Story
+                    Points · 7 épicas · 4 sprints.
+                </p>
             </div>
         </section>
 
@@ -3800,34 +3793,34 @@
                 <div class="sec-eye">Equipo</div>
                 <h2 class="sec-title">Cinco estudiantes, un sistema real</h2>
                 <p class="sec-lead">
-                    Liderazgo rotativo por sprint. Cada integrante ejerce los
-                    roles principales de Scrum a lo largo del semestre.
+                    Equipo de cinco integrantes con roles Scrum definidos:
+                    Product Owner, Scrum Master y equipo de desarrollo.
                 </p>
                 <div class="team-grid">
                     <div class="member">
                         <div class="av">JV</div>
                         <div class="mn">Johan Vilca Flores</div>
-                        <div class="mr">Líder Sprint 0</div>
+                        <div class="mr">Product Owner</div>
                     </div>
                     <div class="member">
                         <div class="av">GY</div>
                         <div class="mn">Gustavo Yunque Quispe</div>
-                        <div class="mr">Líder Sprint 1</div>
+                        <div class="mr">Scrum Master / DevOps</div>
                     </div>
                     <div class="member">
                         <div class="av">HN</div>
                         <div class="mn">Henry Navarro Quispe</div>
-                        <div class="mr">Integrante</div>
+                        <div class="mr">Developer · Documentación</div>
                     </div>
                     <div class="member">
                         <div class="av">FC</div>
                         <div class="mn">Franco Cahua Soto</div>
-                        <div class="mr">Integrante</div>
+                        <div class="mr">Developer · Backend</div>
                     </div>
                     <div class="member">
                         <div class="av">AR</div>
                         <div class="mn">Alberth Riveros Vilca</div>
-                        <div class="mr">Integrante</div>
+                        <div class="mr">Developer · Frontend</div>
                     </div>
                 </div>
             </div>
@@ -4014,20 +4007,29 @@
 
             initTheme();
         </script>
-  <script>
-    const toggleBtn = document.getElementById('theme-toggle');
-    
-    // Check local storage or system preference
-    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.body.classList.add('dark-theme');
-    } else {
-      document.body.classList.remove('dark-theme');
-    }
+        <script>
+            const toggleBtn = document.getElementById("theme-toggle");
 
-    toggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark-theme');
-      localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
-    });
-  </script>
-</body>
+            // Check local storage or system preference
+            if (
+                localStorage.getItem("theme") === "dark" ||
+                (!localStorage.getItem("theme") &&
+                    window.matchMedia("(prefers-color-scheme: dark)").matches)
+            ) {
+                document.body.classList.add("dark-theme");
+            } else {
+                document.body.classList.remove("dark-theme");
+            }
+
+            toggleBtn.addEventListener("click", () => {
+                document.body.classList.toggle("dark-theme");
+                localStorage.setItem(
+                    "theme",
+                    document.body.classList.contains("dark-theme")
+                        ? "dark"
+                        : "light",
+                );
+            });
+        </script>
+    </body>
 </html>
